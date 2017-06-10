@@ -1,4 +1,7 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight.Threading;
+using Microsoft.Practices.ServiceLocation;
+using MoePicture.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -71,6 +74,7 @@ namespace MoePicture
                 // 确保当前窗口处于活动状态
                 Window.Current.Activate();
             }
+            DispatcherHelper.Initialize();
         }
 
         /// <summary>
@@ -93,7 +97,8 @@ namespace MoePicture
         private void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
-            //TODO: 保存应用程序状态并停止任何后台活动
+            ServiceLocator.Current.GetInstance<Models.UserConfigServer>().SaveConfig(
+                ServiceLocator.Current.GetInstance<UserConfigViewModel>().Config);
             deferral.Complete();
         }
     }

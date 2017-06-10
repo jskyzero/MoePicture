@@ -1,0 +1,29 @@
+<!--磁贴Xml-->
+<tile>
+  <visual branding="name" displayName="MoePicture">
+
+    <binding template="TileSmall">
+      <text >{0}</text>
+      <text hint-style="captionSubtle">{1}</text>
+      <image src="{2}" placement="background" />
+    </binding>
+
+    <binding template="TileMedium">
+      <text hint-style="base">{0}</text>
+      <text hint-style="captionSubtle" hint-wrap="true">{1}</text>
+      <image src="{2}" placement="background" />
+    </binding>
+
+    <binding template="TileWide">
+      <text hint-style="base">{0}</text>
+      <text hint-style="captionSubtle" hint-wrap="true">{1}</text>
+      <image src="{2}" placement="background" />
+    </binding>
+
+    <binding template="TileLarge">
+      <text hint-style="base">{0}</text>
+      <text hint-style="captionSubtle" hint-wrap="true">{1}</text>
+      <image src="{2}" placement="background" />
+    </binding>
+  </visual>
+</tile>

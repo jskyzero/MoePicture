@@ -26,7 +26,7 @@ namespace TileUpdate
         // 读取项目中Tiles.xml文件
         private async void ReadFile()
         {
-            var file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Servers/Tiles.xml"));
+            var file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Tiles.xml"));
             XmlData = await FileIO.ReadTextAsync(file);
         }
 

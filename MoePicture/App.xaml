@@ -3,6 +3,18 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:MoePicture"
+    xmlns:vm="using:MoePicture.ViewModels"
     RequestedTheme="Light">
 
+  <Application.Resources>
+    <ResourceDictionary>
+      <!--Global View Model Locator-->
+      <vm:ViewModelLocator x:Key="Locator" />
+
+      <ResourceDictionary.MergedDictionaries>
+        <!--Add My Own Styles-->
+        <ResourceDictionary Source="./Styles/Style.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </Application.Resources>
 </Application>
