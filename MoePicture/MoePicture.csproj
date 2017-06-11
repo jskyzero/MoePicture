@@ -95,6 +95,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\BoolVisibilityConverter.cs" />
+    <Compile Include="Converters\IntVisibilityConverter.cs" />
+    <Compile Include="Converters\RatingNullableBooleanConverter.cs" />
     <Compile Include="Models\PictureItem.cs" />
     <Compile Include="Models\UserConfig.cs" />
     <Compile Include="Models\UserConfigServer.cs" />
@@ -180,9 +183,7 @@
       <Name>TileUpdate</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Converters\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Page Include="Styles\Style.xaml">
       <SubType>Designer</SubType>

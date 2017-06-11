@@ -17,11 +17,15 @@
       </Image>
     </DataTemplate>
   </UserControl.Resources>
-  <controls:AdaptiveGridView
+  <Grid>
+    <ProgressRing Width="60" Height="60"
+              IsActive="true" />
+    <controls:AdaptiveGridView
               DesiredWidth="200"
               ItemHeight="200"
               ItemsSource="{Binding PictureItems}"
               ItemTemplate="{StaticResource PictureItem}"
               ItemContainerStyle="{StaticResource GridViewItemStyle}">
-  </controls:AdaptiveGridView>
+    </controls:AdaptiveGridView>
+  </Grid>
 </UserControl>

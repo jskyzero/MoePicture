@@ -7,11 +7,21 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-  <Grid HorizontalAlignment="Left"
+  <Grid>
+    <Grid HorizontalAlignment="Left"
           VerticalAlignment="Top"
           Margin="48, 48, 0, 0"
           Background="Black"
           Width="256"
           Height="64">
+    </Grid>
+
+    <Grid HorizontalAlignment="Right"
+          VerticalAlignment="Bottom"
+          Margin="0, 0, 48, 48"
+          Background="Black"
+          Width="256"
+          Height="64">
+    </Grid>
   </Grid>
 </UserControl>

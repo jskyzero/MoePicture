@@ -28,7 +28,7 @@ namespace MoePicture.ViewModels.PictureItems
 
         public void Clear()
         {
-            throw new NotImplementedException();
+            _storage.Clear();
         }
 
         public bool Contains(object value)

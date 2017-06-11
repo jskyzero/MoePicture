@@ -64,6 +64,7 @@ namespace MoePicture.ViewModels.PictureItems
                 string str = DB.select(url);
                 if (str != String.Empty)
                 {
+                    // pass
                 }
                 else
                 {

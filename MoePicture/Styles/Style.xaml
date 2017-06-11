@@ -201,9 +201,6 @@
                 <VisualState x:Name="DataAvailable" />
                 <VisualState x:Name="DataPlaceholder">
                   <Storyboard>
-                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PlaceholderTextBlock" Storyboard.TargetProperty="Visibility">
-                      <DiscreteObjectKeyFrame KeyTime="0" Value="Visible" />
-                    </ObjectAnimationUsingKeyFrames>
                     <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PlaceholderRect" Storyboard.TargetProperty="Visibility">
                       <DiscreteObjectKeyFrame KeyTime="0" Value="Visible" />
                     </ObjectAnimationUsingKeyFrames>
@@ -299,16 +296,6 @@
                             Margin="{TemplateBinding Padding}"
                             Opacity="1" />
             </Grid>
-            <!-- The 'Xg' text simulates the amount of space one line of text will occupy.
-                            In the DataPlaceholder state, the Content is not loaded yet so we
-                            approximate the size of the item using placeholder text. -->
-            <TextBlock x:Name="PlaceholderTextBlock"
-                      Visibility="Collapsed"
-                      Text="Xg"
-                      Foreground="{x:Null}"
-                      Margin="{TemplateBinding Padding}"
-                      IsHitTestVisible="False"
-                      AutomationProperties.AccessibilityView="Raw" />
             <Rectangle x:Name="PlaceholderRect"
                       Visibility="Collapsed"
                       Fill="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}" />
