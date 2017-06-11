@@ -3,28 +3,24 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:MoePicture.Views"
+    xmlns:UC="using:MoePicture.UC"
     xmlns:Models="using:MoePicture.Models"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     DataContext="{Binding PicturesViewModel, Source={StaticResource Locator}}">
 
   <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    <Grid x:Name="Grid" />
-    <GridView HorizontalAlignment="Center"
-              ItemsSource="{Binding PictureItems}"
-              Padding="0, 0, 20, 0">
-      <GridView.ItemTemplate>
-        <DataTemplate x:DataType="Models:PictureItem">
-          <StackPanel>
-            <TextBlock Text="{Binding id}" Width="160" />
-            <Image Source="{Binding ImageSource}"
-                     Width="160" Height="160"
-                     Stretch="UniformToFill">
-            </Image>
-          </StackPanel>
-        </DataTemplate>
-      </GridView.ItemTemplate>
-    </GridView>
+    <Grid x:Name="Grid">
+    </Grid>
+
+    <UC:PictureGrid />
+    <UC:ButtonBar
+        d:IsHidden="False" />
+    <UC:PictureSingle />
+    <UC:HamburgerButton />
+    <UC:Search />
+    <UC:Settings />
   </Grid>
 </Page>

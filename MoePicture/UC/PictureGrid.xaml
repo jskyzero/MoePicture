@@ -1,0 +1,27 @@
+﻿<UserControl
+    x:Class="MoePicture.UC.PictureGrid"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MoePicture.UC"
+    xmlns:Models="using:MoePicture.Models"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    DataContext="{Binding PicturesViewModel, Source={StaticResource Locator}}">
+  <UserControl.Resources>
+    <DataTemplate x:Key="PictureItem"
+                  x:DataType="Models:PictureItem">
+      <Image Source="{Binding ImageSource}"
+             Stretch="UniformToFill">
+      </Image>
+    </DataTemplate>
+  </UserControl.Resources>
+  <controls:AdaptiveGridView
+              DesiredWidth="200"
+              ItemHeight="200"
+              ItemsSource="{Binding PictureItems}"
+              ItemTemplate="{StaticResource PictureItem}"
+              ItemContainerStyle="{StaticResource GridViewItemStyle}">
+  </controls:AdaptiveGridView>
+</UserControl>
