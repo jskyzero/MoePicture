@@ -96,6 +96,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\BoolVisibilityConverter.cs" />
+    <Compile Include="Converters\IntBoolConverter.cs" />
     <Compile Include="Converters\IntVisibilityConverter.cs" />
     <Compile Include="Converters\RatingNullableBooleanConverter.cs" />
     <Compile Include="Models\PictureItem.cs" />
@@ -121,6 +122,8 @@
     <Compile Include="UC\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UC\UnsplashImageBase.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\PictureItems\IncrementalLoadingBase.cs" />
     <Compile Include="ViewModels\PictureItems\PictureItems.cs" />
     <Compile Include="ViewModels\PictureItemsViewModel.cs" />
@@ -153,6 +156,9 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="JP.Utils.UWP">
+      <Version>1.1.29</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>5.2.3</Version>
     </PackageReference>
@@ -173,6 +179,10 @@
     <ProjectReference Include="..\ArylicMaterial\ArylicMaterial.csproj">
       <Project>{b68750d8-8876-40e9-a82f-dd376f79a5da}</Project>
       <Name>ArylicMaterial</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CustomControl\CustomControl.csproj">
+      <Project>{a4cc24d4-f383-4e1f-87c6-cd9794b719b3}</Project>
+      <Name>CustomControl</Name>
     </ProjectReference>
     <ProjectReference Include="..\DataBase\DataBase.csproj">
       <Project>{abb6bc46-85f2-4287-b4ac-3db37a09eb31}</Project>

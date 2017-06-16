@@ -5,22 +5,25 @@
     xmlns:local="using:MoePicture.Views"
     xmlns:UC="using:MoePicture.UC"
     xmlns:Models="using:MoePicture.Models"
+    xmlns:Converters="using:MoePicture.Converters"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    DataContext="{Binding PicturesViewModel, Source={StaticResource Locator}}">
+    DataContext="{Binding MainVM, Source={StaticResource Locator}}">
 
+  <Page.Resources>
+    <Converters:BoolVisibilityConverter x:Key="BoolVisibilityConverter" />
+  </Page.Resources>
   <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Grid x:Name="Grid">
     </Grid>
 
     <UC:PictureGrid />
-    <UC:ButtonBar
-        d:IsHidden="False" />
+    <UC:ButtonBar />
     <UC:PictureSingle />
     <UC:HamburgerButton />
-    <UC:Search />
+    <UC:Search Visibility="{Binding ShowSearch, Mode=OneWay, Converter={StaticResource BoolVisibilityConverter}}" />
     <UC:Settings />
   </Grid>
 </Page>

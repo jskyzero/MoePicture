@@ -87,7 +87,8 @@ namespace MoePicture.ViewModels.PictureItems
                             Items.Add(item);
                         }
                     }
-
+                    // for we use Count to bind
+                    OnPropertyChanged("Count");
                     _pageNum++;
                 }
                 else

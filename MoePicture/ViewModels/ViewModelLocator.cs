@@ -23,8 +23,9 @@ namespace MoePicture.ViewModels
 
         public static string ShellKey => shellKey;
 
-        public UserConfigViewModel ConfigViewModel => ServiceLocator.Current.GetInstance<UserConfigViewModel>();
-        public PictureItemsViewModel PicturesViewModel => ServiceLocator.Current.GetInstance<PictureItemsViewModel>();
+        public UserConfigViewModel ConfigVM => ServiceLocator.Current.GetInstance<UserConfigViewModel>();
+        public MainViewModel MainVM => ServiceLocator.Current.GetInstance<MainViewModel>();
+        public PictureItemsViewModel PicturesVM => ServiceLocator.Current.GetInstance<PictureItemsViewModel>();
 
         static ViewModelLocator()
         {
@@ -37,6 +38,7 @@ namespace MoePicture.ViewModels
             SimpleIoc.Default.Register<UserConfigServer>();
             SimpleIoc.Default.Register<UserConfigViewModel>();
             SimpleIoc.Default.Register<PictureItemsViewModel>();
+            SimpleIoc.Default.Register<MainViewModel>();
         }
     }
 }
