@@ -1,0 +1,37 @@
+# Site settings
+title: MoePicture
+subtitle: Official Site
+email: jskyzero@outlook.com
+description: 致力于更轻松的获取二次元图片，源图站yande.re
+# baseurl: "/forty-jekyll-theme" # the subpath of your site, e.g. /blog
+# url: "https://andrewbanchich.gitlab.io" # the base hostname & protocol for your site
+
+# author: jskyzero
+# street_address: "?? ??? Road"
+# city: ?? city
+# state: ??
+# zip_code: ????
+# country: China
+# phone: (086) ???-????-????
+
+# Homepagec tiles
+tiles-source: posts # accepts "posts" or "pages"
+tiles-count: 4
+
+# Social settings
+# 500px_url:
+# facebook_url:
+github_url: https://github.com/jskyzero
+# gitlab_url: 
+# googleplus_url: 
+# instagram_url: 
+# linkedin_url: 
+# pinterest_url:
+# slack_url:
+twitter_url: https://twitter.com/jskyzero
+
+# Build settings
+markdown: kramdown
+
+sass:
+  style: compressed
