@@ -3,8 +3,8 @@ title: MoePicture
 subtitle: Official Site
 email: jskyzero@outlook.com
 description: 致力于更轻松的获取二次元图片，源图站yande.re
-# baseurl: "/forty-jekyll-theme" # the subpath of your site, e.g. /blog
-# url: "https://andrewbanchich.gitlab.io" # the base hostname & protocol for your site
+baseurl: "/MoePicture" # the subpath of your site, e.g. /blog
+url: "https://jskyzero.github.io" # the base hostname & protocol for your site
 
 # author: jskyzero
 # street_address: "?? ??? Road"

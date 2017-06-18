@@ -1,5 +1,2 @@
-# exe
-*.exe
-
-# I usually use '1' as the conpile output
-1
+*.db
+_site
