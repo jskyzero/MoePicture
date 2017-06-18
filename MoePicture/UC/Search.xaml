@@ -9,10 +9,14 @@
     mc:Ignorable="d"
     DataContext="{Binding MainVM, Source={StaticResource Locator}}">
 
-  <Grid Background="Black"
-      attach:UIElementTapCommand.ItemTapCommand="{Binding HideSearchCommand}">
-    <TextBlock Text="Searching" HorizontalAlignment="Center" Foreground="White"
-               Style="{StaticResource  HeaderTextBlockStyle}" />
+  <Grid
+    Background="Transparent"
+    attach:UIElementTapCommand.ItemTapCommand="{Binding HideSearchCommand}">
+    <Grid
+      x:Name="BackGround" />
+    <TextBlock
+      Text="Searching" HorizontalAlignment="Center"
+      Style="{StaticResource  HeaderTextBlockStyle}" />
     <Grid>
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="*" />
@@ -24,14 +28,15 @@
                TextWrapping="Wrap"
                Grid.Column="1"
                Margin="0 0 60 0"
-               Text="Input tag" />
+               Text="input tag"
+               Height="40"
+               FontSize="20" />
       <Button  Grid.Column="1"
                DataContext="{Binding PicturesVM, Source={StaticResource Locator}}"
                HorizontalAlignment="Right"
                Command="{Binding RearchCommand}"
-               CommandParameter="{Binding Text, ElementName=Input}"
-               Style="{StaticResource  CustomButtonStyle}">
-        <FontIcon Height="60" Width="60" FontFamily="Segoe MDL2 Assets" Glyph="&#xE721;" Foreground="White" />
+               CommandParameter="{Binding Text, ElementName=Input}" Style="{StaticResource SearchButtonStyle}">
+        <FontIcon Height="48" Width="48" FontFamily="Segoe MDL2 Assets" Glyph="&#xE721;" Foreground="Black" />
       </Button>
     </Grid>
   </Grid>

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Practices.ServiceLocation;
+using MoePicture.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,6 +24,17 @@ namespace MoePicture.UC
         public Settings()
         {
             this.InitializeComponent();
+            ArylicMaterial.Win2D.initialGlass(BackGround);
+        }
+
+        //private void Button_Click(object sender, RoutedEventArgs e)
+        //{
+        //    ServiceLocator.Current.GetInstance<UserConfigViewModel>().AddTagtoMyTagsByString(input.Text);
+        //}
+
+        private void BackGround_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            ServiceLocator.Current.GetInstance<MainViewModel>().SwitchSettingsCommand.Execute(null);
         }
     }
 }

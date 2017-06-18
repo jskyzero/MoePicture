@@ -1,15 +1,94 @@
 ﻿<UserControl
-    x:Class="MoePicture.UC.PictureSingle"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:MoePicture.UC"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    d:DesignHeight="300"
-    d:DesignWidth="400">
-
-    <Grid>
-
+  x:Class="MoePicture.UC.PictureSingle"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:Converters="using:MoePicture.Converters"
+  xmlns:attach="using:JP.Utils.Framework"
+  xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+  xmlns:local="using:MoePicture.UC"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  mc:Ignorable="d">
+  <UserControl.Resources>
+    <Converters:StringListConverter x:Key="StringListConverter" />
+  </UserControl.Resources>
+  <Grid DataContext="{Binding PicturesVM.SelectPictureItem, Source={StaticResource Locator}}">
+    <Grid Background="Black" Opacity="0.8" />
+    <Border Tapped="Border_Tapped">
+      <Grid Background="Transparent">
+        <ProgressRing IsActive="True" Style="{StaticResource MyProgressRingStyle}" />
+      </Grid>
+    </Border>
+    <Grid Padding="20">
+      <Image Source="{Binding ImageSource}" Stretch="Uniform" />
     </Grid>
+
+    <Grid
+      x:Name="TagsGrid"
+      VerticalAlignment="Bottom"
+      Visibility="Collapsed">
+      <Grid x:Name="TagsGlass" />
+      <ListView
+        Padding="20"
+        VerticalAlignment="Bottom"
+        DataContext="{Binding PicturesVM, Source={StaticResource Locator}}"
+        IsItemClickEnabled="True"
+        ItemClick="ListView_ItemClick"
+        ItemsSource="{Binding SelectPictureTags}">
+        <ListView.Header>
+          <TextBlock Style="{StaticResource SubheaderTextBlockStyle}" Text="{Binding SelectPictureItem.name}" />
+        </ListView.Header>
+        <DataTemplate>
+          <TextBlock
+            Text="{Binding}"
+            TextTrimming="None"
+            TextWrapping="NoWrap" />
+        </DataTemplate>
+      </ListView>
+    </Grid>
+
+    <Grid
+      Margin="0,0,12,0"
+      HorizontalAlignment="Right"
+      VerticalAlignment="Center"
+      Background="Transparent">
+      <Canvas Background="Black" Opacity="0.5" />
+      <StackPanel>
+        <Button
+          x:Name="TagsButton"
+          Click="TagsButton_Click"
+          Foreground="{ThemeResource ApplicationForegroundThemeBrush}"
+          Style="{StaticResource CustomButtonStyle}">
+          <Button.Content>
+            <FontIcon
+              Width="60"
+              Height="60"
+              FontFamily="Segoe MDL2 Assets"
+              Foreground="White"
+              Glyph="&#xE1CB;" />
+          </Button.Content>
+        </Button>
+        <Button Click="Download_Click" Style="{StaticResource CustomButtonStyle}">
+          <Button.Content>
+            <SymbolIcon
+              Width="60"
+              Height="60"
+              Foreground="White"
+              Symbol="Download" />
+          </Button.Content>
+        </Button>
+        <Button Click="Share_Click" Style="{StaticResource CustomButtonStyle}">
+          <Button.Content>
+            <FontIcon
+              Width="60"
+              Height="60"
+              FontFamily="Segoe MDL2 Assets"
+              Foreground="White"
+              Glyph="&#xE72D;" />
+          </Button.Content>
+        </Button>
+      </StackPanel>
+    </Grid>
+  </Grid>
 </UserControl>

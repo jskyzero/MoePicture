@@ -1,29 +1,32 @@
 ﻿<Page
-    x:Class="MoePicture.Views.Shell"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:MoePicture.Views"
-    xmlns:UC="using:MoePicture.UC"
-    xmlns:Models="using:MoePicture.Models"
-    xmlns:Converters="using:MoePicture.Converters"
-    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    DataContext="{Binding MainVM, Source={StaticResource Locator}}">
+  x:Class="MoePicture.Views.Shell"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:Converters="using:MoePicture.Converters"
+  xmlns:Models="using:MoePicture.Models"
+  xmlns:UC="using:MoePicture.UC"
+  xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:local="using:MoePicture.Views"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  DataContext="{Binding MainVM, Source={StaticResource Locator}}"
+  mc:Ignorable="d">
 
   <Page.Resources>
     <Converters:BoolVisibilityConverter x:Key="BoolVisibilityConverter" />
   </Page.Resources>
-  <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    <Grid x:Name="Grid">
-    </Grid>
+  <SplitView IsPaneOpen="{Binding ShowHamburger, Mode=TwoWay}">
+    <SplitView.Pane>
+      <UC:HamburgerButton />
+    </SplitView.Pane>
+    <Grid>
+      <Grid x:Name="BackGround" />
 
-    <UC:PictureGrid />
-    <UC:ButtonBar />
-    <UC:PictureSingle />
-    <UC:HamburgerButton />
-    <UC:Search Visibility="{Binding ShowSearch, Mode=OneWay, Converter={StaticResource BoolVisibilityConverter}}" />
-    <UC:Settings />
-  </Grid>
+      <UC:PictureGrid />
+      <UC:ButtonBar />
+      <UC:PictureSingle d:IsHidden="True" Visibility="{Binding ShowSingle, Mode=OneWay, Converter={StaticResource BoolVisibilityConverter}}" />
+      <UC:Search d:IsHidden="True" Visibility="{Binding ShowSearch, Mode=OneWay, Converter={StaticResource BoolVisibilityConverter}}" />
+      <UC:Settings d:IsHidden="True" Visibility="{Binding ShowSettings, Mode=OneWay, Converter={StaticResource BoolVisibilityConverter}}" />
+    </Grid>
+  </SplitView>
 </Page>

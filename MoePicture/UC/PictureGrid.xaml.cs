@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Practices.ServiceLocation;
+using MoePicture.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -128,6 +130,11 @@ namespace MoePicture.UC
             {
                 Rect = new Rect(0, 0, rootGrid.ActualWidth, rootGrid.ActualHeight)
             };
+        }
+
+        private void GridView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ServiceLocator.Current.GetInstance<PictureItemsViewModel>().SelectItemClick(e);
         }
     }
 }

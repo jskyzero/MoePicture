@@ -22,6 +22,7 @@ namespace MoePicture.UC
         public Search()
         {
             this.InitializeComponent();
+            ArylicMaterial.Win2D.initialGlass(BackGround);
         }
     }
 }

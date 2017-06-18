@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using MoePicture.Models;
 using System;
 using System.Collections.Generic;
@@ -33,7 +34,7 @@ namespace MoePicture.ViewModels
         /// 新加入设置的tag到Model
         /// </summary>
         /// <param name="tag">tag</param>
-        public void AddTag(string tag)
+        private void AddTag(string tag)
         {
             if (!_config.MyTags.Contains(tag))
                 Config.MyTags.Add(tag);
@@ -42,9 +43,22 @@ namespace MoePicture.ViewModels
         /// <summary>
         /// 清除设置的所有tags
         /// </summary>
-        public void ClearAllTag()
+        public void CleanAllTag()
         {
             Config.MyTags.Clear();
         }
+
+        public RelayCommand CleanTagCommand { get { return new RelayCommand(() => { CleanAllTag(); }); } }
+
+        /// <summary>
+        /// 通过String来添加新的Tag
+        /// </summary>
+        /// <param name="str"></param>
+        public void AddTagtoMyTagsByString(string str)
+        {
+            AddTag(str);
+        }
+
+        public RelayCommand<string> AddTagCommand { get { return new RelayCommand<string>((str) => { AddTagtoMyTagsByString(str); }); } }
     }
 }

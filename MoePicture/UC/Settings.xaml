@@ -1,15 +1,109 @@
 ﻿<UserControl
-    x:Class="MoePicture.UC.Settings"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:MoePicture.UC"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    d:DesignHeight="300"
-    d:DesignWidth="400">
+  x:Class="MoePicture.UC.Settings"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:Converters="using:MoePicture.Converters"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:local="using:MoePicture.UC"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  mc:Ignorable="d">
 
-  <Grid Opacity="0">
-    <TextBlock Text="Seetings"  HorizontalAlignment="Center" />
+  <UserControl.Resources>
+    <Converters:RatingNullableBooleanConverter x:Key="RatingNullableBooleanConverter" />
+  </UserControl.Resources>
+  <Grid Background="Transparent" DataContext="{Binding ConfigVM, Source={StaticResource Locator}}">
+    <Border Tapped="BackGround_Tapped">
+      <Grid x:Name="BackGround" Background="Transparent" />
+    </Border>
+    <StackPanel VerticalAlignment="Top">
+      <TextBlock
+        HorizontalAlignment="Center"
+        Style="{StaticResource HeaderTextBlockStyle}"
+        Text="Searching" />
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="auto" />
+        </Grid.ColumnDefinitions>
+        <TextBlock
+          Grid.Column="0"
+          Style="{StaticResource BodyTextBlockStyle}"
+          Text="Show All Pictures" />
+        <CheckBox
+          Grid.Column="1"
+          MinWidth="0"
+          Margin="0"
+          Padding="0"
+          HorizontalAlignment="Right"
+          IsChecked="{Binding Config.Raing, Converter={StaticResource RatingNullableBooleanConverter}, Mode=TwoWay}" />
+      </Grid>
+      <TextBlock Style="{StaticResource BodyTextBlockStyle}" Text="CachePath" />
+      <TextBox
+        Margin="0,10,0,5"
+        Style="{StaticResource AutoSuggestBoxTextBoxStyle}"
+        Text="{Binding Config.Path}"
+        TextWrapping="Wrap" />
+      <TextBlock
+        Margin="0,0,0,10"
+        Style="{StaticResource BodyTextBlockStyle}"
+        Text="You can open cache folder use file explore to see or clean more cache picures if you need." />
+      <!--<Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="auto" />
+        </Grid.ColumnDefinitions>
+        <TextBlock
+          Grid.Column="0"
+          Style="{StaticResource BodyTextBlockStyle}"
+          Text="Add Tag to home" />
+        <Button
+          Grid.Column="1"
+          Width="48"
+          Height="24"
+          Padding="0"
+          HorizontalAlignment="Right"
+          Background="Transparent"
+          Click="Button_Click"
+          Foreground="{ThemeResource ApplicationForegroundThemeBrush}"
+          Style="{StaticResource CustomButtonStyle}">
+          <SymbolIcon
+            Width="20"
+            Height="20"
+            Margin="0,-4,0,-4"
+            Symbol="Add" />
+        </Button>
+      </Grid>
+      <TextBox
+        x:Name="input"
+        Margin="0,10,0,5"
+        Style="{StaticResource AutoSuggestBoxTextBoxStyle}"
+        TextWrapping="Wrap" />
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="auto" />
+        </Grid.ColumnDefinitions>
+        <TextBlock
+          Grid.Column="0"
+          Style="{StaticResource BodyTextBlockStyle}"
+          Text="Clear All Tag" />
+        <Button
+          Grid.Column="1"
+          Width="48"
+          Height="24"
+          Padding="0"
+          HorizontalAlignment="Right"
+          Background="Transparent"
+          Command="{Binding UserConfig.CleanTagCommand}"
+          Foreground="{ThemeResource ApplicationForegroundThemeBrush}"
+          Style="{StaticResource CustomButtonStyle}">
+          <SymbolIcon
+            Width="20"
+            Height="20"
+            Margin="0,-4,0,-4"
+            Symbol="Clear" />
+        </Button>
+      </Grid>-->
+    </StackPanel>
   </Grid>
 </UserControl>
