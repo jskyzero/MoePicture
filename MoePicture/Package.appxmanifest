@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="4ceea491-d703-4bad-a265-180d0f2c7dbc" Publisher="CN=84832" Version="1.0.3.0" />
+  <Identity Name="4ceea491-d703-4bad-a265-180d0f2c7dbc" Publisher="CN=jskyzero" Version="1.0.3.0" />
   <mp:PhoneIdentity PhoneProductId="4ceea491-d703-4bad-a265-180d0f2c7dbc" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>MoePicture</DisplayName>
-    <PublisherDisplayName>84832</PublisherDisplayName>
+    <PublisherDisplayName>jskyzero</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Dependencies>

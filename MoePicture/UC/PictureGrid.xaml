@@ -35,7 +35,7 @@
   <Grid DataContext="{Binding PicturesVM, Source={StaticResource Locator}}">
     <ProgressRing IsActive="{Binding PictureItems.Count, Converter={StaticResource IntBoolConverter}, Mode=OneWay}" 
                   Style="{StaticResource MyProgressRingStyle}" />
-    <CC:AdaptiveGridView Name="listView"
+    <CC:AdaptiveGridView 
               MinItemHeight="180"
               MinItemWidth="180"
               ItemsSource="{Binding PictureItems}"
