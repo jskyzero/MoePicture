@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="4ceea491-d703-4bad-a265-180d0f2c7dbc" Publisher="CN=jskyzero" Version="1.0.3.0" />
-  <mp:PhoneIdentity PhoneProductId="4ceea491-d703-4bad-a265-180d0f2c7dbc" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Identity Name="3771jskyzero.MoePicture" Publisher="CN=3D7EFF45-ABDE-412B-AB72-90AF27AC9FFB" Version="1.0.1.0" />
+  <mp:PhoneIdentity PhoneProductId="a4a1fd3e-8b5c-424a-821e-1e725b313bd0" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>MoePicture</DisplayName>
     <PublisherDisplayName>jskyzero</PublisherDisplayName>
@@ -16,7 +16,8 @@
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="MoePicture.App">
       <uap:VisualElements DisplayName="MoePicture" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="MoePicture" BackgroundColor="transparent">
-        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png">
+        <uap:LockScreen Notification="badge" BadgeLogo="Assets\BadgeLogo.png" />
+        <uap:DefaultTile Square71x71Logo="Assets\SmallTile.png" Square310x310Logo="Assets\LargeTile.png" Wide310x150Logo="Assets\WideTile.png">
         </uap:DefaultTile>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>

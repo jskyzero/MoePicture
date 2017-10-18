@@ -5,10 +5,9 @@
 ![](https://jskyzero.github.io/MoePicture/assets/images/6.18.1.png)
 ![](https://jskyzero.github.io/MoePicture/assets/images/6.18.5.png)
 
-
 ## Install
 
-Download [here](https://github.com/jskyzero/MoePicture/releases/tag/1.0.3.0)
+Download from [Microsoft Store](https://www.microsoft.com/zh-cn/store/p/moepicture/9n7qlfkl7zrh?rtc=1)
 
 ## Thanks
 
@@ -20,6 +19,7 @@ Download [here](https://github.com/jskyzero/MoePicture/releases/tag/1.0.3.0)
 
 
 ## Reference
+
 [MoePicture UWP Official](https://jskyzero.github.io/MoePicture/)
 
 [yande.re API 介绍](https://jskyzero.github.io/MoePicture/2017/05/12/API.html)
