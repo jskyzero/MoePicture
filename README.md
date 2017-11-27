@@ -3,11 +3,16 @@
 
 ## 11/27版本UI界面更新细节
 
-Acrylic Material
++ Acrylic Material
+
 ![](https://jskyzero.github.io//MoePicture/assets/images/gif/1.gif)
-Reveal Highlight 
+
++ Reveal Highlight 
+
 ![](https://jskyzero.github.io//MoePicture/assets/images/gif/2.gif)
-New Pane Background
+
++ New Pane Background
+
 ![](https://jskyzero.github.io//MoePicture/assets/images/gif/3.gif)
 
 ## 06/18版本UI界面
