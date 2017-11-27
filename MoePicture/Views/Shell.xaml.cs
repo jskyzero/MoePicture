@@ -34,7 +34,7 @@ namespace MoePicture.Views
             view.TitleBar.ButtonInactiveBackgroundColor = Colors.Transparent;   // 失去焦点时，将三个键背景设为透明
             view.TitleBar.ButtonInactiveForegroundColor = Colors.White;         // 失去焦点时，将三个键前景色设为白色
 
-            ArylicMaterial.Win2D.initialBackground(BackGround);
+            //ArylicMaterial.Win2D.initialBackground(BackGround);
         }
     }
 }

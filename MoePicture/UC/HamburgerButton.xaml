@@ -6,7 +6,7 @@
   xmlns:local="using:MoePicture.UC"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   mc:Ignorable="d">
-  <Grid Background="Black">
+  <Grid Background="{StaticResource SystemControlBaseHighAcrylicWindowMediumBrush}">
     <Button
       VerticalAlignment="Bottom"
       Command="{Binding SwitchSettingsCommand}"

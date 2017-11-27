@@ -9,17 +9,23 @@
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:local="using:MoePicture.Views"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:media="using:Windows.UI.Xaml.Media"
   DataContext="{Binding MainVM, Source={StaticResource Locator}}"
   mc:Ignorable="d">
 
   <Page.Resources>
     <Converters:BoolVisibilityConverter x:Key="BoolVisibilityConverter" />
+    <media:AcrylicBrush x:Key="MyBackgroundHostBackdropBrush"
+                            BackgroundSource="HostBackdrop"
+                            TintColor="White"
+                            TintOpacity="0.1"
+                            FallbackColor="LightSkyBlue"/>
   </Page.Resources>
   <SplitView IsPaneOpen="{Binding ShowHamburger, Mode=TwoWay}">
     <SplitView.Pane>
       <UC:HamburgerButton />
     </SplitView.Pane>
-    <Grid>
+    <Grid Background="{StaticResource MyBackgroundHostBackdropBrush}">
       <Grid x:Name="BackGround" />
 
       <UC:PictureGrid />
