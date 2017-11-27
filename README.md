@@ -1,6 +1,15 @@
 # MoePicture
 `jskyzero` `UWP`
 
+## 11/27版本UI界面更新细节
+
+Acrylic Material
+![](https://jskyzero.github.io//MoePicture/assets/images/gif/1.gif)
+Reveal Highlight 
+![](https://jskyzero.github.io//MoePicture/assets/images/gif/2.gif)
+New Pane Background
+![](https://jskyzero.github.io//MoePicture/assets/images/gif/3.gif)
+
 ## 06/18版本UI界面
 ![](https://jskyzero.github.io/MoePicture/assets/images/6.18.1.png)
 ![](https://jskyzero.github.io/MoePicture/assets/images/6.18.5.png)
