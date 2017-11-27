@@ -19,7 +19,7 @@
                             BackgroundSource="HostBackdrop"
                             TintColor="White"
                             TintOpacity="0.1"
-                            FallbackColor="LightSkyBlue"/>
+                            FallbackColor="White"/>
   </Page.Resources>
   <SplitView IsPaneOpen="{Binding ShowHamburger, Mode=TwoWay}">
     <SplitView.Pane>
