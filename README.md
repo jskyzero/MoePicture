@@ -24,6 +24,18 @@
 
 Download from [Microsoft Store](https://www.microsoft.com/zh-cn/store/p/moepicture/9n7qlfkl7zrh?rtc=1)
 
+## Todo
+
+下个版本更新计划
++ [ ] 添加设置允许用户自定义行和列的显示数量
++ [ ] 瀑布流加载（暂时不明白是指主界面的图片出现还是单张图片出现TAT）
++ [ ] 优化下返回逻辑
+
+长期更新计划
++ [ ] 添加其他图源
++ [ ] 添加用户收藏
++ [ ] 修改本地数据库储存
+
 ## Thanks
 
 > MoePicture-Yande 06/18日致谢
@@ -31,17 +43,6 @@ Download from [Microsoft Store](https://www.microsoft.com/zh-cn/store/p/moepictu
 > 感谢Mesekovic，M妹使得本项目有了完成的可能性。
 >
 > 感谢Microsoft DOCS，感谢 StackOverFlow，感谢JuniperPhoton’s MyerSplashUWP
-
-## Todo
-
-下个版本更新计划
-+ [ ] 添加设置允许用户自定义行和列的显示数量
-+ [ ] 瀑布流加载（暂时不明白是指主界面的图片出现还是单张图片出现TAT）
-+ [ ] 优化下返回逻辑
-长期更新计划
-+ [ ] 添加其他图源
-+ [ ] 添加用户收藏
-+ [ ] 修改本地数据库储存
 
 ## Reference
 
