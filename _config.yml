@@ -16,7 +16,7 @@ url: "https://jskyzero.github.io" # the base hostname & protocol for your site
 
 # Homepagec tiles
 tiles-source: posts # accepts "posts" or "pages"
-tiles-count: 4
+tiles-count: 6
 
 # Social settings
 # 500px_url:
