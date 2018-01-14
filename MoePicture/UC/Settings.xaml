@@ -15,7 +15,8 @@
     <Border Tapped="BackGround_Tapped">
       <Grid x:Name="BackGround" Background="Transparent" />
     </Border>
-    <StackPanel VerticalAlignment="Top">
+    <StackPanel VerticalAlignment="Top"
+        Margin="20">
       <TextBlock
         HorizontalAlignment="Center"
         Style="{StaticResource HeaderTextBlockStyle}"
