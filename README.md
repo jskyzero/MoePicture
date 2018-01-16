@@ -1,3 +1,1 @@
-# MoePicture
-
-gh-pages
+[MoePicture](https://jskyzero.github.io/MoePicture/)
