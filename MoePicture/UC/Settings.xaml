@@ -20,7 +20,7 @@
       <TextBlock
         HorizontalAlignment="Center"
         Style="{StaticResource HeaderTextBlockStyle}"
-        Text="Searching" />
+        Text="Settings" />
       <Grid>
         <Grid.ColumnDefinitions>
           <ColumnDefinition Width="*" />
@@ -38,7 +38,7 @@
           HorizontalAlignment="Right"
           IsChecked="{Binding Config.Raing, Converter={StaticResource RatingNullableBooleanConverter}, Mode=TwoWay}" />
       </Grid>
-      <TextBlock Style="{StaticResource BodyTextBlockStyle}" Text="CachePath" />
+      <TextBlock Style="{StaticResource BodyTextBlockStyle}" Text="CachePath" FontFamily="Segoe UI" />
       <TextBox
         Margin="0,10,0,5"
         Style="{StaticResource AutoSuggestBoxTextBoxStyle}"
