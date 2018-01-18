@@ -1,6 +1,6 @@
 ﻿using Microsoft.Practices.ServiceLocation;
 using MoePicture.Models;
-using MoePicture.Servers;
+using MoePicture.Services;
 using System;
 using System.Collections.Generic;
 
@@ -14,11 +14,11 @@ namespace MoePicture.ViewModels.PictureItems
     {
         #region Propeities
 
-        private int _pageNum;
-        private string _url;
-        private string _tag;
-        private bool _loadAll = ServiceLocator.Current.GetInstance<UserConfigViewModel>().Config.Raing == UserConfig.rating.all;
-
+        private int pageNum;
+        private string url;
+        private string tag;
+        private bool loadAll;
+        private bool noMorePicture;
 
         public DataBase.DataBase DB;
 
@@ -28,9 +28,11 @@ namespace MoePicture.ViewModels.PictureItems
 
         public PictureItems(string url, string tag = "")
         {
-            _url = url;
-            _pageNum = 1;
-            _tag = tag == "" ? "" : "&tags=" + tag;
+            pageNum = 1;
+            this.url = url;
+            this.tag = tag == "" ? "" : "&tags=" + tag;
+            loadAll = ServiceLocator.Current.GetInstance<UserConfigViewModel>().Config.Raing == UserConfig.rating.all;
+            noMorePicture = false;
 
             DB = new DataBase.DataBase();
         }
@@ -42,7 +44,7 @@ namespace MoePicture.ViewModels.PictureItems
         // 父类的虚函数实现，如果下次访问的页面数>0，证明网站还有可获取图片
         protected override bool HasMoreItemsOverride()
         {
-            return (_pageNum > 0);
+            return !noMorePicture;
         }
 
         // 父类的虚函数实现，根据_uri，_pageNum和_tag属性，组合成要访问的Uri，
@@ -53,7 +55,7 @@ namespace MoePicture.ViewModels.PictureItems
 
             XmlDocument xml = new XmlDocument();
             // 组合成要访问的Uri
-            string url = _url + "&page=" + _pageNum.ToString() + _tag;
+            string url = this.url + "&page=" + pageNum.ToString() + tag;
             // 先在数据库里查找Uri对应的xml文件，如果没有，从网上获取
             string str = DB.select(url);
             if (str != String.Empty)
@@ -62,7 +64,7 @@ namespace MoePicture.ViewModels.PictureItems
             }
             else
             {
-                str = await Servers.Spider.GetString(new Uri(url));
+                str = await Services.Spider.GetString(new Uri(url));
                 DB.add(url, str);
             }
 
@@ -75,21 +77,22 @@ namespace MoePicture.ViewModels.PictureItems
             {
                 for (int i = 0; i < nodeList.Count; i++)
                 {
-                    if (_loadAll || nodeList[i % 100].Attributes["rating"].Value == "s")
+                    var item = new PictureItem(nodeList[i % 100]);
+
+                    if (loadAll || item.IsSafe)
                     {
-                        var item = new PictureItem(nodeList[i % 100]);
                         Items.Add(item);
                     }
                 }
                 // for we use Count to bind
                 OnPropertyChanged("Count");
-                _pageNum++;
+                pageNum++;
             }
             else
             {
-                // 如果xml文件里没有任何图片xml节点，将_pageNum设置为0，
+                // 如果xml文件里没有任何图片xml节点，将noMorePicture 设置为 true
                 // 表示无法得到更多更多图片
-                _pageNum = 0;
+                noMorePicture = true;
             }
 
             return Items;

@@ -25,12 +25,12 @@ namespace MoePicture.UC
 {
     public sealed partial class PictureGrid : UserControl
     {
-        private Compositor _compositor;
+        private Compositor compositor;
 
         public PictureGrid()
         {
             this.InitializeComponent();
-            this._compositor = ElementCompositionPreview.GetElementVisual(this).Compositor;
+            this.compositor = ElementCompositionPreview.GetElementVisual(this).Compositor;
         }
 
         private void RootGrid_Loaded(object sender, RoutedEventArgs e)
@@ -107,7 +107,7 @@ namespace MoePicture.UC
 
         private ScalarKeyFrameAnimation CreateScaleAnimation(bool show)
         {
-            var scaleAnimation = _compositor.CreateScalarKeyFrameAnimation();
+            var scaleAnimation = compositor.CreateScalarKeyFrameAnimation();
             scaleAnimation.InsertKeyFrame(1f, show ? 1.1f : 1f);
             scaleAnimation.Duration = TimeSpan.FromMilliseconds(1000);
             scaleAnimation.StopBehavior = AnimationStopBehavior.LeaveCurrentValue;
@@ -116,7 +116,7 @@ namespace MoePicture.UC
 
         private ScalarKeyFrameAnimation CreateFadeAnimation(bool show)
         {
-            var fadeAnimation = _compositor.CreateScalarKeyFrameAnimation();
+            var fadeAnimation = compositor.CreateScalarKeyFrameAnimation();
             fadeAnimation.InsertKeyFrame(1f, show ? 1f : 0f);
             fadeAnimation.Duration = TimeSpan.FromMilliseconds(500);
 

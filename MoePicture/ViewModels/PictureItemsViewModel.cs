@@ -30,7 +30,7 @@ namespace MoePicture.ViewModels
         public string Tag { get => _tag; set { _tag = value; RaisePropertyChanged(() => Tag); } }
         public string SelectTag { get => _selectTag; set { Set(ref _selectTag, value); } }
         public List<string> SelectPictureTags { get => _selectPictureTags; set { Set(ref _selectPictureTags, value); } }
-        public PictureItem SelectPictureItem { get => _selectPictureItem; set { _selectPictureItem = value; SelectPictureItem.url_type = PictureItem.UrlType.jpeg_url; RaisePropertyChanged(() => SelectPictureItem); } }
+        public PictureItem SelectPictureItem { get => _selectPictureItem; set { _selectPictureItem = value; SelectPictureItem.url_type = UrlType.jpeg_url; RaisePropertyChanged(() => SelectPictureItem); } }
         public PictureItems.PictureItems PictureItems { get => _pictureItems; set { Set(ref _pictureItems, value); } }
 
         public PictureItemsViewModel()
@@ -52,8 +52,8 @@ namespace MoePicture.ViewModels
         public void SelectItemClick(ItemClickEventArgs e)
         {
             SelectPictureItem = (PictureItem)e.ClickedItem;
-            SelectPictureTags = new List<string>((SelectPictureItem.tags).Split(' '));
-            Tiles.UpdataOneItem(SelectPictureItem.file_name);
+            SelectPictureTags = new List<string>((SelectPictureItem.Tags).Split(' '));
+            Tiles.UpdataOneItem(SelectPictureItem.FileName);
             ServiceLocator.Current.GetInstance<MainViewModel>().SwitchSigleCommand.Execute(null);
         }
 

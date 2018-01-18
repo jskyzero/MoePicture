@@ -7,7 +7,7 @@ using Windows.Storage;
 using Windows.Storage.Streams;
 using Windows.Web.Http;
 
-namespace MoePicture.Servers
+namespace MoePicture.Services
 {
     internal class Spider
     {
@@ -21,7 +21,7 @@ namespace MoePicture.Servers
             // client.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", User_Agent);
             using (var client = new HttpClient())
             {
-                // 对爬虫进行伪装，防止网址发现爬虫然后无法访问
+                // 对爬虫进行伪装，防止网站发现爬虫然后无法访问
                 client.DefaultRequestHeaders.Add("User-Agent", User_Agent);
                 return await client.GetStringAsync(url);
             }

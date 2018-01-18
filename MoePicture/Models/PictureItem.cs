@@ -1,6 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Threading;
-using MoePicture.Servers;
+using MoePicture.Services;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -15,6 +15,12 @@ using Windows.UI.Xaml.Media.Imaging;
 
 namespace MoePicture.Models
 {
+
+    // 枚举网站种类
+    public enum WebsiteType { yande, konachon, danbooru };
+    // 枚举Uri种类
+    public enum UrlType { preview_url, sample_url, jpeg_url };
+
     /// <summary>
     /// 图片Model类，用于储存图片的各种信息
     /// </summary>
@@ -22,22 +28,22 @@ namespace MoePicture.Models
     {
         #region Properties
 
-        // 枚举Uri种类
-        public enum UrlType { preview_url, sample_url, jpeg_url };
-
         // 弱引用对象，用于存储下载好的图片对象
         private WeakReference bitmapImage;
 
-        private UrlType _url_type;
+        private UrlType urlType;
+        private Boolean isSafe;
 
-        public string id { get; set; }
-        public string tags { get; set; }
-        public string preview_url { get; set; }
-        public string sample_url { get; set; }
-        public string jpeg_url { get; set; }
-        public string file_name { get; set; }
-        public string name { get; set; }
-        public UrlType url_type { get { return _url_type; } set { _url_type = value; bitmapImage = null; } }
+        public string Id { get; set; }
+        public string Tags { get; set; }
+        public string PreviewUrl { get; set; }
+        public string SampleUrl { get; set; }
+        public string JpegUrl { get; set; }
+        public string FileName { get; set; }
+        public string Name { get; set; }
+        public UrlType url_type { get { return urlType; } set { urlType = value; bitmapImage = null; } }
+        public bool IsSafe { get => isSafe; set => isSafe = value; }
+
 
         #endregion Properties
 
@@ -49,14 +55,16 @@ namespace MoePicture.Models
             try
             {
                 // 从节点得到图片信息
-                id = node.Attributes["id"].Value;
-                tags = node.Attributes["tags"].Value;
-                preview_url = node.Attributes["preview_url"].Value;
-                sample_url = node.Attributes["sample_url"].Value;
-                jpeg_url = node.Attributes["jpeg_url"].Value;
+                Id = node.Attributes["id"].Value;
+                Tags = node.Attributes["tags"].Value;
+                PreviewUrl = node.Attributes["preview_url"].Value;
+                SampleUrl = node.Attributes["sample_url"].Value;
+                JpegUrl = node.Attributes["jpeg_url"].Value;
                 // 通过url处理得到两种name
-                name = Spider.GetFileNameFromUrl(jpeg_url);
-                file_name = Spider.GetFileNameFromUrl(preview_url);
+                Name = Spider.GetFileNameFromUrl(JpegUrl);
+                FileName = Spider.GetFileNameFromUrl(PreviewUrl);
+
+                IsSafe = node.Attributes["rating"].Value == "s";
             }
             catch
             {
@@ -82,12 +90,13 @@ namespace MoePicture.Models
                         Debug.WriteLine("数据已经被回收");
                 }
                 // 弱引用已经被回收那么则通过图片网络地址进行异步下载
-                Uri imageUri = new Uri(url_type == UrlType.preview_url ? preview_url : sample_url);
+                Uri imageUri = new Uri(url_type == UrlType.preview_url ? PreviewUrl : SampleUrl);
                 // 创建后台线程，下载图片
                 Task.Factory.StartNew(() => { DownloadImageAsync(imageUri); });
                 return null;
             }
         }
+
 
         // 下载图片的方法
         private async void DownloadImageAsync(object state)
@@ -96,22 +105,22 @@ namespace MoePicture.Models
             StorageFolder folder = ApplicationData.Current.LocalCacheFolder;
             folder = await folder.CreateFolderAsync(url_type == UrlType.preview_url ? "perview" : "sample", CreationCollisionOption.OpenIfExists);
 
-            if (!File.Exists(Path.Combine(folder.Path, file_name)))
+            if (!File.Exists(Path.Combine(folder.Path, FileName)))
             {
                 if (url_type == UrlType.preview_url)
                 {
-                    await Spider.DownloadPictureFromUriToFolder(state as Uri, folder.Path, file_name);
+                    await Spider.DownloadPictureFromUriToFolder(state as Uri, folder.Path, FileName);
                 }
                 else
                 {
-                    await Spider.DownloadPictureFromUriToFolderLock(state as Uri, folder.Path, file_name);
+                    await Spider.DownloadPictureFromUriToFolderLock(state as Uri, folder.Path, FileName);
                 }
             }
 
             // 在UI线程处理位图和UI更新
             DispatcherHelper.CheckBeginInvokeOnUI(() =>
             {
-                BitmapImage bm = new BitmapImage(new Uri(Path.Combine(folder.Path, file_name)));
+                BitmapImage bm = new BitmapImage(new Uri(Path.Combine(folder.Path, FileName)));
 
                 // 把图片位图对象存放到弱引用对象里面
                 if (bitmapImage == null)

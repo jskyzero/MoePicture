@@ -57,13 +57,13 @@ namespace MoePicture.UC
             FileSavePicker savePicker = new FileSavePicker();
 
             savePicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
-            savePicker.SuggestedFileName = SelectItem.name;
+            savePicker.SuggestedFileName = SelectItem.Name;
             savePicker.FileTypeChoices.Add("Picture", new List<string>() { ".jpg", ".png" });
 
             StorageFile file = await savePicker.PickSaveFileAsync();
             if (file != null)
             {
-                await Servers.Spider.DownloadPictureFromUriToFile(new Uri(SelectItem.jpeg_url), file);
+                await Services.Spider.DownloadPictureFromUriToFile(new Uri(SelectItem.JpegUrl), file);
             }
         }
 
@@ -73,15 +73,15 @@ namespace MoePicture.UC
             var request = args.Request;
             var SelectItem = (Models.PictureItem)TagsGlass.DataContext;
             // 添加文字描述
-            request.Data.Properties.Title = SelectItem.name;
+            request.Data.Properties.Title = SelectItem.Name;
             request.Data.Properties.Description = "Moe picture share";
-            request.Data.SetText(SelectItem.tags);
+            request.Data.SetText(SelectItem.Tags);
 
             // 添加当前图片
             if (SelectItem.ImageSource != null)
             {
                 StorageFolder folder = ApplicationData.Current.LocalCacheFolder;
-                var photoFile = await (await folder.GetFolderAsync("sample")).GetFileAsync(SelectItem.file_name);
+                var photoFile = await (await folder.GetFolderAsync("sample")).GetFileAsync(SelectItem.FileName);
                 request.Data.SetStorageItems(new List<StorageFile> { photoFile });
             }
             DataTransferManager.GetForCurrentView().DataRequested -= OnShareDataRequested;

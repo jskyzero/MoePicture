@@ -21,7 +21,7 @@
              Stretch="UniformToFill">
         </Image>
         <Border x:Name="MaskBorder" Background="#50000000">
-          <TextBlock Text="{Binding name}" TextWrapping="Wrap" Foreground="White" />
+          <TextBlock Text="{Binding Name}" TextWrapping="Wrap" Foreground="White" />
         </Border>
       </Grid>
     </DataTemplate>

@@ -37,7 +37,7 @@
         ItemClick="ListView_ItemClick"
         ItemsSource="{Binding SelectPictureTags}">
         <ListView.Header>
-          <TextBlock Style="{StaticResource SubheaderTextBlockStyle}" Text="{Binding SelectPictureItem.name}" />
+          <TextBlock Style="{StaticResource SubheaderTextBlockStyle}" Text="{Binding SelectPictureItem.Name}" />
         </ListView.Header>
         <DataTemplate>
           <TextBlock
