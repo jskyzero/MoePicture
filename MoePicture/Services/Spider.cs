@@ -13,7 +13,7 @@ namespace MoePicture.Services
     {
 
         // 爬虫模拟Chrome浏览器的字符串
-        public static string User_Agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit / 537.36(KHTML, like Gecko) Chrome  47.0.2526.106 Safari / 537.36";
+        public static string User_Agent = "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Mobile Safari/537.36";
 
         public async static Task<string> GetString(Uri url)
         {
@@ -33,40 +33,18 @@ namespace MoePicture.Services
             using (var client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Add("User-Agent", User_Agent);
-                try
-                {
-                    // 获取图片流下载到文件中
-                    IBuffer buffer = await client.GetBufferAsync(uri);
-                    try
-                    {
-                        await FileIO.WriteBufferAsync(file, buffer);
-                    }
-                    catch
-                    {
-                        // Fail If WriteBuffer Error
-                        // throw new Exception("??????");
-                    }
-                }
-                catch
-                {
-                    // Fail If GetBuffer Error
-                }
+                // 获取图片流下载到文件中
+                IBuffer buffer = await client.GetBufferAsync(uri);
+                await FileIO.WriteBufferAsync(file, buffer);
             }
         }
 
         // 通过Uri下载图片到本地文件(通过path和fileName路径得到本地文件)
         public async static Task DownloadPictureFromUriToFolder(Uri uri, string path, string fileName)
         {
-            try
-            {
-                StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(path);
-                StorageFile file = await folder.CreateFileAsync(fileName, CreationCollisionOption.FailIfExists);
-                await DownloadPictureFromUriToFile(uri, file);
-            }
-            catch
-            {
-                // Fail If Exists
-            }
+            StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(path);
+            StorageFile file = await folder.CreateFileAsync(fileName, CreationCollisionOption.OpenIfExists);
+            await DownloadPictureFromUriToFile(uri, file);
         }
 
         private static SemaphoreSlim DownloadPictureLock = new SemaphoreSlim(5);
@@ -77,16 +55,9 @@ namespace MoePicture.Services
         {
             await DownloadPictureLock.WaitAsync();
 
-            try
-            {
-                StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(path);
-                StorageFile file = await folder.CreateFileAsync(fileName, CreationCollisionOption.FailIfExists);
-                await DownloadPictureFromUriToFile(uri, file);
-            }
-            catch
-            {
-                // Fail If Exists
-            }
+            StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(path);
+            StorageFile file = await folder.CreateFileAsync(fileName, CreationCollisionOption.OpenIfExists);
+            await DownloadPictureFromUriToFile(uri, file);
 
             DownloadPictureLock.Release();
         }

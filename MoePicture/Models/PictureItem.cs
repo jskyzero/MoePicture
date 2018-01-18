@@ -63,12 +63,37 @@ namespace MoePicture.Models
                 case WebsiteType.yande:
                     Yande(node);
                     break;
+                case WebsiteType.konachon:
+                    Konachon(node);
+                    break;
                 default:
                     break;
             }
         }
 
         private void Yande(XmlNode node)
+        {
+            try
+            {
+                // 从节点得到图片信息
+                Id = node.Attributes["id"].Value;
+                Tags = node.Attributes["tags"].Value;
+                PreviewUrl = node.Attributes["preview_url"].Value;
+                SampleUrl = node.Attributes["sample_url"].Value;
+                JpegUrl = node.Attributes["jpeg_url"].Value;
+                // 通过url处理得到两种name
+                Name = Spider.GetFileNameFromUrl(JpegUrl);
+                FileName = Spider.GetFileNameFromUrl(PreviewUrl);
+
+                IsSafe = node.Attributes["rating"].Value == "s";
+            }
+            catch
+            {
+                // if no tags set as default
+            }
+        }
+
+        private void Konachon(XmlNode node)
         {
             try
             {
@@ -121,17 +146,18 @@ namespace MoePicture.Models
         {
             // 根据图片Uri类型，下载到不同文件夹里
             StorageFolder folder = ApplicationData.Current.LocalCacheFolder;
+            folder = await folder.CreateFolderAsync(Type.ToString(), CreationCollisionOption.OpenIfExists);
             folder = await folder.CreateFolderAsync(UrlType == UrlType.preview_url ? "perview" : "sample", CreationCollisionOption.OpenIfExists);
 
             if (!File.Exists(Path.Combine(folder.Path, FileName)))
             {
                 if (UrlType == UrlType.preview_url)
                 {
-                    await Spider.DownloadPictureFromUriToFolder(state as Uri, folder.Path, FileName);
+                    await Spider.DownloadPictureFromUriToFolderLock(state as Uri, folder.Path, FileName);
                 }
                 else
                 {
-                    await Spider.DownloadPictureFromUriToFolderLock(state as Uri, folder.Path, FileName);
+                    await Spider.DownloadPictureFromUriToFolder(state as Uri, folder.Path, FileName);
                 }
             }
 

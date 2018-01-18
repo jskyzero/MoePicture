@@ -11,6 +11,7 @@ namespace MoePicture.Services
     internal class Website
     {
         private static string yandeUrl = "https://yande.re/post.xml?limit=100";
+        private static string konachanUrl = "http://konachan.com/post.xml?limit=100";
 
         private WebsiteType websiteType;
         private string tag;
@@ -29,6 +30,9 @@ namespace MoePicture.Services
                 case WebsiteType.yande:
                     this.tag = tag == "" ? "" : "&tags=" + tag;
                     break;
+                case WebsiteType.konachon:
+                    this.tag = tag == "" ? "" : "&tags=" + tag;
+                    break;
                 default:
                     this.tag = "";
                     break;
@@ -45,6 +49,9 @@ namespace MoePicture.Services
             {
                 case WebsiteType.yande:
                     url = yandeUrl + "&page=" + pageNum.ToString() + tag;
+                    break;
+                case WebsiteType.konachon:
+                    url = konachanUrl + "&page=" + pageNum.ToString() + tag;
                     break;
             }
 
