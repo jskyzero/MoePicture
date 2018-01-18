@@ -15,7 +15,6 @@ namespace MoePicture.ViewModels
 {
     public class PictureItemsViewModel : ViewModelBase
     {
-        private static string url = "https://yande.re/post.xml?limit=100";
         private string _tag;
 
         private RelayCommand _refreshCommand;
@@ -30,7 +29,7 @@ namespace MoePicture.ViewModels
         public string Tag { get => _tag; set { _tag = value; RaisePropertyChanged(() => Tag); } }
         public string SelectTag { get => _selectTag; set { Set(ref _selectTag, value); } }
         public List<string> SelectPictureTags { get => _selectPictureTags; set { Set(ref _selectPictureTags, value); } }
-        public PictureItem SelectPictureItem { get => _selectPictureItem; set { _selectPictureItem = value; SelectPictureItem.url_type = UrlType.jpeg_url; RaisePropertyChanged(() => SelectPictureItem); } }
+        public PictureItem SelectPictureItem { get => _selectPictureItem; set { _selectPictureItem = value; SelectPictureItem.UrlType = UrlType.jpeg_url; RaisePropertyChanged(() => SelectPictureItem); } }
         public PictureItems.PictureItems PictureItems { get => _pictureItems; set { Set(ref _pictureItems, value); } }
 
         public PictureItemsViewModel()
@@ -46,7 +45,7 @@ namespace MoePicture.ViewModels
 
         private void RefreshPictures()
         {
-            PictureItems = new PictureItems.PictureItems(url, Tag);
+            PictureItems = new PictureItems.PictureItems(WebsiteType.yande, Tag);
         }
 
         public void SelectItemClick(ItemClickEventArgs e)

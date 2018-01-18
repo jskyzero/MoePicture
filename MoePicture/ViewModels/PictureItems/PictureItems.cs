@@ -1,9 +1,7 @@
 ﻿using Microsoft.Practices.ServiceLocation;
 using MoePicture.Models;
-using MoePicture.Services;
 using System;
 using System.Collections.Generic;
-
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
@@ -14,11 +12,9 @@ namespace MoePicture.ViewModels.PictureItems
     {
         #region Propeities
 
-        private int pageNum;
-        private string url;
-        private string tag;
         private bool loadAll;
         private bool noMorePicture;
+        private Services.Website website;
 
         public DataBase.DataBase DB;
 
@@ -26,13 +22,11 @@ namespace MoePicture.ViewModels.PictureItems
 
         #region Constructer
 
-        public PictureItems(string url, string tag = "")
+        public PictureItems(WebsiteType websiteType, string tag = "")
         {
-            pageNum = 1;
-            this.url = url;
-            this.tag = tag == "" ? "" : "&tags=" + tag;
             loadAll = ServiceLocator.Current.GetInstance<UserConfigViewModel>().Config.Raing == UserConfig.rating.all;
             noMorePicture = false;
+            website = new Services.Website(websiteType, tag);
 
             DB = new DataBase.DataBase();
         }
@@ -55,7 +49,8 @@ namespace MoePicture.ViewModels.PictureItems
 
             XmlDocument xml = new XmlDocument();
             // 组合成要访问的Uri
-            string url = this.url + "&page=" + pageNum.ToString() + tag;
+            string url = website.Url();
+
             // 先在数据库里查找Uri对应的xml文件，如果没有，从网上获取
             string str = DB.select(url);
             if (str != String.Empty)
@@ -77,7 +72,7 @@ namespace MoePicture.ViewModels.PictureItems
             {
                 for (int i = 0; i < nodeList.Count; i++)
                 {
-                    var item = new PictureItem(nodeList[i % 100]);
+                    var item = new PictureItem(website.Type, nodeList[i % 100]);
 
                     if (loadAll || item.IsSafe)
                     {
@@ -86,7 +81,7 @@ namespace MoePicture.ViewModels.PictureItems
                 }
                 // for we use Count to bind
                 OnPropertyChanged("Count");
-                pageNum++;
+                
             }
             else
             {

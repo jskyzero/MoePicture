@@ -43,13 +43,13 @@ namespace MoePicture.Services
                     }
                     catch
                     {
-                        // Fail If Exists
+                        // Fail If WriteBuffer Error
                         // throw new Exception("??????");
                     }
                 }
                 catch
                 {
-                    // Fail If Http Error
+                    // Fail If GetBuffer Error
                 }
             }
         }
@@ -57,29 +57,15 @@ namespace MoePicture.Services
         // 通过Uri下载图片到本地文件(通过path和fileName路径得到本地文件)
         public async static Task DownloadPictureFromUriToFolder(Uri uri, string path, string fileName)
         {
-            using (var client = new HttpClient())
+            try
             {
-                client.DefaultRequestHeaders.Add("User-Agent", User_Agent);
-                try
-                {
-                    // 获取图片流下载到文件中
-                    IBuffer buffer = await client.GetBufferAsync(uri);
-                    StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(path);
-                    try
-                    {
-                        StorageFile file = await folder.CreateFileAsync(fileName, CreationCollisionOption.FailIfExists);
-                        await FileIO.WriteBufferAsync(file, buffer);
-                    }
-                    catch
-                    {
-                        // Fail If Exists
-                        // throw new Exception("??????");
-                    }
-                }
-                catch
-                {
-                    // Fail If Http Error
-                }
+                StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(path);
+                StorageFile file = await folder.CreateFileAsync(fileName, CreationCollisionOption.FailIfExists);
+                await DownloadPictureFromUriToFile(uri, file);
+            }
+            catch
+            {
+                // Fail If Exists
             }
         }
 
@@ -91,30 +77,17 @@ namespace MoePicture.Services
         {
             await DownloadPictureLock.WaitAsync();
 
-            using (var client = new HttpClient())
+            try
             {
-                client.DefaultRequestHeaders.Add("User-Agent", User_Agent);
-                try
-                {
-                    IBuffer buffer = await client.GetBufferAsync(uri);
-                    StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(path);
-
-                    try
-                    {
-                        StorageFile file = await folder.CreateFileAsync(fileName, CreationCollisionOption.FailIfExists);
-                        await FileIO.WriteBufferAsync(file, buffer);
-                    }
-                    catch
-                    {
-                        // FailIfExists
-                        // throw new Exception("??????");
-                    }
-                }
-                catch
-                {
-                    // GetBufferError
-                }
+                StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(path);
+                StorageFile file = await folder.CreateFileAsync(fileName, CreationCollisionOption.FailIfExists);
+                await DownloadPictureFromUriToFile(uri, file);
             }
+            catch
+            {
+                // Fail If Exists
+            }
+
             DownloadPictureLock.Release();
         }
 

@@ -32,6 +32,8 @@ namespace MoePicture.Models
         private WeakReference bitmapImage;
 
         private UrlType urlType;
+        private WebsiteType websiteType;
+
         private Boolean isSafe;
 
         public string Id { get; set; }
@@ -41,17 +43,33 @@ namespace MoePicture.Models
         public string JpegUrl { get; set; }
         public string FileName { get; set; }
         public string Name { get; set; }
-        public UrlType url_type { get { return urlType; } set { urlType = value; bitmapImage = null; } }
         public bool IsSafe { get => isSafe; set => isSafe = value; }
+
+        public WebsiteType Type { get => websiteType; set => websiteType = value; }
+        public UrlType UrlType { get { return urlType; } set { urlType = value; bitmapImage = null; } }
 
 
         #endregion Properties
 
         #region Constructer
 
-        public PictureItem(XmlNode node)
+        public PictureItem(WebsiteType type, XmlNode node)
         {
-            url_type = UrlType.preview_url;
+            UrlType = UrlType.preview_url;
+            Type = type;
+
+            switch (Type)
+            {
+                case WebsiteType.yande:
+                    Yande(node);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void Yande(XmlNode node)
+        {
             try
             {
                 // 从节点得到图片信息
@@ -90,7 +108,7 @@ namespace MoePicture.Models
                         Debug.WriteLine("数据已经被回收");
                 }
                 // 弱引用已经被回收那么则通过图片网络地址进行异步下载
-                Uri imageUri = new Uri(url_type == UrlType.preview_url ? PreviewUrl : SampleUrl);
+                Uri imageUri = new Uri(UrlType == UrlType.preview_url ? PreviewUrl : SampleUrl);
                 // 创建后台线程，下载图片
                 Task.Factory.StartNew(() => { DownloadImageAsync(imageUri); });
                 return null;
@@ -103,11 +121,11 @@ namespace MoePicture.Models
         {
             // 根据图片Uri类型，下载到不同文件夹里
             StorageFolder folder = ApplicationData.Current.LocalCacheFolder;
-            folder = await folder.CreateFolderAsync(url_type == UrlType.preview_url ? "perview" : "sample", CreationCollisionOption.OpenIfExists);
+            folder = await folder.CreateFolderAsync(UrlType == UrlType.preview_url ? "perview" : "sample", CreationCollisionOption.OpenIfExists);
 
             if (!File.Exists(Path.Combine(folder.Path, FileName)))
             {
-                if (url_type == UrlType.preview_url)
+                if (UrlType == UrlType.preview_url)
                 {
                     await Spider.DownloadPictureFromUriToFolder(state as Uri, folder.Path, FileName);
                 }
