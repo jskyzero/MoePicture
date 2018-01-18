@@ -162,6 +162,10 @@ namespace MoePicture.ViewModels.PictureItems
 
                 return new LoadMoreItemsResult { Count = (uint)items.Count };
             }
+            //catch
+            //{
+            //    return new LoadMoreItemsResult { Count = 0 };
+            //}
             finally
             {
                 _busy = false;

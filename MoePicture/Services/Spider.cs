@@ -13,7 +13,7 @@ namespace MoePicture.Services
     {
 
         // 爬虫模拟Chrome浏览器的字符串
-        public static string User_Agent = "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Mobile Safari/537.36";
+        public static string User_Agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit / 537.36(KHTML, like Gecko) Chrome  47.0.2526.106 Safari / 537.36";
 
         public async static Task<string> GetString(Uri url)
         {
