@@ -13,30 +13,37 @@ namespace MoePicture.Services
     {
 
         // 爬虫模拟Chrome浏览器的字符串
-        public static string User_Agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit / 537.36(KHTML, like Gecko) Chrome  47.0.2526.106 Safari / 537.36";
+        private static HttpClient client = null;
+        private static string User_Agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit / 537.36(KHTML, like Gecko) Chrome  47.0.2526.106 Safari / 537.36";
+
+        public static HttpClient Client
+        {
+            get
+            {
+                if (client == null)
+                {
+                    client = new HttpClient();
+                    // 对爬虫进行伪装，防止网站发现爬虫然后无法访问
+                    client.DefaultRequestHeaders.Add("User-Agent", User_Agent);
+                }
+                return client;
+            }
+        }
+
 
         public async static Task<string> GetString(Uri url)
         {
             // var client = new System.Net.Http.HttpClient();
             // client.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", User_Agent);
-            using (var client = new HttpClient())
-            {
-                // 对爬虫进行伪装，防止网站发现爬虫然后无法访问
-                client.DefaultRequestHeaders.Add("User-Agent", User_Agent);
-                return await client.GetStringAsync(url);
-            }
+            return await Client.GetStringAsync(url);
         }
 
         // 通过Uri下载图片到本地文件
         public async static Task DownloadPictureFromUriToFile(Uri uri, StorageFile file)
         {
-            using (var client = new HttpClient())
-            {
-                client.DefaultRequestHeaders.Add("User-Agent", User_Agent);
-                // 获取图片流下载到文件中
-                IBuffer buffer = await client.GetBufferAsync(uri);
-                await FileIO.WriteBufferAsync(file, buffer);
-            }
+            // 获取图片流下载到文件中
+            IBuffer buffer = await Client.GetBufferAsync(uri);
+            await FileIO.WriteBufferAsync(file, buffer);
         }
 
         // 通过Uri下载图片到本地文件(通过path和fileName路径得到本地文件)
@@ -48,6 +55,7 @@ namespace MoePicture.Services
         }
 
         private static SemaphoreSlim DownloadPictureLock = new SemaphoreSlim(5);
+
 
         // 通过Uri下载图片到本地文件(通过path和fileName路径得到本地文件)
         // 最多同时发送五个请求

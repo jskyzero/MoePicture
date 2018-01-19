@@ -129,10 +129,10 @@ namespace MoePicture.Models
                     // 如果弱引用没有没回收，则取弱引用的值
                     if (bitmapImage.IsAlive)
                         return (ImageSource)bitmapImage.Target;
-                    else
-                        Debug.WriteLine("数据已经被回收");
+                    //else
+                    //    Debug.WriteLine("数据已经被回收");
                 }
-                // 弱引用已经被回收那么则通过图片网络地址进行异步下载
+                // 弱引用已经被回收那么则进行异步下载
                 Uri imageUri = new Uri(UrlType == UrlType.preview_url ? PreviewUrl : SampleUrl);
                 // 创建后台线程，下载图片
                 Task.Factory.StartNew(() => { DownloadImageAsync(imageUri); });

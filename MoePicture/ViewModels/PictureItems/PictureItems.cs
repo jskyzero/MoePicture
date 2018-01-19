@@ -47,24 +47,18 @@ namespace MoePicture.ViewModels.PictureItems
         {
             List<Models.PictureItem> Items = new List<Models.PictureItem>();
 
-            XmlDocument xml = new XmlDocument();
-            // 组合成要访问的Uri
             string url = website.Url();
 
             // 先在数据库里查找Uri对应的xml文件，如果没有，从网上获取
             string str = DB.select(url);
-            if (str != String.Empty)
-            {
-                // pass
-            }
-            else
+            if (str  == String.Empty)
             {
                 str = await Services.Spider.GetString(new Uri(url));
                 DB.add(url, str);
             }
 
+            XmlDocument xml = new XmlDocument();
             xml.LoadXml(str);
-
             // 获取xml文件里面包含图片的xml节点
             XmlNodeList nodeList = xml.GetElementsByTagName("post");
 
@@ -81,7 +75,6 @@ namespace MoePicture.ViewModels.PictureItems
                 }
                 // for we use Count to bind
                 OnPropertyChanged("Count");
-                
             }
             else
             {
