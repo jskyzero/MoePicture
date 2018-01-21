@@ -12,6 +12,7 @@ namespace MoePicture.Services
     {
         private static string yandeUrl = "https://yande.re/post.xml?limit=100";
         private static string konachanUrl = "http://konachan.com/post.xml?limit=100";
+        private static string danbooruUrl =  "https://danbooru.donmai.us/posts.xml??limit=100";
 
         private WebsiteType websiteType;
         private string tag;
@@ -33,6 +34,9 @@ namespace MoePicture.Services
                 case WebsiteType.konachon:
                     this.tag = tag == "" ? "" : "&tags=" + tag;
                     break;
+                case WebsiteType.danbooru:
+                    this.tag = tag == "" ? "" : "&tags=" + tag;
+                    break;
                 default:
                     this.tag = "";
                     break;
@@ -51,6 +55,9 @@ namespace MoePicture.Services
                     url = yandeUrl + "&page=" + pageNum.ToString() + tag;
                     break;
                 case WebsiteType.konachon:
+                    url = konachanUrl + "&page=" + pageNum.ToString() + tag;
+                    break;
+                case WebsiteType.danbooru:
                     url = konachanUrl + "&page=" + pageNum.ToString() + tag;
                     break;
             }

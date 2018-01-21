@@ -66,6 +66,9 @@ namespace MoePicture.Models
                 case WebsiteType.konachon:
                     Konachon(node);
                     break;
+                case WebsiteType.danbooru:
+                    Danbooru(node);
+                    break;
                 default:
                     break;
             }
@@ -95,24 +98,36 @@ namespace MoePicture.Models
 
         private void Konachon(XmlNode node)
         {
-            try
-            {
-                // 从节点得到图片信息
-                Id = node.Attributes["id"].Value;
-                Tags = node.Attributes["tags"].Value;
-                PreviewUrl = node.Attributes["preview_url"].Value;
-                SampleUrl = node.Attributes["sample_url"].Value;
-                JpegUrl = node.Attributes["jpeg_url"].Value;
-                // 通过url处理得到两种name
-                Name = Spider.GetFileNameFromUrl(JpegUrl);
-                FileName = Spider.GetFileNameFromUrl(PreviewUrl);
+            Yande(node);
+        }
 
-                IsSafe = node.Attributes["rating"].Value == "s";
-            }
-            catch
+        private void Danbooru(XmlNode node)
+        {
+            Yande(node);
+        }
+
+
+        public static List<PictureItem> GetPictureItems(WebsiteType type, string str, bool loadAll)
+        {
+            List<PictureItem> Items = new List<PictureItem>();
+            XmlDocument xml = new XmlDocument();
+            xml.LoadXml(str);
+
+            // 获取xml文件里面包含图片的xml节点
+            XmlNodeList nodeList = xml.GetElementsByTagName("post");
+            if (nodeList.Count > 0)
             {
-                // if no tags set as default
+                for (int i = 0; i < nodeList.Count; i++)
+                {
+                    var item = new PictureItem(type, nodeList[i]);
+
+                    if (loadAll || item.IsSafe)
+                    {
+                        Items.Add(item);
+                    }
+                }
             }
+            return Items;
         }
 
         #endregion Constructer

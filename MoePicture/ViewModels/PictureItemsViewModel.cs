@@ -45,7 +45,7 @@ namespace MoePicture.ViewModels
 
         private void RefreshPictures()
         {
-            PictureItems = new PictureItems.PictureItems(WebsiteType.konachon, Tag);
+            PictureItems = new PictureItems.PictureItems(WebsiteType.danbooru, Tag);
         }
 
         public void SelectItemClick(ItemClickEventArgs e)

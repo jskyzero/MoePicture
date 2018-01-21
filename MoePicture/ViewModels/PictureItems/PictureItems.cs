@@ -43,37 +43,23 @@ namespace MoePicture.ViewModels.PictureItems
 
         // 父类的虚函数实现，根据_uri，_pageNum和_tag属性，组合成要访问的Uri，
         // 并通过该Uri访问网站获取新增图片
-        protected override async Task<IList<Models.PictureItem>> LoadMoreItemsOverrideAsync(CancellationToken c, int count)
+        protected override async Task<IList<PictureItem>> LoadMoreItemsOverrideAsync(CancellationToken c, int count)
         {
-            List<Models.PictureItem> Items = new List<Models.PictureItem>();
 
             string url = website.Url();
 
             // 先在数据库里查找Uri对应的xml文件，如果没有，从网上获取
             string str = DB.select(url);
-            if (str  == String.Empty)
+            if (str == String.Empty)
             {
                 str = await Services.Spider.GetString(new Uri(url));
                 DB.add(url, str);
             }
 
-            XmlDocument xml = new XmlDocument();
-            xml.LoadXml(str);
-            // 获取xml文件里面包含图片的xml节点
-            XmlNodeList nodeList = xml.GetElementsByTagName("post");
+            var Items = PictureItem.GetPictureItems(website.Type, str, loadAll);
 
-            if (nodeList.Count > 0)
+            if (Items.Count > 0)
             {
-                for (int i = 0; i < nodeList.Count; i++)
-                {
-                    var item = new PictureItem(website.Type, nodeList[i % 100]);
-
-                    if (loadAll || item.IsSafe)
-                    {
-                        Items.Add(item);
-                    }
-                }
-                // for we use Count to bind
                 OnPropertyChanged("Count");
             }
             else
