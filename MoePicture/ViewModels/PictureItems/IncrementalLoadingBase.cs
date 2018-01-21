@@ -11,7 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Data;
 
-namespace MoePicture.ViewModels.PictureItems
+namespace MoePicture.ViewModels
 {
     /// <summary>
     /// 数据储存虚类，实现IList接口，ISupportIncrementalLoading 接口, INotifyCollectionChanged接口

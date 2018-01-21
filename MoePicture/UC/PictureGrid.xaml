@@ -2,47 +2,44 @@
     x:Class="MoePicture.UC.PictureGrid"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:MoePicture.UC"
     xmlns:CC="using:CustomControl"
-    xmlns:Models="using:MoePicture.Models"
     xmlns:Converters="using:MoePicture.Converters"
+    xmlns:Models="using:MoePicture.Models"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:MoePicture.UC"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-  <UserControl.Resources>
-    <Converters:IntBoolConverter x:Key="IntBoolConverter" />
+    <UserControl.Resources>
+        <Converters:IntBoolConverter x:Key="IntBoolConverter" />
 
-    <DataTemplate x:Key="PictureItem"
-                  x:DataType="Models:PictureItem">
-      <Grid Loaded="RootGrid_Loaded"
-            SizeChanged="RootGrid_SizeChanged">
-        <Image Source="{Binding ImageSource}"
-             Stretch="UniformToFill">
-        </Image>
-        <Border x:Name="MaskBorder" Background="#50000000">
-          <TextBlock Text="{Binding Name}" TextWrapping="Wrap" Foreground="White" />
-        </Border>
-      </Grid>
-    </DataTemplate>
+        <DataTemplate x:Key="PictureItem" x:DataType="Models:PictureItem">
+            <Grid Loaded="RootGrid_Loaded" SizeChanged="RootGrid_SizeChanged">
+                <Image Source="{Binding ImageSource}" Stretch="UniformToFill" />
+                <Border x:Name="MaskBorder" Background="#50000000">
+                    <TextBlock
+                        Foreground="White"
+                        Text="{Binding Name}"
+                        TextWrapping="Wrap" />
+                </Border>
+            </Grid>
+        </DataTemplate>
 
-    <Style x:Key="GridViewItemStyle" TargetType="GridViewItem">
-      <Setter Property="Padding" Value="0" />
-      <Setter Property="Margin" Value="0" />
-      <Setter Property="BorderThickness" Value="0" />
-    </Style>
-  </UserControl.Resources>
-  <Grid DataContext="{Binding PicturesVM, Source={StaticResource Locator}}">
-    <ProgressRing IsActive="{Binding PictureItems.Count, Converter={StaticResource IntBoolConverter}, Mode=OneWay}" 
-                  Style="{StaticResource MyProgressRingStyle}" />
-    <CC:AdaptiveGridView 
-              MinItemHeight="180"
-              MinItemWidth="180"
-              ItemsSource="{Binding PictureItems}"
-              ItemTemplate="{StaticResource PictureItem}"
-              ItemContainerStyle="{StaticResource GridViewItemStyle}"
-              IsItemClickEnabled="True"
-              ItemClick="GridView_ItemClick">
-    </CC:AdaptiveGridView>
-  </Grid>
+        <Style x:Key="GridViewItemStyle" TargetType="GridViewItem">
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="BorderThickness" Value="0" />
+        </Style>
+    </UserControl.Resources>
+    <Grid DataContext="{Binding PicturesVM, Source={StaticResource Locator}}">
+        <ProgressRing IsActive="{Binding PictureItems.Count, Converter={StaticResource IntBoolConverter}, Mode=OneWay}" Style="{StaticResource MyProgressRingStyle}" />
+        <CC:AdaptiveGridView
+            IsItemClickEnabled="True"
+            ItemClick="GridView_ItemClick"
+            ItemContainerStyle="{StaticResource GridViewItemStyle}"
+            ItemTemplate="{StaticResource PictureItem}"
+            ItemsSource="{Binding PictureItems}"
+            MinItemHeight="180"
+            MinItemWidth="180" />
+    </Grid>
 </UserControl>

@@ -10,28 +10,28 @@ namespace MoePicture.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        private bool _showSearch = false;
-        private bool _showPane = false;
-        private bool _showSingle = false;
-        private bool _showSettings = false;
+        private bool showSearch = false;
+        private bool showPane = false;
+        private bool showSingle = false;
+        private bool showSettings = false;
 
-        public bool ShowSearch { get => _showSearch; set { Set(ref _showSearch, value); } }
-        public bool ShowHamburger { get => _showPane; set { Set(ref _showPane, value); } }
-        public bool ShowSingle { get => _showSingle; set { Set(ref _showSingle, value); } }
-        public bool ShowSettings { get => _showSettings; set { Set(ref _showSettings, value); } }
+        public bool ShowSearch { get => showSearch; set { Set(ref showSearch, value); } }
+        public bool ShowHamburger { get => showPane; set { Set(ref showPane, value); } }
+        public bool ShowSingle { get => showSingle; set { Set(ref showSingle, value); } }
+        public bool ShowSettings { get => showSettings; set { Set(ref showSettings, value); } }
 
-        private RelayCommand _hideSearchCommand;
-        private RelayCommand _showSearchCommand;
-        private RelayCommand _switchPaneCommand;
-        private RelayCommand _switchSigleCommand;
-        private RelayCommand _switchSettingsCommand;
+        private RelayCommand hideSearchCommand;
+        private RelayCommand showSearchCommand;
+        private RelayCommand switchPaneCommand;
+        private RelayCommand switchSigleCommand;
+        private RelayCommand switchSettingsCommand;
 
         public RelayCommand SwitchSettingsCommand
         {
             get
             {
-                return _switchSettingsCommand ??
-               (_switchSettingsCommand = new RelayCommand(
+                return switchSettingsCommand ??
+               (switchSettingsCommand = new RelayCommand(
                    () =>
                    {
                        ShowSettings = !ShowSettings;
@@ -44,8 +44,8 @@ namespace MoePicture.ViewModels
         {
             get
             {
-                return _switchSigleCommand ??
-               (_switchSigleCommand = new RelayCommand(
+                return switchSigleCommand ??
+               (switchSigleCommand = new RelayCommand(
                    () =>
                    {
                        ShowSingle = !ShowSingle;
@@ -57,8 +57,8 @@ namespace MoePicture.ViewModels
         {
             get
             {
-                return _switchPaneCommand ??
-                    (_switchPaneCommand = new RelayCommand(
+                return switchPaneCommand ??
+                    (switchPaneCommand = new RelayCommand(
                         () => { ShowHamburger = !ShowHamburger; }));
             }
         }
@@ -67,8 +67,8 @@ namespace MoePicture.ViewModels
         {
             get
             {
-                return _hideSearchCommand ??
-                    (_hideSearchCommand = new RelayCommand(
+                return hideSearchCommand ??
+                    (hideSearchCommand = new RelayCommand(
                         () => { ShowSearch = false; }));
             }
         }
@@ -77,8 +77,8 @@ namespace MoePicture.ViewModels
         {
             get
             {
-                return _showSearchCommand ??
-                    (_showSearchCommand = new RelayCommand(
+                return showSearchCommand ??
+                    (showSearchCommand = new RelayCommand(
                         () => { ShowSearch = true; }));
             }
         }

@@ -120,7 +120,7 @@ namespace MoePicture.Models
                 Name = Spider.GetFileNameFromUrl(JpegUrl);
                 FileName = Spider.GetFileNameFromUrl(PreviewUrl);
 
-                IsSafe = node["is-rating-locked"].InnerText == "false";
+                IsSafe = node["rating"].InnerText == "s";
             }
             catch
             {
@@ -189,7 +189,8 @@ namespace MoePicture.Models
             folder = await folder.CreateFolderAsync(Type.ToString(), CreationCollisionOption.OpenIfExists);
             folder = await folder.CreateFolderAsync(UrlType == UrlType.preview_url ? "perview" : "sample", CreationCollisionOption.OpenIfExists);
 
-            if (!File.Exists(Path.Combine(folder.Path, FileName)))
+            var path = Path.Combine(folder.Path, FileName);
+            if (!File.Exists(path) || ((new FileInfo(path).Length) == 0))
             {
                 if (UrlType == UrlType.preview_url)
                 {

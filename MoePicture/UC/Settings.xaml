@@ -1,54 +1,56 @@
 ﻿<UserControl
-  x:Class="MoePicture.UC.Settings"
-  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-  xmlns:Converters="using:MoePicture.Converters"
-  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-  xmlns:local="using:MoePicture.UC"
-  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-  mc:Ignorable="d">
+    x:Class="MoePicture.UC.Settings"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Converters="using:MoePicture.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:MoePicture.UC"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
 
-  <UserControl.Resources>
-    <Converters:RatingNullableBooleanConverter x:Key="RatingNullableBooleanConverter" />
-  </UserControl.Resources>
-  <Grid Background="Transparent" DataContext="{Binding ConfigVM, Source={StaticResource Locator}}">
-    <Border Tapped="BackGround_Tapped">
-      <Grid x:Name="BackGround" Background="Transparent" />
-    </Border>
-    <StackPanel VerticalAlignment="Top"
-        Margin="20">
-      <TextBlock
-        HorizontalAlignment="Center"
-        Style="{StaticResource HeaderTextBlockStyle}"
-        Text="Settings" />
-      <Grid>
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="*" />
-          <ColumnDefinition Width="auto" />
-        </Grid.ColumnDefinitions>
-        <TextBlock
-          Grid.Column="0"
-          Style="{StaticResource BodyTextBlockStyle}"
-          Text="Show All Pictures" />
-        <CheckBox
-          Grid.Column="1"
-          MinWidth="0"
-          Margin="0"
-          Padding="0"
-          HorizontalAlignment="Right"
-          IsChecked="{Binding Config.Raing, Converter={StaticResource RatingNullableBooleanConverter}, Mode=TwoWay}" />
-      </Grid>
-      <TextBlock Style="{StaticResource BodyTextBlockStyle}" Text="CachePath" FontFamily="Segoe UI" />
-      <TextBox
-        Margin="0,10,0,5"
-        Style="{StaticResource AutoSuggestBoxTextBoxStyle}"
-        Text="{Binding Config.Path}"
-        TextWrapping="Wrap" />
-      <TextBlock
-        Margin="0,0,0,10"
-        Style="{StaticResource BodyTextBlockStyle}"
-        Text="You can open cache folder use file explore to see or clean more cache picures if you need." />
-      <!--<Grid>
+    <UserControl.Resources>
+        <Converters:RatingNullableBooleanConverter x:Key="RatingNullableBooleanConverter" />
+    </UserControl.Resources>
+    <Grid Background="Transparent" DataContext="{Binding ConfigVM, Source={StaticResource Locator}}">
+        <Border Tapped="BackGround_Tapped">
+            <Grid x:Name="BackGround" Background="Transparent" />
+        </Border>
+        <StackPanel Margin="20" VerticalAlignment="Top">
+            <TextBlock
+                HorizontalAlignment="Center"
+                Style="{StaticResource HeaderTextBlockStyle}"
+                Text="Settings" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock
+                    Grid.Column="0"
+                    Style="{StaticResource BodyTextBlockStyle}"
+                    Text="Show All Pictures" />
+                <CheckBox
+                    Grid.Column="1"
+                    MinWidth="0"
+                    Margin="0"
+                    Padding="0"
+                    HorizontalAlignment="Right"
+                    IsChecked="{Binding Config.Raing, Converter={StaticResource RatingNullableBooleanConverter}, Mode=TwoWay}" />
+            </Grid>
+            <TextBlock
+                FontFamily="Segoe UI"
+                Style="{StaticResource BodyTextBlockStyle}"
+                Text="CachePath" />
+            <TextBox
+                Margin="0,10,0,5"
+                Style="{StaticResource AutoSuggestBoxTextBoxStyle}"
+                Text="{Binding Config.Path}"
+                TextWrapping="Wrap" />
+            <TextBlock
+                Margin="0,0,0,10"
+                Style="{StaticResource BodyTextBlockStyle}"
+                Text="You can open cache folder use file explore to see or clean more cache picures if you need." />
+            <!--<Grid>
         <Grid.ColumnDefinitions>
           <ColumnDefinition Width="*" />
           <ColumnDefinition Width="auto" />
@@ -105,6 +107,6 @@
             Symbol="Clear" />
         </Button>
       </Grid>-->
-    </StackPanel>
-  </Grid>
+        </StackPanel>
+    </Grid>
 </UserControl>

@@ -1,23 +1,84 @@
 ﻿<UserControl
-  x:Class="MoePicture.UC.HamburgerButton"
-  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-  xmlns:local="using:MoePicture.UC"
-  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-  mc:Ignorable="d">
-  <Grid Background="{StaticResource SystemControlBaseHighAcrylicWindowMediumBrush}">
-    <Button
-      VerticalAlignment="Bottom"
-      Command="{Binding SwitchSettingsCommand}"
-      DataContext="{Binding MainVM, Source={StaticResource Locator}}"
-      Style="{StaticResource CustomButtonStyle}">
-      <FontIcon
-        Width="60"
-        Height="60"
-        FontFamily="Segoe MDL2 Assets"
-        Foreground="White"
-        Glyph="&#xE115;" />
-    </Button>
-  </Grid>
+    x:Class="MoePicture.UC.HamburgerButton"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:MoePicture.UC"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style x:Key="FontIconStyle" TargetType="FontIcon">
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="Width" Value="60" />
+            <Setter Property="Height" Value="60" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="FontFamily" Value="Segoe MDL2 Assets" />
+        </Style>
+        <Style x:Key="TextBlockStyle" TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="Foreground" Value="Black" />
+        </Style>
+    </UserControl.Resources>
+    <Grid Background="{StaticResource SystemControlChromeMediumAcrylicWindowMediumBrush}">
+        <StackPanel>
+            <Button
+                HorizontalAlignment="Stretch"
+                HorizontalContentAlignment="Left"
+                Command="{Binding ChangeWebsiteCommand}"
+                CommandParameter="yande"
+                DataContext="{Binding PicturesVM, Source={StaticResource Locator}}"
+                Style="{StaticResource CustomButtonStyle}">
+                <Grid Height="60">
+                    <TextBlock
+                        Margin="20"
+                        Style="{StaticResource TextBlockStyle}"
+                        Text="Yande" />
+                </Grid>
+            </Button>
+            <Button
+                HorizontalAlignment="Stretch"
+                HorizontalContentAlignment="Left"
+                Command="{Binding ChangeWebsiteCommand}"
+                CommandParameter="konachon"
+                DataContext="{Binding PicturesVM, Source={StaticResource Locator}}"
+                Style="{StaticResource CustomButtonStyle}">
+                <Grid Height="60">
+                    <TextBlock
+                        Margin="20"
+                        Style="{StaticResource TextBlockStyle}"
+                        Text="konachon" />
+                </Grid>
+            </Button>
+            <Button
+                HorizontalAlignment="Stretch"
+                HorizontalContentAlignment="Left"
+                Command="{Binding ChangeWebsiteCommand}"
+                CommandParameter="danbooru"
+                DataContext="{Binding PicturesVM, Source={StaticResource Locator}}"
+                Style="{StaticResource CustomButtonStyle}">
+                <Grid Height="60">
+                    <TextBlock
+                        Margin="20"
+                        Style="{StaticResource TextBlockStyle}"
+                        Text="danbooru" />
+                </Grid>
+            </Button>
+        </StackPanel>
+        <Button
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Bottom"
+            HorizontalContentAlignment="Left"
+            Command="{Binding SwitchSettingsCommand}"
+            DataContext="{Binding MainVM, Source={StaticResource Locator}}"
+            Style="{StaticResource CustomButtonStyle}">
+            <Grid>
+                <FontIcon Glyph="&#xE115;" Style="{StaticResource FontIconStyle}" />
+                <TextBlock
+                    Margin="60,0,0,0"
+                    Style="{StaticResource TextBlockStyle}"
+                    Text="Settings" />
+            </Grid>
+        </Button>
+    </Grid>
 </UserControl>

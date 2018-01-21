@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MoePicture.ViewModels.PictureItems;
 using GalaSoft.MvvmLight.Command;
 using Microsoft.Practices.ServiceLocation;
 using MoePicture.Models;
@@ -15,25 +14,38 @@ namespace MoePicture.ViewModels
 {
     public class PictureItemsViewModel : ViewModelBase
     {
-        private string _tag;
+        private string tag;
+        private WebsiteType type;
 
-        private RelayCommand _refreshCommand;
-        private RelayCommand<string> _searchCommand;
+        private RelayCommand refreshCommand;
+        private RelayCommand<string> searchCommand;
+        private RelayCommand<string> changeWebsiteCommand;
+
         private static TilesUpdater Tiles = new TilesUpdater();
 
-        private string _selectTag;
-        private List<string> _selectPictureTags;
-        private PictureItem _selectPictureItem;
-        private PictureItems.PictureItems _pictureItems;
+        private PictureItem selectPictureItem;
+        private PictureItems pictureItems;
 
-        public string Tag { get => _tag; set { _tag = value; RaisePropertyChanged(() => Tag); } }
-        public string SelectTag { get => _selectTag; set { Set(ref _selectTag, value); } }
-        public List<string> SelectPictureTags { get => _selectPictureTags; set { Set(ref _selectPictureTags, value); } }
-        public PictureItem SelectPictureItem { get => _selectPictureItem; set { _selectPictureItem = value; SelectPictureItem.UrlType = UrlType.jpeg_url; RaisePropertyChanged(() => SelectPictureItem); } }
-        public PictureItems.PictureItems PictureItems { get => _pictureItems; set { Set(ref _pictureItems, value); } }
+        public string Tag { get => tag; set { Set(ref tag, value); } }
+        public PictureItems PictureItems { get => pictureItems; set { Set(ref pictureItems, value); } }
+        public List<string> SelectPictureTags
+        {
+            get => SelectPictureItem == null ? null : new List<string>((SelectPictureItem.Tags).Split(' '));
+        }
+        public PictureItem SelectPictureItem
+        {
+            get => selectPictureItem;
+            set
+            {
+                value.UrlType = UrlType.jpeg_url;
+                Set(ref selectPictureItem, value);
+                RaisePropertyChanged(() => SelectPictureTags);
+            }
+        }
 
         public PictureItemsViewModel()
         {
+            type = WebsiteType.yande;
             RefreshPictures();
         }
 
@@ -43,15 +55,20 @@ namespace MoePicture.ViewModels
             RefreshPictures();
         }
 
+        private void ChangeWebsite(string websiteStr)
+        {
+            type = (WebsiteType)Enum.Parse(typeof(WebsiteType), websiteStr);
+            RefreshPictures();
+        }
+
         private void RefreshPictures()
         {
-            PictureItems = new PictureItems.PictureItems(WebsiteType.danbooru, Tag);
+            PictureItems = new PictureItems(type, Tag);
         }
 
         public void SelectItemClick(ItemClickEventArgs e)
         {
             SelectPictureItem = (PictureItem)e.ClickedItem;
-            SelectPictureTags = new List<string>((SelectPictureItem.Tags).Split(' '));
             Tiles.UpdataOneItem(SelectPictureItem.FileName);
             ServiceLocator.Current.GetInstance<MainViewModel>().SwitchSigleCommand.Execute(null);
         }
@@ -66,8 +83,8 @@ namespace MoePicture.ViewModels
         {
             get
             {
-                return _refreshCommand ??
-                    (_refreshCommand = new RelayCommand(
+                return refreshCommand ??
+                    (refreshCommand = new RelayCommand(
                         RefreshPictures));
             }
         }
@@ -76,9 +93,19 @@ namespace MoePicture.ViewModels
         {
             get
             {
-                return _searchCommand ??
-                    (_searchCommand = new RelayCommand<string>(
+                return searchCommand ??
+                    (searchCommand = new RelayCommand<string>(
                         tag => SearchPictures(tag)));
+            }
+        }
+
+        public RelayCommand<string> ChangeWebsiteCommand
+        {
+            get
+            {
+                return changeWebsiteCommand ??
+                    (changeWebsiteCommand = new RelayCommand<string>(
+                        websiteStr => ChangeWebsite(websiteStr)));
             }
         }
     }
