@@ -34,7 +34,8 @@ namespace MoePicture.Models
         private UrlType urlType;
         private WebsiteType websiteType;
 
-        private Boolean isSafe;
+        private bool isSafe = false;
+        private bool isOK = true;
 
         public string Id { get; set; }
         public string Tags { get; set; }
@@ -43,6 +44,7 @@ namespace MoePicture.Models
         public string JpegUrl { get; set; }
         public string FileName { get; set; }
         public string Name { get; set; }
+        public bool IsOK { get => isOK; set => isOK = value; }
         public bool IsSafe { get => isSafe; set => isSafe = value; }
 
         public WebsiteType Type { get => websiteType; set => websiteType = value; }
@@ -78,6 +80,7 @@ namespace MoePicture.Models
         {
             try
             {
+
                 // 从节点得到图片信息
                 Id = node.Attributes["id"].Value;
                 Tags = node.Attributes["tags"].Value;
@@ -92,8 +95,9 @@ namespace MoePicture.Models
             }
             catch
             {
-                // if no tags set as default
+                IsOK = false;
             }
+
         }
 
         private void Konachon(XmlNode node)
@@ -103,7 +107,26 @@ namespace MoePicture.Models
 
         private void Danbooru(XmlNode node)
         {
-            Yande(node);
+            try
+            {
+                string site = "https://danbooru.donmai.us";
+                // 从节点得到图片信息
+                Id = node["id"].InnerText;
+                Tags = node["tag-string-general"].InnerText;
+                PreviewUrl = site + node["preview-file-url"].InnerText;
+                SampleUrl = site + node["file-url"].InnerText;
+                JpegUrl = site + node["large-file-url"].InnerText;
+                // 通过url处理得到两种name
+                Name = Spider.GetFileNameFromUrl(JpegUrl);
+                FileName = Spider.GetFileNameFromUrl(PreviewUrl);
+
+                IsSafe = node["is-rating-locked"].InnerText == "false";
+            }
+            catch
+            {
+                IsOK = false;
+            }
+
         }
 
 
@@ -121,7 +144,7 @@ namespace MoePicture.Models
                 {
                     var item = new PictureItem(type, nodeList[i]);
 
-                    if (loadAll || item.IsSafe)
+                    if ((loadAll || item.IsSafe) && item.IsOK)
                     {
                         Items.Add(item);
                     }
@@ -154,6 +177,8 @@ namespace MoePicture.Models
                 return null;
             }
         }
+
+
 
 
         // 下载图片的方法

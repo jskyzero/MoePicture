@@ -12,7 +12,7 @@ namespace MoePicture.Services
     {
         private static string yandeUrl = "https://yande.re/post.xml?limit=100";
         private static string konachanUrl = "http://konachan.com/post.xml?limit=100";
-        private static string danbooruUrl =  "https://danbooru.donmai.us/posts.xml??limit=100";
+        private static string danbooruUrl =  "https://danbooru.donmai.us/posts.xml?limit=100";
 
         private WebsiteType websiteType;
         private string tag;
@@ -58,7 +58,7 @@ namespace MoePicture.Services
                     url = konachanUrl + "&page=" + pageNum.ToString() + tag;
                     break;
                 case WebsiteType.danbooru:
-                    url = konachanUrl + "&page=" + pageNum.ToString() + tag;
+                    url = danbooruUrl + "&page=" + pageNum.ToString() + tag;
                     break;
             }
 
