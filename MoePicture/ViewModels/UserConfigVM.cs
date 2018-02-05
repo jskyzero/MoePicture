@@ -9,16 +9,16 @@ using System.Threading.Tasks;
 
 namespace MoePicture.ViewModels
 {
-    public class UserConfigViewModel : ViewModelBase
+    public class UserConfigVM : ViewModelBase
     {
-        private UserConfigServer _configServer;
-        private UserConfig _config;
+        private Services.ConfigSaver configService;
+        private UserConfig config;
 
-        public UserConfig Config { get => _config; set { Set(ref _config, value); } }
+        public UserConfig Config { get => config; set { Set(ref config, value); } }
 
-        public UserConfigViewModel(UserConfigServer userConfigServer)
+        public UserConfigVM(Services.ConfigSaver userConfigServer)
         {
-            _configServer = userConfigServer;
+            configService = userConfigServer;
             InitialConfigAsync();
         }
 
@@ -27,7 +27,7 @@ namespace MoePicture.ViewModels
         /// </summary>
         public async Task InitialConfigAsync()
         {
-            Config = await _configServer.GetConfig();
+            Config = await configService.GetConfig();
         }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace MoePicture.ViewModels
         /// <param name="tag">tag</param>
         private void AddTag(string tag)
         {
-            if (!_config.MyTags.Contains(tag))
+            if (!config.MyTags.Contains(tag))
                 Config.MyTags.Add(tag);
         }
 

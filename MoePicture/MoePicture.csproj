@@ -17,11 +17,11 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
-    <PackageCertificateKeyFile>MoePicture_StoreKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>MoePicture_TemporaryKey.pfx</PackageCertificateKeyFile>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxBundle>Auto</AppxBundle>
     <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
-    <PackageCertificateThumbprint>83609F5453078C2298ABC982134AF19D2BCA66C5</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>500E8A14D1F087E25AB50FC64CA916017643BBE5</PackageCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -104,17 +104,15 @@
     <Compile Include="Converters\IntVisibilityConverter.cs" />
     <Compile Include="Converters\RatingNullableBooleanConverter.cs" />
     <Compile Include="Converters\StringListConverter.cs" />
+    <Compile Include="Converters\TagStringConverter.cs" />
     <Compile Include="Models\PictureItem.cs" />
     <Compile Include="Models\UserConfig.cs" />
-    <Compile Include="Models\UserConfigServer.cs" />
+    <Compile Include="Services\ConfigSaver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Spider.cs" />
     <Compile Include="Services\Website.cs" />
     <Compile Include="UC\ButtonBar.xaml.cs">
       <DependentUpon>ButtonBar.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UC\HamburgerButton.xaml.cs">
-      <DependentUpon>HamburgerButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="UC\PictureGrid.xaml.cs">
       <DependentUpon>PictureGrid.xaml</DependentUpon>
@@ -122,17 +120,14 @@
     <Compile Include="UC\PictureSingle.xaml.cs">
       <DependentUpon>PictureSingle.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UC\Search.xaml.cs">
-      <DependentUpon>Search.xaml</DependentUpon>
+    <Compile Include="Views\SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UC\Settings.xaml.cs">
-      <DependentUpon>Settings.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\ShellVM.cs" />
     <Compile Include="ViewModels\PictureItems\IncrementalLoadingBase.cs" />
     <Compile Include="ViewModels\PictureItems\PictureItems.cs" />
-    <Compile Include="ViewModels\PictureItemsViewModel.cs" />
-    <Compile Include="ViewModels\UserConfigViewModel.cs" />
+    <Compile Include="ViewModels\PictureItemsVM.cs" />
+    <Compile Include="ViewModels\UserConfigVM.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -260,10 +255,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UC\HamburgerButton.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="UC\PictureGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -272,11 +263,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UC\Search.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UC\Settings.xaml">
+    <Page Include="Views\SettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

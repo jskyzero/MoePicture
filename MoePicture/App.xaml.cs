@@ -98,8 +98,8 @@ namespace MoePicture
         private void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
-            ServiceLocator.Current.GetInstance<Models.UserConfigServer>().SaveConfig(
-                ServiceLocator.Current.GetInstance<UserConfigViewModel>().Config);
+            ServiceLocator.Current.GetInstance<Services.ConfigSaver>().SaveConfig(
+                ServiceLocator.Current.GetInstance<UserConfigVM>().Config);
             deferral.Complete();
         }
     }

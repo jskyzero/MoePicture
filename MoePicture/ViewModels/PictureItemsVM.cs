@@ -9,10 +9,12 @@ using Microsoft.Practices.ServiceLocation;
 using MoePicture.Models;
 using Windows.UI.Xaml.Controls;
 using TileUpdate;
+using MoePicture.Converters;
+using Windows.UI.Xaml.Data;
 
 namespace MoePicture.ViewModels
 {
-    public class PictureItemsViewModel : ViewModelBase
+    public class PictureItemsVM : ViewModelBase
     {
         private string tag;
         private WebsiteType type;
@@ -26,12 +28,15 @@ namespace MoePicture.ViewModels
         private PictureItem selectPictureItem;
         private PictureItems pictureItems;
 
-        public string Tag { get => tag; set { Set(ref tag, value); } }
+        public string Tag { get => tag; set { Set(ref tag, value); RefreshPictures(); } }
+        public WebsiteType Type { get => type; set { type = value; RaisePropertyChanged(() => Tag); RefreshPictures(); } }
+
         public PictureItems PictureItems { get => pictureItems; set { Set(ref pictureItems, value); } }
         public List<string> SelectPictureTags
         {
             get => SelectPictureItem == null ? null : new List<string>((SelectPictureItem.Tags).Split(' '));
         }
+
         public PictureItem SelectPictureItem
         {
             get => selectPictureItem;
@@ -43,40 +48,40 @@ namespace MoePicture.ViewModels
             }
         }
 
-        public PictureItemsViewModel()
+
+
+        public PictureItemsVM()
         {
-            type = WebsiteType.yande;
-            RefreshPictures();
+            Type = WebsiteType.yande;
+            Tag = string.Empty;
         }
 
         private void SearchPictures(string tag)
         {
             Tag = tag;
-            RefreshPictures();
         }
 
         private void ChangeWebsite(string websiteStr)
         {
-            type = (WebsiteType)Enum.Parse(typeof(WebsiteType), websiteStr);
-            RefreshPictures();
+            Type = (WebsiteType)Enum.Parse(typeof(WebsiteType), websiteStr);
         }
 
         private void RefreshPictures()
         {
-            PictureItems = new PictureItems(type, Tag);
+            PictureItems = new PictureItems(Type, Tag);
         }
 
         public void SelectItemClick(ItemClickEventArgs e)
         {
             SelectPictureItem = (PictureItem)e.ClickedItem;
             Tiles.UpdataOneItem(SelectPictureItem.FileName);
-            ServiceLocator.Current.GetInstance<MainViewModel>().SwitchSigleCommand.Execute(null);
+            ServiceLocator.Current.GetInstance<ShellVM>().SwitchSigleCommand.Execute(null);
         }
 
         public void SelectTagClick(ItemClickEventArgs e)
         {
             SearchPictures((string)e.ClickedItem);
-            ServiceLocator.Current.GetInstance<MainViewModel>().SwitchSigleCommand.Execute(null);
+            ServiceLocator.Current.GetInstance<ShellVM>().SwitchSigleCommand.Execute(null);
         }
 
         public RelayCommand RefreshCommand
@@ -108,5 +113,6 @@ namespace MoePicture.ViewModels
                         websiteStr => ChangeWebsite(websiteStr)));
             }
         }
+
     }
 }

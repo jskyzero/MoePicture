@@ -6,88 +6,70 @@
     xmlns:local="using:MoePicture.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-
     <NavigationView
         x:Name="NavView"
-        Canvas.ZIndex="0"
-        ItemInvoked="NavView_ItemInvoked"
-        Loaded="NavView_Loaded"
-        SelectionChanged="NavView_SelectionChanged">
-
+        IsPaneOpen="False"
+        SelectionChanged="NavViewSelectionChanged">
         <NavigationView.MenuItems>
-            <NavigationViewItem
-                x:Uid="HomeNavItem"
-                Content="Home"
-                Tag="home">
+            <NavigationViewItem Content="Yande">
                 <NavigationViewItem.Icon>
-                    <FontIcon Glyph="&#xE10F;" />
+                    <FontIcon Glyph="&#xEB9F;" />
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
-            <NavigationViewItemSeparator />
-            <NavigationViewItemHeader Content="Main pages" />
-            <NavigationViewItem
-                x:Uid="AppsNavItem"
-                Content="Apps"
-                Icon="AllApps"
-                Tag="apps" />
-            <NavigationViewItem
-                x:Uid="GamesNavItem"
-                Content="Games"
-                Icon="Video"
-                Tag="games" />
-            <NavigationViewItem
-                x:Uid="MusicNavItem"
-                Content="Music"
-                Icon="Audio"
-                Tag="music" />
+            <NavigationViewItem Content="Konachan">
+                <NavigationViewItem.Icon>
+                    <FontIcon Glyph="&#xEB9F;" />
+                </NavigationViewItem.Icon>
+            </NavigationViewItem>
+            <NavigationViewItem Content="Danbooru">
+                <NavigationViewItem.Icon>
+                    <FontIcon Glyph="&#xEB9F;" />
+                </NavigationViewItem.Icon>
+            </NavigationViewItem>
         </NavigationView.MenuItems>
 
         <NavigationView.AutoSuggestBox>
-            <AutoSuggestBox x:Name="ASB" QueryIcon="Find" />
+            <AutoSuggestBox
+                x:Name="ASB"
+                QueryIcon="Find"
+                QuerySubmitted="QuerySubmitted" />
         </NavigationView.AutoSuggestBox>
 
         <NavigationView.HeaderTemplate>
             <DataTemplate>
-                <Grid Margin="24,10,0,0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock
-                        VerticalAlignment="Center"
-                        FontSize="28"
-                        Style="{StaticResource TitleTextBlockStyle}"
-                        Text="Welcome" />
-                    <CommandBar
-                        Grid.Column="1"
-                        HorizontalAlignment="Right"
-                        VerticalAlignment="Top"
-                        Background="{ThemeResource SystemControlBackgroundAltHighBrush}"
-                        DefaultLabelPosition="Right">
-                        <AppBarButton Icon="Refresh" Label="Refresh" />
-                        <AppBarButton Icon="Import" Label="Import" />
-                    </CommandBar>
-                </Grid>
+                <!--  you never see it  -->
+                <Grid
+                    Height="48px"
+                    Background="White"
+                    Opacity="0" />
             </DataTemplate>
         </NavigationView.HeaderTemplate>
 
         <NavigationView.PaneFooter>
-            <HyperlinkButton
-                x:Name="MoreInfoBtn"
-                Margin="12,0"
-                Content="More info" />
+            <NavigationViewItem
+                Content="Help"
+                Icon="Help"
+                Tapped="NavigationViewItem_Tapped" />
         </NavigationView.PaneFooter>
 
-        <Frame
-            x:Name="ContentFrame"
-            Margin="0,-84,0,3"
-            Background="Red">
+        <Frame x:Name="ContentFrame" Margin="0,-84,0,0">
             <Frame.ContentTransitions>
                 <TransitionCollection>
                     <NavigationThemeTransition />
                 </TransitionCollection>
             </Frame.ContentTransitions>
         </Frame>
-
     </NavigationView>
+    <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup>
+            <VisualState>
+                <VisualState.StateTriggers>
+                    <AdaptiveTrigger MinWindowWidth="1920" />
+                </VisualState.StateTriggers>
+                <VisualState.Setters>
+                    <Setter Target="NavView.IsPaneOpen" Value="true" />
+                </VisualState.Setters>
+            </VisualState>
+        </VisualStateGroup>
+    </VisualStateManager.VisualStateGroups>
 </Page>

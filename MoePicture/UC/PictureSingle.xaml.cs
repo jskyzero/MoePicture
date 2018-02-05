@@ -37,12 +37,12 @@ namespace MoePicture.UC
 
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            ServiceLocator.Current.GetInstance<PictureItemsViewModel>().SelectTagClick(e);
+            ServiceLocator.Current.GetInstance<PictureItemsVM>().SelectTagClick(e);
         }
 
         private void Border_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            ServiceLocator.Current.GetInstance<MainViewModel>().SwitchSigleCommand.Execute(null);
+            ServiceLocator.Current.GetInstance<ShellVM>().SwitchSigleCommand.Execute(null);
         }
 
         private void Share_Click(object sender, RoutedEventArgs e)

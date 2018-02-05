@@ -19,26 +19,25 @@ namespace MoePicture.ViewModels
     /// </summary>
     public class ViewModelLocator
     {
-        private const string shellKey = nameof(Views.Shell);
+        //private const string shellKey = nameof(Views.Shell);
+        //public static string ShellKey => shellKey;
 
-        public static string ShellKey => shellKey;
-
-        public UserConfigViewModel ConfigVM => ServiceLocator.Current.GetInstance<UserConfigViewModel>();
-        public MainViewModel MainVM => ServiceLocator.Current.GetInstance<MainViewModel>();
-        public PictureItemsViewModel PicturesVM => ServiceLocator.Current.GetInstance<PictureItemsViewModel>();
+        public UserConfigVM ConfigVM => ServiceLocator.Current.GetInstance<UserConfigVM>();
+        public ShellVM MainVM => ServiceLocator.Current.GetInstance<ShellVM>();
+        public PictureItemsVM PicturesVM => ServiceLocator.Current.GetInstance<PictureItemsVM>();
 
         static ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-            var nav = new NavigationService();
-            nav.Configure(ShellKey, typeof(Views.Shell));
-            SimpleIoc.Default.Register<INavigationService>(() => nav);
+            //var nav = new NavigationService();
+            //nav.Configure(ShellKey, typeof(Views.Shell));
+            //SimpleIoc.Default.Register<INavigationService>(() => nav);
 
-            SimpleIoc.Default.Register<UserConfigServer>();
-            SimpleIoc.Default.Register<UserConfigViewModel>();
-            SimpleIoc.Default.Register<PictureItemsViewModel>();
-            SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<Services.ConfigSaver>();
+            SimpleIoc.Default.Register<UserConfigVM>();
+            SimpleIoc.Default.Register<PictureItemsVM>();
+            SimpleIoc.Default.Register<ShellVM>();
         }
     }
 }

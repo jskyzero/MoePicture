@@ -31,7 +31,7 @@ namespace MoePicture.Services
                 case WebsiteType.yande:
                     this.tag = tag == "" ? "" : "&tags=" + tag;
                     break;
-                case WebsiteType.konachon:
+                case WebsiteType.konachan:
                     this.tag = tag == "" ? "" : "&tags=" + tag;
                     break;
                 case WebsiteType.danbooru:
@@ -54,7 +54,7 @@ namespace MoePicture.Services
                 case WebsiteType.yande:
                     url = yandeUrl + "&page=" + pageNum.ToString() + tag;
                     break;
-                case WebsiteType.konachon:
+                case WebsiteType.konachan:
                     url = konachanUrl + "&page=" + pageNum.ToString() + tag;
                     break;
                 case WebsiteType.danbooru:

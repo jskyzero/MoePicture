@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="3771jskyzero.MoePicture" Publisher="CN=3D7EFF45-ABDE-412B-AB72-90AF27AC9FFB" Version="1.0.1.0" />
+  <Identity Name="jskyzero.MoePicture" Publisher="CN=jskyzero" Version="1.0.1.0" />
   <mp:PhoneIdentity PhoneProductId="a4a1fd3e-8b5c-424a-821e-1e725b313bd0" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>MoePicture</DisplayName>
@@ -25,5 +25,6 @@
   </Applications>
   <Capabilities>
     <Capability Name="internetClient" />
+    <uap:Capability Name="picturesLibrary" />
   </Capabilities>
 </Package>

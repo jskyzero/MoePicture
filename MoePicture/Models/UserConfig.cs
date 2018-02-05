@@ -13,16 +13,15 @@ namespace MoePicture.Models
     {
         #region Properties
 
-        public enum rating { safe, all };
+        public enum RatingType { safe, all };
 
-        private rating _raing;
-        private bool _isPaneOpen;
-        private ObservableCollection<string> _myTags = new ObservableCollection<string>();
+        private RatingType rating;
+        private ObservableCollection<string> myTags = new ObservableCollection<string>();
 
-        public string Path { get => ApplicationData.Current.LocalCacheFolder.Path; }
-        public rating Raing { get => _raing; set { Set(ref _raing, value); } }
-        public bool IsPaneOpen { get => _isPaneOpen; set { Set(ref _isPaneOpen, value); } }
-        public ObservableCollection<string> MyTags { get => _myTags; set { Set(ref _myTags, value); } }
+        public string SaveFolderlToken { get; set; }
+        public string CacheFolderToken { get; set; }
+        public RatingType Rating { get => rating; set { Set(ref rating, value); } }
+        public ObservableCollection<string> MyTags { get => myTags; set { Set(ref myTags, value); } }
 
         #endregion Properties
     }

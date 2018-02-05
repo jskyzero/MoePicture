@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Threading;
+using Microsoft.Practices.ServiceLocation;
 using MoePicture.Services;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using Windows.Storage;
+using Windows.Storage.AccessCache;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 
@@ -17,7 +19,7 @@ namespace MoePicture.Models
 {
 
     // 枚举网站种类
-    public enum WebsiteType { yande, konachon, danbooru };
+    public enum WebsiteType { yande, konachan, danbooru };
     // 枚举Uri种类
     public enum UrlType { preview_url, sample_url, jpeg_url };
 
@@ -65,7 +67,7 @@ namespace MoePicture.Models
                 case WebsiteType.yande:
                     Yande(node);
                     break;
-                case WebsiteType.konachon:
+                case WebsiteType.konachan:
                     Konachon(node);
                     break;
                 case WebsiteType.danbooru:
@@ -178,18 +180,27 @@ namespace MoePicture.Models
             }
         }
 
-
-
-
         // 下载图片的方法
         private async void DownloadImageAsync(object state)
         {
+            string folderToken;
+            StorageFolder folder;
             // 根据图片Uri类型，下载到不同文件夹里
-            StorageFolder folder = ApplicationData.Current.LocalCacheFolder;
-            folder = await folder.CreateFolderAsync(Type.ToString(), CreationCollisionOption.OpenIfExists);
-            folder = await folder.CreateFolderAsync(UrlType == UrlType.preview_url ? "perview" : "sample", CreationCollisionOption.OpenIfExists);
+            if (UrlType == UrlType.preview_url)
+            {
+                folderToken = ServiceLocator.Current.GetInstance<ViewModels.UserConfigVM>().Config.CacheFolderToken;
+                folder = await StorageApplicationPermissions.FutureAccessList.GetFolderAsync(folderToken);
+                folder = await folder.CreateFolderAsync("cache", CreationCollisionOption.OpenIfExists);
+            } else
+            {
+                folderToken = ServiceLocator.Current.GetInstance<ViewModels.UserConfigVM>().Config.SaveFolderlToken;
+                folder = await StorageApplicationPermissions.FutureAccessList.GetFolderAsync(folderToken);
+                folder = await folder.CreateFolderAsync("MoePicture", CreationCollisionOption.OpenIfExists);
+            }
 
+            folder = await folder.CreateFolderAsync(Type.ToString(), CreationCollisionOption.OpenIfExists);
             var path = Path.Combine(folder.Path, FileName);
+
             if (!File.Exists(path) || ((new FileInfo(path).Length) == 0))
             {
                 if (UrlType == UrlType.preview_url)
@@ -203,9 +214,12 @@ namespace MoePicture.Models
             }
 
             // 在UI线程处理位图和UI更新
-            DispatcherHelper.CheckBeginInvokeOnUI(() =>
+            DispatcherHelper.CheckBeginInvokeOnUI(async () =>
             {
-                BitmapImage bm = new BitmapImage(new Uri(Path.Combine(folder.Path, FileName)));
+                var file = await StorageFile.GetFileFromPathAsync(path);
+                var stream = await file.OpenReadAsync();
+                var bm = new BitmapImage();
+                await bm.SetSourceAsync(stream);
 
                 // 把图片位图对象存放到弱引用对象里面
                 if (bitmapImage == null)

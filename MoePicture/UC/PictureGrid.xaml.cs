@@ -134,7 +134,7 @@ namespace MoePicture.UC
 
         private void GridView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            ServiceLocator.Current.GetInstance<PictureItemsViewModel>().SelectItemClick(e);
+            ServiceLocator.Current.GetInstance<PictureItemsVM>().SelectItemClick(e);
         }
     }
 }

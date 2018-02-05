@@ -24,7 +24,7 @@ namespace MoePicture.ViewModels
 
         public PictureItems(WebsiteType websiteType, string tag = "")
         {
-            loadAll = ServiceLocator.Current.GetInstance<UserConfigViewModel>().Config.Raing == UserConfig.rating.all;
+            loadAll = ServiceLocator.Current.GetInstance<UserConfigVM>().Config.Rating == UserConfig.RatingType.all;
             noMorePicture = false;
             website = new Services.Website(websiteType, tag);
 

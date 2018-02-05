@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight.Ioc;
+using Microsoft.Practices.ServiceLocation;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,83 +27,111 @@ namespace MoePicture.Views
         public MainPage()
         {
             this.InitializeComponent();
+            ContentFrame.Navigate(typeof(Shell));
+            contentFrameBackToShell();
+            Windows.UI.Core.SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
+            ContentFrame.Navigated += (s, a) =>
+            {
+                if (ContentFrame.CanGoBack)
+                {
+                    // Setting this visible is ignored on Mobile and when in tablet mode!
+                    Windows.UI.Core.SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = Windows.UI.Core.AppViewBackButtonVisibility.Visible;
+                }
+                else
+                {
+                    Windows.UI.Core.SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = Windows.UI.Core.AppViewBackButtonVisibility.Collapsed;
+                }
+            };
         }
 
-
-        private void NavView_Loaded(object sender, RoutedEventArgs e)
+        private void OnBackRequested(object sender, Windows.UI.Core.BackRequestedEventArgs e)
         {
+            // Navigate back if possible, and if the event has not already been handled.
+            if (ContentFrame.CanGoBack && e.Handled == false)
+            {
+                ContentFrame.GoBack();
+                e.Handled = true;
+            }
+
+            updateNavViewSelect();
+        }
+
+        private void contentFrameBackToShell()
+        {
+            // Navigate back if possible, and if the event has not already been handled.
+            while (ContentFrame.CanGoBack)
+            {
+                ContentFrame.GoBack();
+            }
+            updateNavViewSelect();
+        }
+
+        private void updateNavViewSelect()
+        {
+            //get the Type of the currently displayed page
+            var pageName = ContentFrame.Content.GetType().Name;
+            if (pageName == typeof(SettingsPage).ToString().Split('.').Last())
+            {
+                NavView.SelectedItem = NavView.SettingsItem;
+            }
+            else
+            {
+                if (pageName == typeof(Shell).ToString().Split('.').Last())
+                {
+                    pageName = ServiceLocator.Current.GetInstance<ViewModels.PictureItemsVM>().Type.ToString();
+                }
+                //find menu item that has the matching tag
+                var menuItem = NavView.MenuItems
+                                         .OfType<NavigationViewItem>()
+                                         .Where(item => item.Content.ToString().ToLower() == pageName)
+                                         .First();
+                //select
+                NavView.SelectedItem = menuItem;
+            }
 
         }
 
-        private void NavView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
+        private void NavViewSelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
-            //var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
+            if (args.IsSettingsSelected)
+            {
+                ContentFrame.Navigate(typeof(SettingsPage));
+            }
+            else
+            {
+                var pageTag = ((args.SelectedItem as NavigationViewItem).Content as string).ToLower();
 
-            //if (args.IsSettingsInvoked)
-            //{
-            //    ContentFrame.Navigate(typeof(SettingsPage));
-            //}
-            //else
-            //{
-            //    switch (args.InvokedItem)
-            //    {
-            //        case loader.GetString("HomeNavItem.Content"):
-            //            ContentFrame.Navigate(typeof(HomePage));
-            //            break;
-
-            //        case loader.GetString("AppsNavItem.Content"):
-            //            ContentFrame.Navigate(typeof(AppsPage));
-            //            break;
-
-            //        case loader.GetString("GamesNavItem.Content"):
-            //            ContentFrame.Navigate(typeof(GamesPage));
-            //            break;
-
-            //        case loader.GetString("MusicNavItem.Content"):
-            //            ContentFrame.Navigate(typeof(MusicPage));
-            //            break;
-
-            //        case loader.GetString("ContentNavItem.Content"):
-            //            ContentFrame.Navigate(typeof(MyContentPage));
-            //            break;
-            //    }
-            //}
+                switch (pageTag)
+                {
+                    // now can't be help, but future may have other type.
+                    case "help":
+                        break;
+                    default:
+                        contentFrameBackToShell();
+                        ServiceLocator.Current.GetInstance<ViewModels.PictureItemsVM>().ChangeWebsiteCommand.Execute(pageTag);
+                        break;
+                }
+            }
         }
 
-        private void NavView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
+        private void QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
         {
-            //if (args.IsSettingsSelected)
-            //{
-            //    ContentFrame.Navigate(typeof(SettingsPage));
-            //}
-            //else
-            //{
+            contentFrameBackToShell();
+            string queryText = args.ChosenSuggestion == null ? sender.Text : args.ChosenSuggestion.ToString();
+            ServiceLocator.Current.GetInstance<ViewModels.PictureItemsVM>().RearchCommand.Execute(queryText);
+        }
 
-            //    NavigationViewItem item = args.SelectedItem as NavigationViewItem;
+        private async void NavigationViewItem_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            // The URI to launch
+            var uriBing = new Uri(@"https://jskyzero.github.io/MoePicture/");
 
-            //    switch (item.Tag)
-            //    {
-            //        case "home":
-            //            ContentFrame.Navigate(typeof(HomePage));
-            //            break;
+            // Set the option to show a warning
+            var promptOptions = new Windows.System.LauncherOptions();
+            promptOptions.TreatAsUntrusted = true;
 
-            //        case "apps":
-            //            ContentFrame.Navigate(typeof(AppsPage));
-            //            break;
-
-            //        case "games":
-            //            ContentFrame.Navigate(typeof(GamesPage));
-            //            break;
-
-            //        case "music":
-            //            ContentFrame.Navigate(typeof(MusicPage));
-            //            break;
-
-            //        case "content":
-            //            ContentFrame.Navigate(typeof(MyContentPage));
-            //            break;
-            //    }
-            //}
+            // Launch the URI
+            var success = await Windows.System.Launcher.LaunchUriAsync(uriBing, promptOptions);
         }
     }
 }

@@ -5,7 +5,7 @@ using Windows.UI.Xaml.Data;
 
 namespace MoePicture.Converters
 {
-    internal class StringListConverter
+    internal class StringListConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {

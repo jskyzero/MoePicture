@@ -23,19 +23,12 @@
             TintOpacity="0.1" />
     </Page.Resources>
 
-    <Grid Background="{StaticResource MyBackgroundHostBackdropBrush}">
+    <Grid Background="{StaticResource SystemControlAcrylicWindowBrush}">
         <Grid x:Name="BackGround" />
-        <NavigationView IsPaneOpen="{Binding ShowHamburger, Mode=TwoWay}">
-            <NavigationView.PaneFooter />
-            <Grid>
-                <UC:PictureGrid />
-                <UC:ButtonBar />
-                <UC:PictureSingle d:IsHidden="True" Visibility="{Binding ShowSingle, Mode=OneWay, Converter={StaticResource BoolVisibilityConverter}}" />
-                <UC:Search d:IsHidden="True" Visibility="{Binding ShowSearch, Mode=OneWay, Converter={StaticResource BoolVisibilityConverter}}" />
-                <UC:Settings d:IsHidden="True" Visibility="{Binding ShowSettings, Mode=OneWay, Converter={StaticResource BoolVisibilityConverter}}" />
-            </Grid>
-        </NavigationView>
-
-
+        <Grid>
+            <UC:PictureGrid />
+            <UC:ButtonBar />
+            <UC:PictureSingle d:IsHidden="True" Visibility="{Binding ShowSingle, Mode=OneWay, Converter={StaticResource BoolVisibilityConverter}}" />
+        </Grid>
     </Grid>
 </Page>
