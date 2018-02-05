@@ -118,6 +118,7 @@ namespace MoePicture.Models
                 PreviewUrl = site + node["preview-file-url"].InnerText;
                 SampleUrl = site + node["file-url"].InnerText;
                 JpegUrl = site + node["large-file-url"].InnerText;
+
                 // 通过url处理得到两种name
                 Name = Spider.GetFileNameFromUrl(JpegUrl);
                 FileName = Spider.GetFileNameFromUrl(PreviewUrl);
@@ -191,7 +192,8 @@ namespace MoePicture.Models
                 folderToken = ServiceLocator.Current.GetInstance<ViewModels.UserConfigVM>().Config.CacheFolderToken;
                 folder = await StorageApplicationPermissions.FutureAccessList.GetFolderAsync(folderToken);
                 folder = await folder.CreateFolderAsync("cache", CreationCollisionOption.OpenIfExists);
-            } else
+            }
+            else
             {
                 folderToken = ServiceLocator.Current.GetInstance<ViewModels.UserConfigVM>().Config.SaveFolderlToken;
                 folder = await StorageApplicationPermissions.FutureAccessList.GetFolderAsync(folderToken);
@@ -216,18 +218,24 @@ namespace MoePicture.Models
             // 在UI线程处理位图和UI更新
             DispatcherHelper.CheckBeginInvokeOnUI(async () =>
             {
-                var file = await StorageFile.GetFileFromPathAsync(path);
-                var stream = await file.OpenReadAsync();
-                var bm = new BitmapImage();
-                await bm.SetSourceAsync(stream);
-
-                // 把图片位图对象存放到弱引用对象里面
-                if (bitmapImage == null)
-                    bitmapImage = new WeakReference(bm);
-                else
-                    bitmapImage.Target = bm;
-                //触发UI绑定属性的改变
-                RaisePropertyChanged(() => ImageSource);
+                try
+                {
+                    var file = await StorageFile.GetFileFromPathAsync(path);
+                    var stream = await file.OpenReadAsync();
+                    var bm = new BitmapImage();
+                    await bm.SetSourceAsync(stream);
+                    // 把图片位图对象存放到弱引用对象里面
+                    if (bitmapImage == null)
+                        bitmapImage = new WeakReference(bm);
+                    else
+                        bitmapImage.Target = bm;
+                    //触发UI绑定属性的改变
+                    RaisePropertyChanged(() => ImageSource);
+                }
+                catch
+                {
+                    // pass
+                }
             });
         }
 
