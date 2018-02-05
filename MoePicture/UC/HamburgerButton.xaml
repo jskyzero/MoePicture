@@ -20,15 +20,14 @@
             <Setter Property="Foreground" Value="Black" />
         </Style>
     </UserControl.Resources>
-    <Grid Background="{StaticResource SystemControlChromeMediumAcrylicWindowMediumBrush}">
+    <Grid>
         <StackPanel>
             <Button
                 HorizontalAlignment="Stretch"
                 HorizontalContentAlignment="Left"
                 Command="{Binding ChangeWebsiteCommand}"
                 CommandParameter="yande"
-                DataContext="{Binding PicturesVM, Source={StaticResource Locator}}"
-                Style="{StaticResource CustomButtonStyle}">
+                DataContext="{Binding PicturesVM, Source={StaticResource Locator}}">
                 <Grid Height="60">
                     <TextBlock
                         Margin="20"
@@ -41,8 +40,7 @@
                 HorizontalContentAlignment="Left"
                 Command="{Binding ChangeWebsiteCommand}"
                 CommandParameter="konachon"
-                DataContext="{Binding PicturesVM, Source={StaticResource Locator}}"
-                Style="{StaticResource CustomButtonStyle}">
+                DataContext="{Binding PicturesVM, Source={StaticResource Locator}}">
                 <Grid Height="60">
                     <TextBlock
                         Margin="20"
@@ -55,8 +53,7 @@
                 HorizontalContentAlignment="Left"
                 Command="{Binding ChangeWebsiteCommand}"
                 CommandParameter="danbooru"
-                DataContext="{Binding PicturesVM, Source={StaticResource Locator}}"
-                Style="{StaticResource CustomButtonStyle}">
+                DataContext="{Binding PicturesVM, Source={StaticResource Locator}}">
                 <Grid Height="60">
                     <TextBlock
                         Margin="20"
@@ -74,10 +71,10 @@
             Style="{StaticResource CustomButtonStyle}">
             <Grid>
                 <FontIcon Glyph="&#xE115;" Style="{StaticResource FontIconStyle}" />
-                <TextBlock
+                <!--<TextBlock
                     Margin="60,0,0,0"
                     Style="{StaticResource TextBlockStyle}"
-                    Text="Settings" />
+                    Text="Settings" />-->
             </Grid>
         </Button>
     </Grid>

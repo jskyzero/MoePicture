@@ -1,0 +1,93 @@
+﻿<Page
+    x:Class="MoePicture.Views.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:MoePicture.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <NavigationView
+        x:Name="NavView"
+        Canvas.ZIndex="0"
+        ItemInvoked="NavView_ItemInvoked"
+        Loaded="NavView_Loaded"
+        SelectionChanged="NavView_SelectionChanged">
+
+        <NavigationView.MenuItems>
+            <NavigationViewItem
+                x:Uid="HomeNavItem"
+                Content="Home"
+                Tag="home">
+                <NavigationViewItem.Icon>
+                    <FontIcon Glyph="&#xE10F;" />
+                </NavigationViewItem.Icon>
+            </NavigationViewItem>
+            <NavigationViewItemSeparator />
+            <NavigationViewItemHeader Content="Main pages" />
+            <NavigationViewItem
+                x:Uid="AppsNavItem"
+                Content="Apps"
+                Icon="AllApps"
+                Tag="apps" />
+            <NavigationViewItem
+                x:Uid="GamesNavItem"
+                Content="Games"
+                Icon="Video"
+                Tag="games" />
+            <NavigationViewItem
+                x:Uid="MusicNavItem"
+                Content="Music"
+                Icon="Audio"
+                Tag="music" />
+        </NavigationView.MenuItems>
+
+        <NavigationView.AutoSuggestBox>
+            <AutoSuggestBox x:Name="ASB" QueryIcon="Find" />
+        </NavigationView.AutoSuggestBox>
+
+        <NavigationView.HeaderTemplate>
+            <DataTemplate>
+                <Grid Margin="24,10,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        VerticalAlignment="Center"
+                        FontSize="28"
+                        Style="{StaticResource TitleTextBlockStyle}"
+                        Text="Welcome" />
+                    <CommandBar
+                        Grid.Column="1"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Background="{ThemeResource SystemControlBackgroundAltHighBrush}"
+                        DefaultLabelPosition="Right">
+                        <AppBarButton Icon="Refresh" Label="Refresh" />
+                        <AppBarButton Icon="Import" Label="Import" />
+                    </CommandBar>
+                </Grid>
+            </DataTemplate>
+        </NavigationView.HeaderTemplate>
+
+        <NavigationView.PaneFooter>
+            <HyperlinkButton
+                x:Name="MoreInfoBtn"
+                Margin="12,0"
+                Content="More info" />
+        </NavigationView.PaneFooter>
+
+        <Frame
+            x:Name="ContentFrame"
+            Margin="0,-84,0,3"
+            Background="Red">
+            <Frame.ContentTransitions>
+                <TransitionCollection>
+                    <NavigationThemeTransition />
+                </TransitionCollection>
+            </Frame.ContentTransitions>
+        </Frame>
+
+    </NavigationView>
+</Page>
