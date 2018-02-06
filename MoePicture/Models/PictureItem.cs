@@ -160,6 +160,30 @@ namespace MoePicture.Models
 
         #region ImageSource Properties
 
+        public async Task<StorageFolder> GetStorageFolder(UrlType urlType)
+        {
+            string folderToken;
+            StorageFolder folder;
+            // 根据图片Uri类型，打开到不同文件夹里
+            if (urlType == UrlType.preview_url)
+            {
+                folderToken = ServiceLocator.Current.GetInstance<ViewModels.UserConfigVM>().Config.CacheFolderToken;
+                folder = await StorageApplicationPermissions.FutureAccessList.GetFolderAsync(folderToken);
+                folder = await folder.CreateFolderAsync("cache", CreationCollisionOption.OpenIfExists);
+            }
+            else
+            {
+                folderToken = ServiceLocator.Current.GetInstance<ViewModels.UserConfigVM>().Config.SaveFolderlToken;
+                folder = await StorageApplicationPermissions.FutureAccessList.GetFolderAsync(folderToken);
+                folder = await folder.CreateFolderAsync("MoePicture", CreationCollisionOption.OpenIfExists);
+            }
+
+            folder = await folder.CreateFolderAsync(Type.ToString(), CreationCollisionOption.OpenIfExists);
+
+            return folder;
+        }
+
+
         // ImageSource属性用于绑定到列表的Image控件上
         public ImageSource ImageSource
         {
@@ -184,23 +208,8 @@ namespace MoePicture.Models
         // 下载图片的方法
         private async void DownloadImageAsync(object state)
         {
-            string folderToken;
-            StorageFolder folder;
-            // 根据图片Uri类型，下载到不同文件夹里
-            if (UrlType == UrlType.preview_url)
-            {
-                folderToken = ServiceLocator.Current.GetInstance<ViewModels.UserConfigVM>().Config.CacheFolderToken;
-                folder = await StorageApplicationPermissions.FutureAccessList.GetFolderAsync(folderToken);
-                folder = await folder.CreateFolderAsync("cache", CreationCollisionOption.OpenIfExists);
-            }
-            else
-            {
-                folderToken = ServiceLocator.Current.GetInstance<ViewModels.UserConfigVM>().Config.SaveFolderlToken;
-                folder = await StorageApplicationPermissions.FutureAccessList.GetFolderAsync(folderToken);
-                folder = await folder.CreateFolderAsync("MoePicture", CreationCollisionOption.OpenIfExists);
-            }
 
-            folder = await folder.CreateFolderAsync(Type.ToString(), CreationCollisionOption.OpenIfExists);
+            var folder = await GetStorageFolder(UrlType);
             var path = Path.Combine(folder.Path, FileName);
 
             if (!File.Exists(path) || ((new FileInfo(path).Length) == 0))

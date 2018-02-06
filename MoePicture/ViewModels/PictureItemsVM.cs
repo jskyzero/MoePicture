@@ -11,6 +11,8 @@ using Windows.UI.Xaml.Controls;
 using TileUpdate;
 using MoePicture.Converters;
 using Windows.UI.Xaml.Data;
+using Windows.Storage.AccessCache;
+using Windows.Storage;
 
 namespace MoePicture.ViewModels
 {
@@ -71,10 +73,10 @@ namespace MoePicture.ViewModels
             PictureItems = new PictureItems(Type, Tag);
         }
 
-        public void SelectItemClick(ItemClickEventArgs e)
+        public async void SelectItemClick(ItemClickEventArgs e)
         {
             SelectPictureItem = (PictureItem)e.ClickedItem;
-            Tiles.UpdataOneItem(SelectPictureItem.FileName);
+            Tiles.UpdataOneItem(await SelectPictureItem.GetStorageFolder(UrlType.preview_url), SelectPictureItem.FileName);
             ServiceLocator.Current.GetInstance<ShellVM>().SwitchSigleCommand.Execute(null);
         }
 

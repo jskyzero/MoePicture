@@ -31,13 +31,12 @@ namespace TileUpdate
         }
 
         // 更新磁贴，向磁贴中加入一个新图片
-        public async void UpdataOneItem(string fileName)
+        public async void UpdataOneItem(StorageFolder folder,  string fileName)
         {
             try
             {
                 // 得到该item在本地缓存的本地Uri
-                StorageFolder folder = ApplicationData.Current.LocalCacheFolder;
-                var file = await (await folder.GetFolderAsync("perview")).GetFileAsync(fileName);
+                var file = await folder.GetFileAsync(fileName);
 
                 // 进行xml内容的替换
                 var doc = new Windows.Data.Xml.Dom.XmlDocument();
