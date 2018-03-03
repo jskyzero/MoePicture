@@ -33,7 +33,7 @@
                     Margin="0"
                     Padding="0"
                     HorizontalAlignment="Right"
-                    IsEnabled="{Binding Config.Raing, Converter={StaticResource RatingNullableBooleanConverter}, Mode=TwoWay}" />
+                    IsOn="{Binding Config.Rating, Converter={StaticResource RatingNullableBooleanConverter}, Mode=TwoWay}" />
             </Grid>
             <Button
                 Width="200"
