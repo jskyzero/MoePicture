@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 冬季更新
+title: 冬季更新计划
 description: 虽说目前还没开始修改
 image: assets/images/bg1.jpg
 ---
@@ -8,7 +8,7 @@ image: assets/images/bg1.jpg
 开始来制定本次更新的计划吧。
 
 # MoePicture冬季更新计划
-`jskyzero` `2010/01/14`
+`jskyzero` `2018/01/14`
 
 ## 回顾秋季更新情况
 

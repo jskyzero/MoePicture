@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 11/27版本UI界面
+title: 秋季更新发布
 description: 更新了秋季更新的一些新特性。
 image: assets/images/gif/3.gif
 ---
