@@ -19,6 +19,7 @@
 
 ![](https://jskyzero.github.io//MoePicture/assets/images/17.winter/3.gif)
 
+<!--
 ### 11/27版本UI界面更新细节
 
 + Acrylic Material
@@ -37,6 +38,8 @@
 ![](https://jskyzero.github.io/MoePicture/assets/images/6.18.1.png)
 ![](https://jskyzero.github.io/MoePicture/assets/images/6.18.5.png)
 
+-->
+
 ## Install & Run
 
 Download from [Microsoft Store](https://www.microsoft.com/zh-cn/store/p/moepicture/9n7qlfkl7zrh?rtc=1)
@@ -52,6 +55,14 @@ Download from [Microsoft Store](https://www.microsoft.com/zh-cn/store/p/moepictu
 + [x] 添加其他图源
 + [ ] 添加用户收藏
 + [ ] 修改本地数据库储存
+
+## Privacy Policy
+
+1. 我们不收集任何类型的信息。
+2. 您的信息只会存储在您的本地存储器中。
+3. 如果您有任何问题，可以给我发电子邮件询问 (jskyzero@outlook.com)。
+
+ENGLISH VERSION click [here](https://jskyzero.github.io/MoePicture/2018/03/28/privacy_policy.html)
 
 ## Thanks
 
