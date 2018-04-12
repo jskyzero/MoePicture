@@ -177,9 +177,7 @@ namespace MoePicture.Models
                 folder = await StorageApplicationPermissions.FutureAccessList.GetFolderAsync(folderToken);
                 folder = await folder.CreateFolderAsync("MoePicture", CreationCollisionOption.OpenIfExists);
             }
-
             folder = await folder.CreateFolderAsync(Type.ToString(), CreationCollisionOption.OpenIfExists);
-
             return folder;
         }
 
@@ -212,6 +210,7 @@ namespace MoePicture.Models
             var folder = await GetStorageFolder(UrlType);
             var path = Path.Combine(folder.Path, FileName);
 
+            
             if (!File.Exists(path) || ((new FileInfo(path).Length) == 0))
             {
                 if (UrlType == UrlType.preview_url)

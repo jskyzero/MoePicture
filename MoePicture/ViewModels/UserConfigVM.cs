@@ -25,9 +25,9 @@ namespace MoePicture.ViewModels
         /// <summary>
         /// 异步初始化用户设置
         /// </summary>
-        public async Task InitialConfigAsync()
+        public void InitialConfigAsync()
         {
-            Config = await configService.GetConfig();
+            Config = configService.GetConfig();
         }
 
         /// <summary>
