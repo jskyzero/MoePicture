@@ -4,10 +4,7 @@ using GalaSoft.MvvmLight.Threading;
 using MoePicture.Services;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using Windows.Storage;
@@ -18,9 +15,14 @@ using Windows.UI.Xaml.Media.Imaging;
 namespace MoePicture.Models
 {
 
-    // 枚举网站种类
+    /// <summary>
+    /// 枚举网站种类
+    /// </summary>
     public enum WebsiteType { yande, konachan, danbooru };
-    // 枚举Uri种类
+
+    /// <summary>
+    /// 枚举Uri种类
+    /// </summary>
     public enum UrlType { preview_url, sample_url, jpeg_url };
 
     /// <summary>
@@ -37,7 +39,7 @@ namespace MoePicture.Models
         private WebsiteType websiteType;
 
         private bool isSafe = false;
-        private bool isOK = true;
+        private bool isAllRight = true;
 
         public string Id { get; set; }
         public string Tags { get; set; }
@@ -46,7 +48,7 @@ namespace MoePicture.Models
         public string JpegUrl { get; set; }
         public string FileName { get; set; }
         public string Name { get; set; }
-        public bool IsOK { get => isOK; set => isOK = value; }
+        public bool IsAllRight { get => isAllRight; set => isAllRight = value; }
         public bool IsSafe { get => isSafe; set => isSafe = value; }
 
         public WebsiteType Type { get => websiteType; set => websiteType = value; }
@@ -61,75 +63,7 @@ namespace MoePicture.Models
         {
             UrlType = UrlType.preview_url;
             Type = type;
-
-            switch (Type)
-            {
-                case WebsiteType.yande:
-                    Yande(node);
-                    break;
-                case WebsiteType.konachan:
-                    Konachon(node);
-                    break;
-                case WebsiteType.danbooru:
-                    Danbooru(node);
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        private void Yande(XmlNode node)
-        {
-            try
-            {
-
-                // 从节点得到图片信息
-                Id = node.Attributes["id"].Value;
-                Tags = node.Attributes["tags"].Value;
-                PreviewUrl = node.Attributes["preview_url"].Value;
-                SampleUrl = node.Attributes["sample_url"].Value;
-                JpegUrl = node.Attributes["jpeg_url"].Value;
-                // 通过url处理得到两种name
-                Name = Spider.GetFileNameFromUrl(JpegUrl);
-                FileName = Spider.GetFileNameFromUrl(PreviewUrl);
-
-                IsSafe = node.Attributes["rating"].Value == "s";
-            }
-            catch
-            {
-                IsOK = false;
-            }
-
-        }
-
-        private void Konachon(XmlNode node)
-        {
-            Yande(node);
-        }
-
-        private void Danbooru(XmlNode node)
-        {
-            try
-            {
-                //string site = "https://danbooru.donmai.us";
-                // 从节点得到图片信息
-                Id = node["id"].InnerText;
-                Tags = node["tag-string-general"].InnerText;
-                PreviewUrl = node["preview-file-url"].InnerText;
-                SampleUrl = node["file-url"].InnerText;
-                JpegUrl = node["large-file-url"].InnerText;
-
-                // 通过url处理得到两种name
-                Name = Spider.GetFileNameFromUrl(JpegUrl);
-                FileName = Spider.GetFileNameFromUrl(PreviewUrl);
-
-                IsSafe = node["rating"].InnerText == "s";
-            }
-            catch
-            {
-                IsOK = false;
-            }
-
+            Website.SetInfoFromNode(this, node, Type);
         }
 
 
@@ -147,7 +81,7 @@ namespace MoePicture.Models
                 {
                     var item = new PictureItem(type, nodeList[i]);
 
-                    if ((loadAll || item.IsSafe) && item.IsOK)
+                    if ((loadAll || item.IsSafe) && item.IsAllRight)
                     {
                         Items.Add(item);
                     }
@@ -210,7 +144,7 @@ namespace MoePicture.Models
             var folder = await GetStorageFolder(UrlType);
             var path = Path.Combine(folder.Path, FileName);
 
-            
+
             if (!File.Exists(path) || ((new FileInfo(path).Length) == 0))
             {
                 if (UrlType == UrlType.preview_url)

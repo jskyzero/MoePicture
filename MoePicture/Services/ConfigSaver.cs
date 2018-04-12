@@ -12,7 +12,7 @@ namespace MoePicture.Services
 {
     public class ConfigSaver
     {
-        private const string configKey = "Config3";
+        private const string configKey = "Config";
         /// <summary>
         /// 获取之前的设置
         /// </summary>
@@ -20,7 +20,7 @@ namespace MoePicture.Services
         {
             UserConfig Config;
             // 如果之前有json文件储存记录，读取json文件并反序列化，否则新建一个默认的实例
-            if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(configKey))
+            if (ApplicationData.Current.LocalSettings.Values.ContainsKey(configKey))
             {
                 var jsonStr = ApplicationData.Current.RoamingSettings.Values[configKey].ToString();
                 try
