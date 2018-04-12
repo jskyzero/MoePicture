@@ -12,37 +12,52 @@ namespace MoePicture.ViewModels
     {
         #region Propeities
 
+        /// <summary> 是否加载全部图片 </summary>
         private bool loadAll;
+        /// <summary> 判断是否还有图片 </summary>
         private bool noMorePicture;
-        private Services.Website website;
-
+        /// <summary> 网页类型 </summary>
+        private Services.WebsiteHelper website;
+        /// <summary> 数据库实例 </summary>
         public DataBase.DataBase DB;
 
         #endregion Propeities
 
         #region Constructer
 
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="websiteType">网站类型</param>
+        /// <param name="tag">搜索标签</param>
         public PictureItems(WebsiteType websiteType, string tag = "")
         {
-            loadAll = ServiceLocator.Current.GetInstance<UserConfigVM>().Config.Rating == Models.RatingType.All;
             noMorePicture = false;
-            website = new Services.Website(websiteType, tag);
-
             DB = new DataBase.DataBase();
+            website = new Services.WebsiteHelper(websiteType, tag);
+            loadAll = ServiceLocator.Current.GetInstance<UserConfigVM>().Config.Rating == RatingType.All;
         }
 
         #endregion Constructer
 
         #region Methods
 
-        // 父类的虚函数实现，如果下次访问的页面数>0，证明网站还有可获取图片
+        /// <summary>
+        /// 是否还有可获取图片
+        /// </summary>
+        /// <returns>True:还有可获取图片</returns>
         protected override bool HasMoreItemsOverride()
         {
             return !noMorePicture;
         }
 
-        // 父类的虚函数实现，根据_uri，_pageNum和_tag属性，组合成要访问的Uri，
-        // 并通过该Uri访问网站获取新增图片
+
+        /// <summary>
+        /// 访问网站获取新增图片
+        /// </summary>
+        /// <param name="c">CancellationToken</param>
+        /// <param name="count">数目</param>
+        /// <returns></returns>
         protected override async Task<IList<PictureItem>> LoadMoreItemsOverrideAsync(CancellationToken c, int count)
         {
 

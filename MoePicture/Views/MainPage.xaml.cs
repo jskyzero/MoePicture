@@ -136,7 +136,7 @@ namespace MoePicture.Views
         {
             ContentFrameBackToShell();
             string queryText = args.ChosenSuggestion == null ? sender.Text : args.ChosenSuggestion.ToString();
-            ServiceLocator.Current.GetInstance<ViewModels.PictureItemsVM>().RearchCommand.Execute(queryText);
+            ServiceLocator.Current.GetInstance<ViewModels.PictureItemsVM>().SearchCommand.Execute(queryText);
         }
 
         private async void NavigationViewItem_Tapped(object sender, TappedRoutedEventArgs e)

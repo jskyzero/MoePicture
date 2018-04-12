@@ -107,11 +107,11 @@
     <Compile Include="Converters\TagStringConverter.cs" />
     <Compile Include="Models\PictureItem.cs" />
     <Compile Include="Models\UserConfig.cs" />
-    <Compile Include="Services\ConfigSaver.cs" />
+    <Compile Include="Services\ConfigService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\MoePictureConfig.cs" />
     <Compile Include="Services\Spider.cs" />
-    <Compile Include="Services\Website.cs" />
+    <Compile Include="Services\WebsiteHelper.cs" />
     <Compile Include="UC\ButtonBar.xaml.cs">
       <DependentUpon>ButtonBar.xaml</DependentUpon>
     </Compile>

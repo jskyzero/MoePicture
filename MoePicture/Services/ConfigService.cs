@@ -10,9 +10,8 @@ using Windows.Storage.AccessCache;
 
 namespace MoePicture.Services
 {
-    public class ConfigSaver
+    public class ConfigService
     {
-        private const string configKey = "Config";
         /// <summary>
         /// 获取之前的设置
         /// </summary>
@@ -20,15 +19,15 @@ namespace MoePicture.Services
         {
             UserConfig Config;
             // 如果之前有json文件储存记录，读取json文件并反序列化，否则新建一个默认的实例
-            if (ApplicationData.Current.LocalSettings.Values.ContainsKey(configKey))
+            if (ApplicationData.Current.LocalSettings.Values.ContainsKey(MoePictureConfig.ConfigKey))
             {
-                var jsonStr = ApplicationData.Current.RoamingSettings.Values[configKey].ToString();
+                var jsonStr = ApplicationData.Current.RoamingSettings.Values[MoePictureConfig.ConfigKey].ToString();
                 try
                 {
                     Config = JsonConvert.DeserializeObject<UserConfig>(jsonStr);
                     if (!TestConfigWorksWell(Config).Result)
                     {
-                        throw new Exception("Test Error");
+                        Config = GetDefaultConfig();
                     }
                 }
                 catch
@@ -40,10 +39,14 @@ namespace MoePicture.Services
             {
                 Config = GetDefaultConfig();
             }
-            //return Task.FromResult(Config);
             return Config;
         }
 
+        /// <summary>
+        /// 测试配置文件是否能工作
+        /// </summary>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public async Task<bool> TestConfigWorksWell (UserConfig config)
         {
             try
@@ -53,15 +56,18 @@ namespace MoePicture.Services
                 folderToken = config.CacheFolderToken;
                 folder = await StorageApplicationPermissions.FutureAccessList.GetFolderAsync(folderToken);
                 folder = await folder.CreateFolderAsync("cache", CreationCollisionOption.OpenIfExists);
+                if (folder == null) return false;
                 folderToken = config.SaveFolderlToken;
                 folder = await StorageApplicationPermissions.FutureAccessList.GetFolderAsync(folderToken);
                 folder = await folder.CreateFolderAsync("MoePicture", CreationCollisionOption.OpenIfExists);
-                return true;
+                if (folder == null) return false;
             }
             catch
             {
                 return false;
             }
+
+            return true;
         }
 
         /// <summary>
@@ -69,7 +75,7 @@ namespace MoePicture.Services
         /// </summary>
         public void SaveConfig(UserConfig Config)
         {
-            ApplicationData.Current.RoamingSettings.Values[configKey] = JsonConvert.SerializeObject(Config);
+            ApplicationData.Current.RoamingSettings.Values[MoePictureConfig.ConfigKey] = JsonConvert.SerializeObject(Config);
         }
 
         /// <summary>

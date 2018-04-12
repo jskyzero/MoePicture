@@ -9,16 +9,26 @@ using System.Threading.Tasks;
 
 namespace MoePicture.ViewModels
 {
+    /// <summary>
+    /// 用户设置VM
+    /// </summary>
     public class UserConfigVM : ViewModelBase
     {
-        private Services.ConfigSaver configService;
+        /// <summary> ConfigHelper </summary>
+        private Services.ConfigService configHelper;
+        /// <summary> 用户设置 </summary>
         private UserConfig config;
 
+        /// <summary> 用户设置 </summary>
         public UserConfig Config { get => config; set { Set(ref config, value); } }
 
-        public UserConfigVM(Services.ConfigSaver userConfigServer)
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="configHelper">Services.ConfigHelper</param>
+        public UserConfigVM(Services.ConfigService configHelper)
         {
-            configService = userConfigServer;
+            this.configHelper = configHelper;
             InitialConfigAsync();
         }
 
@@ -27,7 +37,7 @@ namespace MoePicture.ViewModels
         /// </summary>
         public void InitialConfigAsync()
         {
-            Config = configService.GetConfig();
+            Config = configHelper.GetConfig();
         }
 
         /// <summary>

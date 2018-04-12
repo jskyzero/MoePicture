@@ -83,7 +83,7 @@ namespace MoePicture.Models
             // 初始化为预览链接
             UrlType = UrlType.PreviewUrl;
             // 用网站特异性的方法来设置具体信息
-            Website.SetInfoFromNode(this, node, Type);
+            WebsiteHelper.SetInfoFromNode(this, node, Type);
         }
 
         /// <summary>

@@ -9,12 +9,12 @@ using Windows.Web.Http;
 
 namespace MoePicture.Services
 {
-    internal class Spider
+    static class Spider
     {
-
-        // 爬虫模拟Chrome浏览器的字符串
+        /// <summary> client </summary>
         private static HttpClient client = null;
-        private static string User_Agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit / 537.36(KHTML, like Gecko) Chrome  47.0.2526.106 Safari / 537.36";
+        /// <summary> 伪装头 </summary>
+        private const string User_Agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit / 537.36(KHTML, like Gecko) Chrome  47.0.2526.106 Safari / 537.36";
 
         public static HttpClient Client
         {
@@ -30,15 +30,22 @@ namespace MoePicture.Services
             }
         }
 
-
+        /// <summary>
+        /// 下载成字符串
+        /// </summary>
+        /// <param name="url">链接</param>
+        /// <returns></returns>
         public async static Task<string> GetString(Uri url)
         {
-            // var client = new System.Net.Http.HttpClient();
-            // client.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", User_Agent);
             return await Client.GetStringAsync(url);
         }
 
-        // 通过Uri下载图片到本地文件
+        /// <summary>
+        /// 通过Uri下载图片到本地文件
+        /// </summary>
+        /// <param name="uri">链接</param>
+        /// <param name="file">保存文件</param>
+        /// <returns></returns>
         public async static Task DownloadPictureFromUriToFile(Uri uri, StorageFile file)
         {
             // 获取图片流下载到文件中
@@ -46,7 +53,13 @@ namespace MoePicture.Services
             await FileIO.WriteBufferAsync(file, buffer);
         }
 
-        // 通过Uri下载图片到本地文件(通过path和fileName路径得到本地文件)
+        /// <summary>
+        /// 通过Uri下载图片到本地文件(通过path和fileName路径得到本地文件)
+        /// </summary>
+        /// <param name="uri">链接</param>
+        /// <param name="path">路径</param>
+        /// <param name="fileName">文件名</param>
+        /// <returns></returns>
         public async static Task DownloadPictureFromUriToFolder(Uri uri, string path, string fileName)
         {
             StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(path);
@@ -56,9 +69,13 @@ namespace MoePicture.Services
 
         private static SemaphoreSlim DownloadPictureLock = new SemaphoreSlim(5);
 
-
-        // 通过Uri下载图片到本地文件(通过path和fileName路径得到本地文件)
-        // 最多同时发送五个请求
+        /// <summary>
+        /// 限制最大同时下载次数的通过Uri下载图片到本地文件(通过path和fileName路径得到本地文件)
+        /// </summary>
+        /// <param name="uri"></param>
+        /// <param name="path"></param>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
         public async static Task DownloadPictureFromUriToFolderLock(Uri uri, string path, string fileName)
         {
             await DownloadPictureLock.WaitAsync();
@@ -70,17 +87,25 @@ namespace MoePicture.Services
             DownloadPictureLock.Release();
         }
 
-        // 将fileName中不符合在文件名中使用的字符清除
-        public static string CleanFileName(string fileName)
+        /// <summary>
+        /// 获取安全的文件名
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
+        public static string GetSafeFileName(string fileName)
         {
             return Path.GetInvalidFileNameChars().Aggregate(fileName, (current, c) => current.Replace(c.ToString(), string.Empty));
         }
 
-        // 通过Uri得到对应死亡本地缓存的文件名
+        /// <summary>
+        /// 通过Uri得到对应的本地文件名
+        /// </summary>
+        /// <param name="url">链接</param>
+        /// <returns></returns>
         public static string GetFileNameFromUrl(string url)
         {
             string fileName = Uri.UnescapeDataString(url);
-            return Spider.CleanFileName(fileName.Substring(fileName.LastIndexOf('/') + 1));
+            return Spider.GetSafeFileName(fileName.Substring(fileName.LastIndexOf('/') + 1));
         }
     }
 }

@@ -8,21 +8,31 @@ using System.Xml;
 
 namespace MoePicture.Services
 {
-
-    internal class Website
+    public class WebsiteHelper
     {
+        /// <summary> yandeUrl </summary>
         private static string yandeUrl = "https://yande.re/post.xml?limit=100";
+        /// <summary> konachanUrl </summary>
         private static string konachanUrl = "http://konachan.com/post.xml?limit=100";
+        /// <summary> danbooruUrl </summary>
         private static string danbooruUrl = "https://danbooru.donmai.us/posts.xml?limit=100";
 
+        /// <summary> 网站类型 </summary>
         private WebsiteType websiteType;
-        private string tag;
+        /// <summary> 标签 </summary>
+        private string searchTag;
+        /// <summary> 页码 </summary>
         private int pageNum;
 
+        /// <summary> 页码 </summary>
         public WebsiteType Type { get => websiteType; set => websiteType = value; }
 
-
-        public Website(WebsiteType websiteType, string tag)
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="websiteType">网站类型</param>
+        /// <param name="tag">搜索标签</param>
+        public WebsiteHelper(WebsiteType websiteType, string tag)
         {
             pageNum = 1;
             Type = websiteType;
@@ -30,36 +40,16 @@ namespace MoePicture.Services
             switch (Type)
             {
                 case WebsiteType.Yande:
-                    this.tag = tag == "" ? "" : "&tags=" + tag;
-                    break;
                 case WebsiteType.Konachan:
-                    this.tag = tag == "" ? "" : "&tags=" + tag;
-                    break;
                 case WebsiteType.Danbooru:
-                    this.tag = tag == "" ? "" : "&tags=" + tag;
-                    break;
-                default:
-                    this.tag = "";
+                    searchTag = tag == "" ? "": "&tags=" + tag;
                     break;
             }
         }
-
-        //public static List<string> ParseTags(WebsiteType websiteType)
-        //{
-        //    switch (websiteType)
-        //    {
-        //        case WebsiteType.yande:
-        //            return new List<string> { "id", "tags", "preview_url", "sample_url", "jpeg_url", "rating", "s" };
-        //        case WebsiteType.konachan:
-        //            return new List<string> { "id", "tags", "preview_url", "sample_url", "jpeg_url", "rating", "s" };
-        //        case WebsiteType.danbooru:
-        //            return new List<string> { "id", "tag-string-general", "preview-file-url", "file-url", "large-file-url", "rating", "s" };
-        //        default:
-        //            return new List<string> { "id", "tags", "preview_url", "sample_url", "jpeg_url", "rating", "s" };
-        //    }
-        //}
-
-
+        /// <summary>
+        /// 获取每次的链接
+        /// </summary>
+        /// <returns></returns>
         public string Url()
         {
             string url = "";
@@ -67,13 +57,13 @@ namespace MoePicture.Services
             switch (Type)
             {
                 case WebsiteType.Yande:
-                    url = yandeUrl + "&page=" + pageNum.ToString() + tag;
+                    url = yandeUrl + "&page=" + pageNum.ToString() + searchTag;
                     break;
                 case WebsiteType.Konachan:
-                    url = konachanUrl + "&page=" + pageNum.ToString() + tag;
+                    url = konachanUrl + "&page=" + pageNum.ToString() + searchTag;
                     break;
                 case WebsiteType.Danbooru:
-                    url = danbooruUrl + "&page=" + pageNum.ToString() + tag;
+                    url = danbooruUrl + "&page=" + pageNum.ToString() + searchTag;
                     break;
             }
 
@@ -82,6 +72,12 @@ namespace MoePicture.Services
             return url;
         }
 
+        /// <summary>
+        /// 帮助设置图片信息
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="node"></param>
+        /// <param name="websiteType"></param>
         public static void SetInfoFromNode(PictureItem item, XmlNode node, WebsiteType websiteType)
         {
             switch (websiteType)
@@ -103,7 +99,6 @@ namespace MoePicture.Services
         {
             try
             {
-
                 // 从节点得到图片信息
                 item.Id = node.Attributes["id"].Value;
                 item.Tags = node.Attributes["tags"].Value;
@@ -128,7 +123,6 @@ namespace MoePicture.Services
         {
             try
             {
-                //string site = "https://danbooru.donmai.us";
                 // 从节点得到图片信息
                 item.Id = node["id"].InnerText;
                 item.Tags = node["tag-string-general"].InnerText;

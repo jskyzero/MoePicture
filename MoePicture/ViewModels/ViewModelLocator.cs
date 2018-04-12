@@ -28,13 +28,12 @@ namespace MoePicture.ViewModels
 
         static ViewModelLocator()
         {
+            //SimpleIoc.Default.Register<INavigationService>(() => nav);
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
             //var nav = new NavigationService();
             //nav.Configure(ShellKey, typeof(Views.Shell));
-            //SimpleIoc.Default.Register<INavigationService>(() => nav);
-
-            SimpleIoc.Default.Register<Services.ConfigSaver>();
+            SimpleIoc.Default.Register<Services.ConfigService>();
             SimpleIoc.Default.Register<UserConfigVM>();
             SimpleIoc.Default.Register<PictureItemsVM>();
             SimpleIoc.Default.Register<ShellVM>();

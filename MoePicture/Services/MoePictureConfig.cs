@@ -11,11 +11,17 @@ namespace MoePicture.Services
     /// </summary>
     public static class MoePictureConfig
     {
+        #region Properties
+
         /// <summary> 缓存文件夹 </summary>
         public const string CacheFolderName = "Cache";
         /// <summary> 样例文件夹 </summary>
         public const string SampleFolderName = "MoePicture";
+        /// <summary> 配置文件KEY </summary>
+        public const string ConfigKey = "Config";
         /// <summary> 帮助链接 </summary>
         public const string HelpWebSiteUrl = @"https://jskyzero.github.io/MoePicture/";
+        
+        #endregion
     }
 }
