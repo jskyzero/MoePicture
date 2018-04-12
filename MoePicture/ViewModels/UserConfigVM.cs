@@ -34,31 +34,31 @@ namespace MoePicture.ViewModels
         /// 新加入设置的tag到Model
         /// </summary>
         /// <param name="tag">tag</param>
-        private void AddTag(string tag)
-        {
-            if (!config.MyTags.Contains(tag))
-                Config.MyTags.Add(tag);
-        }
+        //private void AddTag(string tag)
+        //{
+        //    if (!config.MyTags.Contains(tag))
+        //        Config.MyTags.Add(tag);
+        //}
 
         /// <summary>
         /// 清除设置的所有tags
         /// </summary>
-        public void CleanAllTag()
-        {
-            Config.MyTags.Clear();
-        }
+        //public void CleanAllTag()
+        //{
+        //    Config.MyTags.Clear();
+        //}
 
-        public RelayCommand CleanTagCommand { get { return new RelayCommand(() => { CleanAllTag(); }); } }
+        //public RelayCommand CleanTagCommand { get { return new RelayCommand(() => { CleanAllTag(); }); } }
 
         /// <summary>
         /// 通过String来添加新的Tag
         /// </summary>
         /// <param name="str"></param>
-        public void AddTagtoMyTagsByString(string str)
-        {
-            AddTag(str);
-        }
+        //public void AddTagtoMyTagsByString(string str)
+        //{
+        //    AddTag(str);
+        //}
 
-        public RelayCommand<string> AddTagCommand { get { return new RelayCommand<string>((str) => { AddTagtoMyTagsByString(str); }); } }
+        //public RelayCommand<string> AddTagCommand { get { return new RelayCommand<string>((str) => { AddTagtoMyTagsByString(str); }); } }
     }
 }

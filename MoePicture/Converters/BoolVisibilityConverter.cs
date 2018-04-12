@@ -4,7 +4,9 @@ using Windows.UI.Xaml.Data;
 
 namespace MoePicture.Converters
 {
-    // 双向值转换器：bool -> Visibility
+    /// <summary>
+    /// 双向值转换器：bool -> Visibility
+    /// </summary>
     internal class BoolVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language) =>

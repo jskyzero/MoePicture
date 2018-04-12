@@ -9,19 +9,30 @@ using Windows.Storage;
 
 namespace MoePicture.Models
 {
+
+    /// <summary> 评级设置 </summary>
+    public enum RatingType { Safe, All };
+
+    /// <summary>
+    /// 用户配置
+    /// </summary>
     public class UserConfig : ObservableObject
     {
         #region Properties
-
-        public enum RatingType { safe, all };
-
+        /// <summary> 评级设置 </summary>
         private RatingType rating;
-        private ObservableCollection<string> myTags = new ObservableCollection<string>();
 
-        public string SaveFolderlToken { get; set; }
+
+        /// <summary> 缓存设置文件夹 </summary>
         public string CacheFolderToken { get; set; }
+        /// <summary> 保存设置文件夹 </summary>
+        public string SaveFolderlToken { get; set; }
+        /// <summary> 评级 </summary>
         public RatingType Rating { get => rating; set { Set(ref rating, value); } }
-        public ObservableCollection<string> MyTags { get => myTags; set { Set(ref myTags, value); } }
+
+        // no use right now
+        // private ObservableCollection<string> myTags = new ObservableCollection<string>();
+        // public ObservableCollection<string> MyTags { get => myTags; set { Set(ref myTags, value); } }
 
         #endregion Properties
     }

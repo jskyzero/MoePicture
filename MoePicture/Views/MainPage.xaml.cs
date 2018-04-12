@@ -24,11 +24,14 @@ namespace MoePicture.Views
     /// </summary>
     public sealed partial class MainPage : Page
     {
+
+
         public MainPage()
         {
             this.InitializeComponent();
             ContentFrame.Navigate(typeof(Shell));
-            contentFrameBackToShell();
+            InitialNaveMenuItems();
+            ContentFrameBackToShell();
             Windows.UI.Core.SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
             ContentFrame.Navigated += (s, a) =>
             {
@@ -42,6 +45,22 @@ namespace MoePicture.Views
                     Windows.UI.Core.SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = Windows.UI.Core.AppViewBackButtonVisibility.Collapsed;
                 }
             };
+
+        }
+
+        private void InitialNaveMenuItems()
+        {
+            foreach (var type in Enum.GetValues(typeof(Models.WebsiteType)))
+            {
+                NavView.MenuItems.Add(new NavigationViewItem()
+                {
+                    Content = type.ToString(),
+                    Icon = new FontIcon()
+                    {
+                        Glyph = "\uEB9F"
+                    }
+                });
+            }
         }
 
         private void OnBackRequested(object sender, Windows.UI.Core.BackRequestedEventArgs e)
@@ -53,20 +72,20 @@ namespace MoePicture.Views
                 e.Handled = true;
             }
 
-            updateNavViewSelect();
+            UpdateNavViewSelect();
         }
 
-        private void contentFrameBackToShell()
+        private void ContentFrameBackToShell()
         {
             // Navigate back if possible, and if the event has not already been handled.
             while (ContentFrame.CanGoBack)
             {
                 ContentFrame.GoBack();
             }
-            updateNavViewSelect();
+            UpdateNavViewSelect();
         }
 
-        private void updateNavViewSelect()
+        private void UpdateNavViewSelect()
         {
             //get the Type of the currently displayed page
             var pageName = ContentFrame.Content.GetType().Name;
@@ -80,11 +99,10 @@ namespace MoePicture.Views
                 {
                     pageName = ServiceLocator.Current.GetInstance<ViewModels.PictureItemsVM>().Type.ToString();
                 }
-                //find menu item that has the matching tag
+                // find menu item that has the matching tag
                 var menuItem = NavView.MenuItems
-                                         .OfType<NavigationViewItem>()
-                                         .Where(item => item.Content.ToString().ToLower() == pageName)
-                                         .First();
+                                      .OfType<NavigationViewItem>()
+                                      .First(item => item.Content.ToString() == pageName);
                 //select
                 NavView.SelectedItem = menuItem;
             }
@@ -99,7 +117,7 @@ namespace MoePicture.Views
             }
             else
             {
-                var pageTag = ((args.SelectedItem as NavigationViewItem).Content as string).ToLower();
+                var pageTag = ((args.SelectedItem as NavigationViewItem).Content as string);
 
                 switch (pageTag)
                 {
@@ -107,7 +125,7 @@ namespace MoePicture.Views
                     case "help":
                         break;
                     default:
-                        contentFrameBackToShell();
+                        ContentFrameBackToShell();
                         ServiceLocator.Current.GetInstance<ViewModels.PictureItemsVM>().ChangeWebsiteCommand.Execute(pageTag);
                         break;
                 }
@@ -116,7 +134,7 @@ namespace MoePicture.Views
 
         private void QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
         {
-            contentFrameBackToShell();
+            ContentFrameBackToShell();
             string queryText = args.ChosenSuggestion == null ? sender.Text : args.ChosenSuggestion.ToString();
             ServiceLocator.Current.GetInstance<ViewModels.PictureItemsVM>().RearchCommand.Execute(queryText);
         }
@@ -124,14 +142,14 @@ namespace MoePicture.Views
         private async void NavigationViewItem_Tapped(object sender, TappedRoutedEventArgs e)
         {
             // The URI to launch
-            var uriBing = new Uri(@"https://jskyzero.github.io/MoePicture/");
+            var uriBing = new Uri(Services.MoePictureConfig.HelpWebSiteUrl);
 
             // Set the option to show a warning
             var promptOptions = new Windows.System.LauncherOptions();
             promptOptions.TreatAsUntrusted = true;
 
             // Launch the URI
-            var success = await Windows.System.Launcher.LaunchUriAsync(uriBing, promptOptions);
+            await Windows.System.Launcher.LaunchUriAsync(uriBing, promptOptions);
         }
     }
 }

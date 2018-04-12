@@ -57,13 +57,13 @@ namespace MoePicture.UC
             FileSavePicker savePicker = new FileSavePicker();
 
             savePicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
-            savePicker.SuggestedFileName = SelectItem.Name;
+            savePicker.SuggestedFileName = SelectItem.Title;
             savePicker.FileTypeChoices.Add("Picture", new List<string>() { ".jpg", ".png" });
 
             StorageFile file = await savePicker.PickSaveFileAsync();
             if (file != null)
             {
-                await Services.Spider.DownloadPictureFromUriToFile(new Uri(SelectItem.JpegUrl), file);
+                await Services.Spider.DownloadPictureFromUriToFile(new Uri(SelectItem.SourceUrl), file);
             }
         }
 
@@ -73,14 +73,14 @@ namespace MoePicture.UC
             var request = args.Request;
             var SelectItem = (Models.PictureItem)TagsGlass.DataContext;
             // 添加文字描述
-            request.Data.Properties.Title = SelectItem.Name;
+            request.Data.Properties.Title = SelectItem.Title;
             request.Data.Properties.Description = "Moe picture share";
             request.Data.SetText(SelectItem.Tags);
 
             // 添加当前图片
             if (SelectItem.ImageSource != null)
             {
-                StorageFolder folder = await SelectItem.GetStorageFolder(Models.UrlType.sample_url);
+                StorageFolder folder = await SelectItem.GetStorageFolder(Models.UrlType.SampleUrl);
                 var photoFile = await folder.GetFileAsync(SelectItem.FileName);
                 request.Data.SetStorageItems(new List<StorageFile> { photoFile });
             }

@@ -44,7 +44,7 @@ namespace MoePicture.ViewModels
             get => selectPictureItem;
             set
             {
-                value.UrlType = UrlType.jpeg_url;
+                value.UrlType = UrlType.SourceUrl;
                 Set(ref selectPictureItem, value);
                 RaisePropertyChanged(() => SelectPictureTags);
             }
@@ -54,7 +54,7 @@ namespace MoePicture.ViewModels
 
         public PictureItemsVM()
         {
-            Type = WebsiteType.yande;
+            Type = WebsiteType.Yande;
             Tag = string.Empty;
         }
 
@@ -73,10 +73,10 @@ namespace MoePicture.ViewModels
             PictureItems = new PictureItems(Type, Tag);
         }
 
-        public async void SelectItemClick(ItemClickEventArgs e)
+        public async Task SelectItemClick(ItemClickEventArgs e)
         {
             SelectPictureItem = (PictureItem)e.ClickedItem;
-            Tiles.UpdataOneItem(await SelectPictureItem.GetStorageFolder(UrlType.preview_url), SelectPictureItem.FileName);
+            Tiles.UpdataOneItem(await SelectPictureItem.GetStorageFolder(UrlType.PreviewUrl), SelectPictureItem.FileName);
             ServiceLocator.Current.GetInstance<ShellVM>().SwitchSigleCommand.Execute(null);
         }
 

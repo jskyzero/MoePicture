@@ -10,7 +10,8 @@
         x:Name="NavView"
         IsPaneOpen="False"
         SelectionChanged="NavViewSelectionChanged">
-        <NavigationView.MenuItems>
+
+        <!--<NavigationView.MenuItems>
             <NavigationViewItem Content="Yande">
                 <NavigationViewItem.Icon>
                     <FontIcon Glyph="&#xEB9F;" />
@@ -26,7 +27,7 @@
                     <FontIcon Glyph="&#xEB9F;" />
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
-        </NavigationView.MenuItems>
+        </NavigationView.MenuItems>-->
 
         <NavigationView.AutoSuggestBox>
             <AutoSuggestBox

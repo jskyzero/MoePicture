@@ -29,13 +29,13 @@ namespace MoePicture.Services
 
             switch (Type)
             {
-                case WebsiteType.yande:
+                case WebsiteType.Yande:
                     this.tag = tag == "" ? "" : "&tags=" + tag;
                     break;
-                case WebsiteType.konachan:
+                case WebsiteType.Konachan:
                     this.tag = tag == "" ? "" : "&tags=" + tag;
                     break;
-                case WebsiteType.danbooru:
+                case WebsiteType.Danbooru:
                     this.tag = tag == "" ? "" : "&tags=" + tag;
                     break;
                 default:
@@ -66,13 +66,13 @@ namespace MoePicture.Services
 
             switch (Type)
             {
-                case WebsiteType.yande:
+                case WebsiteType.Yande:
                     url = yandeUrl + "&page=" + pageNum.ToString() + tag;
                     break;
-                case WebsiteType.konachan:
+                case WebsiteType.Konachan:
                     url = konachanUrl + "&page=" + pageNum.ToString() + tag;
                     break;
-                case WebsiteType.danbooru:
+                case WebsiteType.Danbooru:
                     url = danbooruUrl + "&page=" + pageNum.ToString() + tag;
                     break;
             }
@@ -86,11 +86,11 @@ namespace MoePicture.Services
         {
             switch (websiteType)
             {
-                case WebsiteType.yande:
-                case WebsiteType.konachan:
+                case WebsiteType.Yande:
+                case WebsiteType.Konachan:
                     Yande(item, node);
                     break;
-                case WebsiteType.danbooru:
+                case WebsiteType.Danbooru:
                     Danbooru(item, node);
                     break;
                 default:
@@ -109,11 +109,11 @@ namespace MoePicture.Services
                 item.Tags = node.Attributes["tags"].Value;
                 item.PreviewUrl = node.Attributes["preview_url"].Value;
                 item.SampleUrl = node.Attributes["sample_url"].Value;
-                item.JpegUrl = node.Attributes["jpeg_url"].Value;
+                item.SourceUrl = node.Attributes["jpeg_url"].Value;
                 item.IsSafe = node.Attributes["rating"].Value == "s";
 
                 // 通过url处理得到两种name
-                item.Name = Spider.GetFileNameFromUrl(item.JpegUrl);
+                item.Title = Spider.GetFileNameFromUrl(item.SourceUrl);
                 item.FileName = Spider.GetFileNameFromUrl(item.PreviewUrl);
 
             }
@@ -134,11 +134,11 @@ namespace MoePicture.Services
                 item.Tags = node["tag-string-general"].InnerText;
                 item.PreviewUrl = node["preview-file-url"].InnerText;
                 item.SampleUrl = node["file-url"].InnerText;
-                item.JpegUrl = node["large-file-url"].InnerText;
+                item.SourceUrl = node["large-file-url"].InnerText;
                 item.IsSafe = node["rating"].InnerText == "s";
 
                 // 通过url处理得到两种name
-                item.Name = Spider.GetFileNameFromUrl(item.JpegUrl);
+                item.Title = Spider.GetFileNameFromUrl(item.SourceUrl);
                 item.FileName = Spider.GetFileNameFromUrl(item.PreviewUrl);
 
             }

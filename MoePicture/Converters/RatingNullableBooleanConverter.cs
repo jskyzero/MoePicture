@@ -8,14 +8,14 @@ namespace MoePicture.Converters
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            var rating = (Models.UserConfig.RatingType)value;
-            return rating == Models.UserConfig.RatingType.all ? (bool?)true : (bool?)false;
+            var rating = (Models.RatingType)value;
+            return rating == Models.RatingType.All ? (bool?)true : (bool?)false;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
         {
             var LoadAll = (bool?)value;
-            return LoadAll == true ? Models.UserConfig.RatingType.all : Models.UserConfig.RatingType.safe;
+            return LoadAll == true ? Models.RatingType.All : Models.RatingType.Safe;
         }
     }
 }

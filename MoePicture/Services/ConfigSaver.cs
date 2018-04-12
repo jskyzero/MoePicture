@@ -83,7 +83,7 @@ namespace MoePicture.Services
 
             return new UserConfig()
             {
-                Rating = UserConfig.RatingType.safe,
+                Rating = RatingType.Safe,
                 SaveFolderlToken = saveFolderlToken,
                 CacheFolderToken = cacheFolderToken
             };
