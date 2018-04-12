@@ -1,4 +1,4 @@
-﻿using Microsoft.Practices.ServiceLocation;
+﻿using CommonServiceLocator;
 using MoePicture.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -80,8 +80,8 @@ namespace MoePicture.UC
             // 添加当前图片
             if (SelectItem.ImageSource != null)
             {
-                StorageFolder folder = ApplicationData.Current.LocalCacheFolder;
-                var photoFile = await (await folder.GetFolderAsync("sample")).GetFileAsync(SelectItem.FileName);
+                StorageFolder folder = await SelectItem.GetStorageFolder(Models.UrlType.sample_url);
+                var photoFile = await folder.GetFileAsync(SelectItem.FileName);
                 request.Data.SetStorageItems(new List<StorageFile> { photoFile });
             }
             DataTransferManager.GetForCurrentView().DataRequested -= OnShareDataRequested;

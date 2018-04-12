@@ -1,4 +1,4 @@
-﻿using Microsoft.Practices.ServiceLocation;
+﻿using CommonServiceLocator;
 using MoePicture.ViewModels;
 using System;
 using System.Collections.Generic;

@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight.Command;
-using Microsoft.Practices.ServiceLocation;
 using MoePicture.Models;
 using Windows.UI.Xaml.Controls;
 using TileUpdate;
@@ -13,6 +12,7 @@ using MoePicture.Converters;
 using Windows.UI.Xaml.Data;
 using Windows.Storage.AccessCache;
 using Windows.Storage;
+using CommonServiceLocator;
 
 namespace MoePicture.ViewModels
 {

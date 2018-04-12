@@ -1,6 +1,6 @@
-﻿using GalaSoft.MvvmLight;
+﻿using CommonServiceLocator;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Threading;
-using Microsoft.Practices.ServiceLocation;
 using MoePicture.Services;
 using System;
 using System.Collections.Generic;
@@ -111,13 +111,13 @@ namespace MoePicture.Models
         {
             try
             {
-                string site = "https://danbooru.donmai.us";
+                //string site = "https://danbooru.donmai.us";
                 // 从节点得到图片信息
                 Id = node["id"].InnerText;
                 Tags = node["tag-string-general"].InnerText;
-                PreviewUrl = site + node["preview-file-url"].InnerText;
-                SampleUrl = site + node["file-url"].InnerText;
-                JpegUrl = site + node["large-file-url"].InnerText;
+                PreviewUrl = node["preview-file-url"].InnerText;
+                SampleUrl = node["file-url"].InnerText;
+                JpegUrl = node["large-file-url"].InnerText;
 
                 // 通过url处理得到两种name
                 Name = Spider.GetFileNameFromUrl(JpegUrl);

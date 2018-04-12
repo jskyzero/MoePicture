@@ -1,5 +1,5 @@
-﻿using GalaSoft.MvvmLight.Threading;
-using Microsoft.Practices.ServiceLocation;
+﻿using CommonServiceLocator;
+using GalaSoft.MvvmLight.Threading;
 using MoePicture.ViewModels;
 using System;
 using System.Collections.Generic;
