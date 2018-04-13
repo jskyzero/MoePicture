@@ -13,52 +13,56 @@
         <Converters:RatingNullableBooleanConverter x:Key="RatingNullableBooleanConverter" />
     </UserControl.Resources>
     <Grid Background="{StaticResource SystemControlAcrylicWindowBrush}" DataContext="{Binding ConfigVM, Source={StaticResource Locator}}">
-        <StackPanel Margin="20" VerticalAlignment="Top">
+        <Grid Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
             <TextBlock
-                HorizontalAlignment="Center"
+                Margin="0,0,0,20"
+                HorizontalAlignment="Left"
                 Style="{StaticResource HeaderTextBlockStyle}"
                 Text="Settings" />
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="auto" />
-                </Grid.ColumnDefinitions>
-                <TextBlock
-                    Grid.Column="0"
-                    Style="{StaticResource BodyTextBlockStyle}"
-                    Text="Show All Pictures" />
+            <StackPanel Grid.Row="1" VerticalAlignment="Top">
+                <TextBlock Style="{StaticResource BodyTextBlockStyle}" Text="Show All Pictures" />
                 <ToggleSwitch
-                    Grid.Column="1"
                     MinWidth="0"
-                    Margin="0"
+                    Margin="0,0,0,20"
                     Padding="0"
-                    HorizontalAlignment="Right"
+                    HorizontalAlignment="Left"
                     IsOn="{Binding Config.Rating, Converter={StaticResource RatingNullableBooleanConverter}, Mode=TwoWay}" />
-            </Grid>
-            <Button
-                Width="200"
-                Margin="5,5,5,5"
-                Click="changeSaveFolderPath"
-                Style="{StaticResource ButtonRevealStyle}">
-                <TextBlock Text="Change Save Path" />
-            </Button>
+                <TextBlock Style="{StaticResource BodyTextBlockStyle}" Text="Picture Item Size" />
+                <Slider
+                    Width="200"
+                    Margin="0,0,0,20"
+                    HorizontalAlignment="Left"
+                    Maximum="300"
+                    Minimum="100"
+                    Value="{Binding ConfigVM.Config.PictureItemSize, Source={StaticResource Locator}, Mode=TwoWay}" />
+                <Button
+                    Width="200"
+                    Margin="5,5,5,5"
+                    Click="changeSaveFolderPath"
+                    Style="{StaticResource ButtonRevealStyle}">
+                    <TextBlock Text="Change Save Path" />
+                </Button>
 
-            <Button
-                Width="200"
-                Margin="5,5,5,5"
-                Click="changeCacheFolderPath"
-                Style="{StaticResource ButtonRevealStyle}">
-                <TextBlock Text="Change Cache Path" />
-            </Button>
+                <Button
+                    Width="200"
+                    Margin="5,5,5,5"
+                    Click="changeCacheFolderPath"
+                    Style="{StaticResource ButtonRevealStyle}">
+                    <TextBlock Text="Change Cache Path" />
+                </Button>
 
-            <Button
-                Width="200"
-                Margin="5,5,5,5"
-                Click="resetAllPath"
-                Style="{StaticResource ButtonRevealStyle}">
-                <TextBlock Text="Reset All Path" />
-            </Button>
-
-        </StackPanel>
+                <Button
+                    Width="200"
+                    Margin="5,5,5,5"
+                    Click="resetAllPath"
+                    Style="{StaticResource ButtonRevealStyle}">
+                    <TextBlock Text="Reset All Path" />
+                </Button>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Page>

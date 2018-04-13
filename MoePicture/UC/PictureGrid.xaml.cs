@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Numerics;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Devices.Input;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -67,21 +68,6 @@ namespace MoePicture.UC
             var rootGrid = sender as Grid;
             var maskBorder = rootGrid.Children[1] as FrameworkElement;
             var img = rootGrid.Children[0] as FrameworkElement;
-            var btn = rootGrid.FindName("DownloadBtn") as Button;
-
-            //var unsplashImage = rootGrid.DataContext as UnsplashImageBase;
-            //if (unsplashImage.DownloadStatus != DownloadStatus.Pending)
-            //{
-            //    btn.Visibility = Visibility.Collapsed;
-            //}
-            //else
-            //{
-            //    btn.Visibility = Visibility.Visible;
-            //}
-            //if (!checkListImageDownloaded(unsplashImage))
-            //{
-            //    btn.Visibility = Visibility.Collapsed;
-            //}
 
             ToggleItemPointAnimation(maskBorder, img, true);
         }

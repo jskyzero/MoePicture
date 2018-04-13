@@ -39,7 +39,7 @@
             ItemContainerStyle="{StaticResource GridViewItemStyle}"
             ItemTemplate="{StaticResource PictureItem}"
             ItemsSource="{Binding PictureItems}"
-            MinItemHeight="180"
-            MinItemWidth="180" />
+            MinItemHeight="{Binding ConfigVM.Config.PictureItemSize, Source={StaticResource Locator}, Mode=OneWay}"
+            MinItemWidth="{Binding ConfigVM.Config.PictureItemSize, Source={StaticResource Locator}, Mode=OneWay}" />
     </Grid>
 </UserControl>

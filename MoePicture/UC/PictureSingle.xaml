@@ -29,23 +29,28 @@
             VerticalAlignment="Bottom"
             Visibility="Collapsed">
             <Grid x:Name="TagsGlass" />
-            <ListView
+            <Grid
                 Padding="20"
                 VerticalAlignment="Bottom"
-                DataContext="{Binding PicturesVM, Source={StaticResource Locator}}"
-                IsItemClickEnabled="True"
-                ItemClick="ListView_ItemClick"
-                ItemsSource="{Binding SelectPictureTags}">
-                <ListView.Header>
-                    <TextBlock Style="{StaticResource SubheaderTextBlockStyle}" Text="{Binding SelectPictureItem.Name}" />
-                </ListView.Header>
-                <DataTemplate>
-                    <TextBlock
-                        Text="{Binding}"
-                        TextTrimming="None"
-                        TextWrapping="NoWrap" />
-                </DataTemplate>
-            </ListView>
+                DataContext="{Binding PicturesVM, Source={StaticResource Locator}}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <TextBlock Style="{StaticResource SubheaderTextBlockStyle}" Text="{Binding SelectPictureItem.Title}" />
+                <GridView
+                    Grid.Row="1"
+                    IsItemClickEnabled="True"
+                    ItemClick="ListView_ItemClick"
+                    ItemsSource="{Binding SelectPictureTags}">
+                    <DataTemplate>
+                        <TextBlock
+                            Text="{Binding}"
+                            TextTrimming="None"
+                            TextWrapping="NoWrap" />
+                    </DataTemplate>
+                </GridView>
+            </Grid>
         </Grid>
 
         <Grid

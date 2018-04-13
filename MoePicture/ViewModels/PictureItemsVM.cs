@@ -4,6 +4,7 @@ using GalaSoft.MvvmLight.Command;
 using MoePicture.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using TileUpdate;
 using Windows.UI.Xaml.Controls;
@@ -50,7 +51,7 @@ namespace MoePicture.ViewModels
         /// <summary> 当前选中对象标签 </summary>
         public List<string> SelectPictureTags
         {
-            get => SelectPictureItem == null ? null : new List<string>((SelectPictureItem.Tags).Split(' '));
+            get => SelectPictureItem == null ? null : (SelectPictureItem.Tags).Split(' ').OrderByDescending(s => s.Length).ToList<string>();
         }
         /// <summary> 当前选中对象 </summary>
         public PictureItem SelectPictureItem

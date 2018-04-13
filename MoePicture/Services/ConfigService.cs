@@ -90,6 +90,7 @@ namespace MoePicture.Services
             return new UserConfig()
             {
                 Rating = RatingType.Safe,
+                PictureItemSize = 180,
                 SaveFolderlToken = saveFolderlToken,
                 CacheFolderToken = cacheFolderToken
             };
