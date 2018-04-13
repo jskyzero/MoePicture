@@ -4,11 +4,16 @@
 ## Overview
 
 ### 04/13版本更新细节
-1. 进一步增加新的图源
+1. 进一步增加新的图源：gelbooru.com 和 safebooru.org
+
 ![](https://jskyzero.github.io/MoePicture/assets/images/18.spring/1.gif)
-2. 自定义主界面图片大小
+
+2. 允许自定义主界面图片大小，同时在大小大于400px时候将会加载大图。
+
 ![](https://jskyzero.github.io/MoePicture/assets/images/18.spring/2.gif)
-3. 异常处理界面
+
+3. 加入了异常处理界面，避免体验极差的闪退。
+
 ![](https://jskyzero.github.io/MoePicture/assets/images/18.spring/3.gif)
 
 ### 02/06版本更新细节
@@ -64,13 +69,20 @@ Download from [Microsoft Store](https://www.microsoft.com/zh-cn/store/p/moepictu
 + [ ] 添加用户收藏
 + [ ] 修改本地数据库储存
 
-## Privacy Policy
+## [Privacy Policy](https://jskyzero.github.io/MoePicture/2018/03/28/privacy_policy.html)
+
+> ENGLISH VERSION
+
+1. We do not collect any type of your information.
+2. Your information will only stored in your local storage.
+3. If you have any question, please send me a email (jskyzero@outlook.com).
+
+> 中文版本
 
 1. 我们不收集任何类型的信息。
 2. 您的信息只会存储在您的本地存储器中。
 3. 如果您有任何问题，可以给我发电子邮件询问 (jskyzero@outlook.com)。
 
-ENGLISH VERSION click [here](https://jskyzero.github.io/MoePicture/2018/03/28/privacy_policy.html)
 
 ## Thanks
 
