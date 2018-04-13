@@ -90,13 +90,13 @@ namespace MoePicture.ViewModels
         private void RefreshPictures()
         {
             PictureItems = new PictureItems(Type, Tag);
+            ServiceLocator.Current.GetInstance<ShellVM>().ShowError = false;
         }
         /// <summary> 点击单个对象 </summary>
         public async Task SelectItemClick(ItemClickEventArgs e)
         {
             SelectPictureItem = (PictureItem)e.ClickedItem;
             Tiles.UpdataOneItem(await SelectPictureItem.GetStorageFolder(UrlType.PreviewUrl), SelectPictureItem.FileName);
-            // ServiceLocator.Current.GetInstance<ShellVM>().ShowSingle = false;
             ServiceLocator.Current.GetInstance<ShellVM>().SwitchSigleCommand.Execute(null);
         }
         /// <summary> 点击标签 </summary>

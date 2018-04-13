@@ -60,31 +60,38 @@ namespace MoePicture.ViewModels
         /// <returns></returns>
         protected override async Task<IList<PictureItem>> LoadMoreItemsOverrideAsync(CancellationToken c, int count)
         {
-
-            string url = website.Url();
-
-            // 先在数据库里查找Uri对应的xml文件，如果没有，从网上获取
-            string str = DB.select(url);
-            if (str == String.Empty)
+            try
             {
-                str = await Services.Spider.GetString(new Uri(url));
-                DB.add(url, str);
+                string url = website.Url();
+
+                // 先在数据库里查找Uri对应的xml文件，如果没有，从网上获取
+                string str = DB.select(url);
+                if (str == String.Empty)
+                {
+                    str = await Services.Spider.GetString(new Uri(url));
+                    DB.add(url, str);
+                }
+
+                var Items = PictureItem.GetPictureItems(website.Type, str, loadAll);
+
+                if (Items.Count > 0)
+                {
+                    OnPropertyChanged("Count");
+                }
+                else
+                {
+                    // 如果xml文件里没有任何图片xml节点，将noMorePicture 设置为 true
+                    // 表示无法得到更多更多图片
+                    noMorePicture = true;
+                }
+
+                return Items;
             }
-
-            var Items = PictureItem.GetPictureItems(website.Type, str, loadAll);
-
-            if (Items.Count > 0)
+            catch
             {
-                OnPropertyChanged("Count");
+                ServiceLocator.Current.GetInstance<ShellVM>().ShowError = true;
+                return PictureItem.GetPictureItems(website.Type, "", loadAll);
             }
-            else
-            {
-                // 如果xml文件里没有任何图片xml节点，将noMorePicture 设置为 true
-                // 表示无法得到更多更多图片
-                noMorePicture = true;
-            }
-
-            return Items;
         }
 
         #endregion Methods

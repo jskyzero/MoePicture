@@ -96,22 +96,30 @@ namespace MoePicture.Models
         public static List<PictureItem> GetPictureItems(WebsiteType type, string xmlString, bool loadAll)
         {
             List<PictureItem> Items = new List<PictureItem>();
-            XmlDocument xml = new XmlDocument();
-            // 加载XML字符数据
-            xml.LoadXml(xmlString);
-
-            // 获取xml文件里面包含图片的xml节点
-            XmlNodeList nodeList = xml.GetElementsByTagName("post");
-            for (int i = 0; i < nodeList.Count; i++)
+            try
             {
-                var item = new PictureItem(type, nodeList[i]);
+                XmlDocument xml = new XmlDocument();
+                // 加载XML字符数据
+                xml.LoadXml(xmlString);
 
-                if ((loadAll || item.IsSafe) && item.IsAllRight)
+                // 获取xml文件里面包含图片的xml节点
+                XmlNodeList nodeList = xml.GetElementsByTagName("post");
+                for (int i = 0; i < nodeList.Count; i++)
                 {
-                    Items.Add(item);
+                    var item = new PictureItem(type, nodeList[i]);
+
+                    if ((loadAll || item.IsSafe) && item.IsAllRight)
+                    {
+                        Items.Add(item);
+                    }
                 }
+                return Items;
             }
-            return Items;
+            catch
+            {
+                return Items;
+            }
+            
         }
 
         #endregion Constructer
@@ -207,7 +215,8 @@ namespace MoePicture.Models
                 }
                 catch
                 {
-                    // Let it go
+                    // show error page
+                    ServiceLocator.Current.GetInstance<ViewModels.ShellVM>().ShowError = true;
                 }
             });
         }

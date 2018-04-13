@@ -12,9 +12,14 @@ namespace MoePicture.ViewModels
     {
         /// <summary> 显示单个页面 </summary>
         private bool showSingle = false;
+        /// <summary> 显示错误页面 </summary>
+        private bool showError = false;
 
         /// <summary> 显示单个页面 </summary>
         public bool ShowSingle { get => showSingle; set { Set(ref showSingle, value); } }
+        /// <summary> 显示错误页面 </summary>
+        public bool ShowError { get => showError; set { Set(ref showError, value); } }
+
 
 
         /// <summary> 切换单个页面 </summary>
@@ -33,5 +38,6 @@ namespace MoePicture.ViewModels
                    }));
             }
         }
+
     }
 }

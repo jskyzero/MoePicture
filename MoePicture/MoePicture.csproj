@@ -115,6 +115,9 @@
     <Compile Include="UC\ButtonBar.xaml.cs">
       <DependentUpon>ButtonBar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UC\ErrorPrompt.xaml.cs">
+      <DependentUpon>ErrorPrompt.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UC\PictureGrid.xaml.cs">
       <DependentUpon>PictureGrid.xaml</DependentUpon>
     </Compile>
@@ -253,6 +256,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
     <Page Include="UC\ButtonBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UC\ErrorPrompt.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
