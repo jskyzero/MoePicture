@@ -3,12 +3,13 @@
 
 ## Overview
 
-![](https://jskyzero.github.io//MoePicture/assets/images/17.winter/1.gif)
-
 ### 04/13版本更新细节
-1. 加入了异常处理界面，避免体验极差的闪退。
-2. 进一步增加新的图源：gelbooru.com 和 safebooru.org
-3. 允许自定义主界面图片大小，同时在大小大于400px时候将会加载大图。
+1. 进一步增加新的图源
+![](https://jskyzero.github.io/MoePicture/assets/images/18.spring/1.gif)
+2. 自定义主界面图片大小
+![](https://jskyzero.github.io/MoePicture/assets/images/18.spring/2.gif)
+3. 异常处理界面
+![](https://jskyzero.github.io/MoePicture/assets/images/18.spring/3.gif)
 
 ### 02/06版本更新细节
 1. 增加了新图源：konachan.com 和 danbooru.donmai.us
