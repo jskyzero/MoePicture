@@ -36,7 +36,7 @@
                     Width="200"
                     Margin="0,0,0,20"
                     HorizontalAlignment="Left"
-                    Maximum="300"
+                    Maximum="600"
                     Minimum="100"
                     Value="{Binding ConfigVM.Config.PictureItemSize, Source={StaticResource Locator}, Mode=TwoWay}" />
                 <Button

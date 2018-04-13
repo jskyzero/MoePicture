@@ -8,14 +8,28 @@ using System.Xml;
 
 namespace MoePicture.Services
 {
+    /// <summary>
+    /// 枚举网站种类
+    /// </summary>
+    public enum WebsiteType { Yande, Konachan, Danbooru, Gelbooru, Safebooru, Behoimi };
+
     public class WebsiteHelper
     {
-        /// <summary> yandeUrl </summary>
-        private static string yandeUrl = "https://yande.re/post.xml?limit=100";
-        /// <summary> konachanUrl </summary>
-        private static string konachanUrl = "http://konachan.com/post.xml?limit=100";
-        /// <summary> danbooruUrl </summary>
-        private static string danbooruUrl = "https://danbooru.donmai.us/posts.xml?limit=100";
+
+        /// <summary> url table </summary>
+        static Dictionary<WebsiteType, string> UrlDict = new Dictionary<WebsiteType, string>
+        {
+            {WebsiteType.Yande, "https://yande.re/post.xml?limit=100"} ,
+            {WebsiteType.Konachan, "http://konachan.com/post.xml?limit=100"},
+            {WebsiteType.Danbooru, "https://danbooru.donmai.us/posts.xml?limit=100"},
+            {WebsiteType.Gelbooru, "https://gelbooru.com//index.php?page=dapi&s=post&q=index&limit=100"},
+            {WebsiteType.Safebooru, "http://safebooru.org/index.php?page=dapi&s=post&q=index&limit=100"},
+            {WebsiteType.Behoimi, "http://safebooru.org/index.php?page=dapi&s=post&q=index&limit=100"},
+        };
+
+        // https://chan.sankakucomplex.com/post/index.xml 403 Forbidden
+        // https://idol.sankakucomplex.com/post/index.xml 403 Forbidden
+
 
         /// <summary> 网站类型 </summary>
         private WebsiteType websiteType;
@@ -39,10 +53,8 @@ namespace MoePicture.Services
 
             switch (Type)
             {
-                case WebsiteType.Yande:
-                case WebsiteType.Konachan:
-                case WebsiteType.Danbooru:
-                    searchTag = tag == "" ? "": "&tags=" + tag;
+                default:
+                    searchTag = tag == "" ? "" : "&tags=" + tag;
                     break;
             }
         }
@@ -57,14 +69,15 @@ namespace MoePicture.Services
             switch (Type)
             {
                 case WebsiteType.Yande:
-                    url = yandeUrl + "&page=" + pageNum.ToString() + searchTag;
-                    break;
                 case WebsiteType.Konachan:
-                    url = konachanUrl + "&page=" + pageNum.ToString() + searchTag;
-                    break;
                 case WebsiteType.Danbooru:
-                    url = danbooruUrl + "&page=" + pageNum.ToString() + searchTag;
+                    url = UrlDict[Type] + "&page=" + pageNum.ToString() + searchTag;
                     break;
+                case WebsiteType.Gelbooru:
+                case WebsiteType.Safebooru:
+                    url = UrlDict[Type] + "&pid=" + pageNum.ToString() + searchTag;
+                    break;
+
             }
 
             pageNum++;
@@ -88,6 +101,12 @@ namespace MoePicture.Services
                     break;
                 case WebsiteType.Danbooru:
                     Danbooru(item, node);
+                    break;
+                case WebsiteType.Gelbooru:
+                    Gelbooru(item, node);
+                    break;
+                case WebsiteType.Safebooru:
+                    Safebooru(item, node);
                     break;
                 default:
                     item.IsAllRight = false;
@@ -116,7 +135,50 @@ namespace MoePicture.Services
             {
                 item.IsAllRight = false;
             }
+        }
 
+        public static void Gelbooru(PictureItem item, XmlNode node)
+        {
+            try
+            {
+                // 从节点得到图片信息
+                item.Id = node.Attributes["id"].Value;
+                item.Tags = node.Attributes["tags"].Value;
+                item.PreviewUrl = node.Attributes["preview_url"].Value;
+                item.SampleUrl = node.Attributes["sample_url"].Value;
+                item.SourceUrl = node.Attributes["file_url"].Value;
+                item.IsSafe = node.Attributes["rating"].Value == "s";
+
+                // 通过url处理得到两种name
+                item.Title = Spider.GetFileNameFromUrl(item.SourceUrl);
+                item.FileName = Spider.GetFileNameFromUrl(item.PreviewUrl);
+            }
+            catch
+            {
+                item.IsAllRight = false;
+            }
+        }
+
+        public static void Safebooru(PictureItem item, XmlNode node)
+        {
+            try
+            {
+                // 从节点得到图片信息
+                item.Id = node.Attributes["tags"].Value;
+                item.Tags = node.Attributes["tags"].Value;
+                item.PreviewUrl = "http:" + node.Attributes["preview_url"].Value;
+                item.SampleUrl = "http:" + node.Attributes["sample_url"].Value;
+                item.SourceUrl = "http:" + node.Attributes["file_url"].Value;
+                item.IsSafe = node.Attributes["rating"].Value == "s";
+
+                // 通过url处理得到两种name
+                item.Title = Spider.GetFileNameFromUrl(item.SourceUrl);
+                item.FileName = Spider.GetFileNameFromUrl(item.PreviewUrl);
+            }
+            catch
+            {
+                item.IsAllRight = false;
+            }
         }
 
         public static void Danbooru(PictureItem item, XmlNode node)

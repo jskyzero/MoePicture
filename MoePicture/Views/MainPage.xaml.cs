@@ -50,7 +50,7 @@ namespace MoePicture.Views
 
         private void InitialNaveMenuItems()
         {
-            foreach (var type in Enum.GetValues(typeof(Models.WebsiteType)))
+            foreach (var type in Enum.GetValues(typeof(Services.WebsiteType)))
             {
                 NavView.MenuItems.Add(new NavigationViewItem()
                 {

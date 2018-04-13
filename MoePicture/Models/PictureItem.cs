@@ -2,6 +2,7 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Threading;
 using MoePicture.Services;
+using MoePicture.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,10 +16,7 @@ using Windows.UI.Xaml.Media.Imaging;
 namespace MoePicture.Models
 {
 
-    /// <summary>
-    /// 枚举网站种类
-    /// </summary>
-    public enum WebsiteType { Yande, Konachan, Danbooru };
+    
 
     /// <summary>
     /// 枚举Uri种类
@@ -81,7 +79,9 @@ namespace MoePicture.Models
         {
             Type = type;
             // 初始化为预览链接
-            UrlType = UrlType.PreviewUrl;
+            UrlType = ServiceLocator.Current.GetInstance<UserConfigVM>().Config.PictureItemSize > 400 ?
+                       UrlType.SampleUrl:
+                       UrlType.PreviewUrl;
             // 用网站特异性的方法来设置具体信息
             WebsiteHelper.SetInfoFromNode(this, node, Type);
         }
@@ -107,8 +107,9 @@ namespace MoePicture.Models
                 for (int i = 0; i < nodeList.Count; i++)
                 {
                     var item = new PictureItem(type, nodeList[i]);
+                    if (!item.IsAllRight) throw new Exception("Parse Error");
 
-                    if ((loadAll || item.IsSafe) && item.IsAllRight)
+                    if (loadAll || item.IsSafe)
                     {
                         Items.Add(item);
                     }
@@ -117,6 +118,8 @@ namespace MoePicture.Models
             }
             catch
             {
+                // show error page
+                ServiceLocator.Current.GetInstance<ViewModels.ShellVM>().ShowError = true;
                 return Items;
             }
             

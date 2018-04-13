@@ -2,6 +2,7 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using MoePicture.Models;
+using MoePicture.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,7 +60,7 @@ namespace MoePicture.ViewModels
             get => selectPictureItem;
             set
             {
-                value.UrlType = UrlType.SourceUrl;
+                value.UrlType = value.UrlType == UrlType.PreviewUrl ? UrlType.SampleUrl : UrlType.SourceUrl;
                 Set(ref selectPictureItem, value);
                 RaisePropertyChanged(() => SelectPictureTags);
             }

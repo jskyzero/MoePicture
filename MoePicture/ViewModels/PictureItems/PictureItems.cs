@@ -1,5 +1,6 @@
 ﻿using CommonServiceLocator;
 using MoePicture.Models;
+using MoePicture.Services;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -68,7 +69,7 @@ namespace MoePicture.ViewModels
                 string str = DB.select(url);
                 if (str == String.Empty)
                 {
-                    str = await Services.Spider.GetString(new Uri(url));
+                    str = await Spider.GetString(new Uri(url));
                     DB.add(url, str);
                 }
 
