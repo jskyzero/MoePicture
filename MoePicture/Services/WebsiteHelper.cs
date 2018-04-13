@@ -11,7 +11,7 @@ namespace MoePicture.Services
     /// <summary>
     /// 枚举网站种类
     /// </summary>
-    public enum WebsiteType { Yande, Konachan, Danbooru, Gelbooru, Safebooru, Behoimi };
+    public enum WebsiteType { Yande, Konachan, Danbooru, Gelbooru, Safebooru};
 
     public class WebsiteHelper
     {
@@ -22,13 +22,13 @@ namespace MoePicture.Services
             {WebsiteType.Yande, "https://yande.re/post.xml?limit=100"} ,
             {WebsiteType.Konachan, "http://konachan.com/post.xml?limit=100"},
             {WebsiteType.Danbooru, "https://danbooru.donmai.us/posts.xml?limit=100"},
-            {WebsiteType.Gelbooru, "https://gelbooru.com//index.php?page=dapi&s=post&q=index&limit=100"},
+            {WebsiteType.Gelbooru, "https://gelbooru.com/index.php?page=dapi&s=post&q=index&limit=100"},
             {WebsiteType.Safebooru, "http://safebooru.org/index.php?page=dapi&s=post&q=index&limit=100"},
-            {WebsiteType.Behoimi, "http://safebooru.org/index.php?page=dapi&s=post&q=index&limit=100"},
         };
 
         // https://chan.sankakucomplex.com/post/index.xml 403 Forbidden
         // https://idol.sankakucomplex.com/post/index.xml 403 Forbidden
+        // Behoimi I don't like add cosplay site
 
 
         /// <summary> 网站类型 </summary>

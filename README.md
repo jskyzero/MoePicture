@@ -3,11 +3,18 @@
 
 ## Overview
 
+![](https://jskyzero.github.io//MoePicture/assets/images/17.winter/1.gif)
+
+### 04/13版本更新细节
+1. 加入了异常处理界面，避免体验极差的闪退。
+2. 进一步增加新的图源：gelbooru.com 和 safebooru.org
+3. 允许自定义主界面图片大小，同时在大小大于400px时候将会加载大图。
+
 ### 02/06版本更新细节
 1. 增加了新图源：konachan.com 和 danbooru.donmai.us
 2. 大幅修改了界面逻辑，整合了导航搜索界面，在搜索栏留空搜索就可以返回Home，修改了设置界面，可以自定义缓存位置。
 
-+ 增加了新图源：konachan.com 和 danbooru.donmai.us
+<!-- + 增加了新图源：konachan.com 和 danbooru.donmai.us
 
 ![](https://jskyzero.github.io//MoePicture/assets/images/17.winter/1.gif)
 
@@ -17,7 +24,7 @@
 
 + 修改了设置界面，可以自定义缓存位置。
 
-![](https://jskyzero.github.io//MoePicture/assets/images/17.winter/3.gif)
+![](https://jskyzero.github.io//MoePicture/assets/images/17.winter/3.gif) -->
 
 <!--
 ### 11/27版本UI界面更新细节
@@ -47,7 +54,7 @@ Download from [Microsoft Store](https://www.microsoft.com/zh-cn/store/p/moepictu
 ## Todo
 
 下个版本更新计划
-+ [ ] 添加设置允许用户自定义行和列的显示数量
++ [x] 添加设置允许用户自定义行和列的显示数量
 + [ ] 瀑布流加载（暂时不明白是指主界面的图片出现还是单张图片出现TAT）
 + [x] 优化下返回逻辑
 
