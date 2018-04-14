@@ -107,9 +107,10 @@ namespace MoePicture.Models
                 for (int i = 0; i < nodeList.Count; i++)
                 {
                     var item = new PictureItem(type, nodeList[i]);
-                    if (!item.IsAllRight) throw new Exception("Parse Error");
+                    //if (!item.IsAllRight)
+                    //    throw new Exception("Parse Error");
 
-                    if (loadAll || item.IsSafe)
+                    if (item.IsAllRight && (loadAll || item.IsSafe))
                     {
                         Items.Add(item);
                     }
