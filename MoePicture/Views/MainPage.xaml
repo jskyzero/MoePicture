@@ -53,7 +53,7 @@
                 Tapped="NavigationViewItem_Tapped" />
         </NavigationView.PaneFooter>
 
-        <Frame x:Name="ContentFrame" Margin="0,-84,0,0">
+        <Frame x:Name="ContentFrame" Margin="0,-48,0,0">
             <Frame.ContentTransitions>
                 <TransitionCollection>
                     <NavigationThemeTransition />
