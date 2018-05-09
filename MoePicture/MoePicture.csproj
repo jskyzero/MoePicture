@@ -249,6 +249,10 @@
       <Project>{672ad9eb-41bc-47dc-b600-6d2a66e3e981}</Project>
       <Name>TileUpdate</Name>
     </ProjectReference>
+    <ProjectReference Include="..\UserActivities\UserActivities.csproj">
+      <Project>{b41fe2f5-2026-46d0-a0b0-c772312e17b8}</Project>
+      <Name>UserActivities</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Page Include="Styles\Style.xaml">

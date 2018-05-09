@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TileUpdate;
 using Windows.UI.Xaml.Controls;
+using UserActivities;
 
 namespace MoePicture.ViewModels
 {
@@ -96,6 +97,8 @@ namespace MoePicture.ViewModels
         /// <summary> 点击单个对象 </summary>
         public async Task SelectItemClick(ItemClickEventArgs e)
         {
+            UserActivitiesHelper helper = new UserActivitiesHelper();
+            helper.GenerateActivityAsync();
             SelectPictureItem = (PictureItem)e.ClickedItem;
             Tiles.UpdataOneItem(await SelectPictureItem.GetStorageFolder(UrlType.PreviewUrl), SelectPictureItem.FileName);
             ServiceLocator.Current.GetInstance<ShellVM>().SwitchSigleCommand.Execute(null);
