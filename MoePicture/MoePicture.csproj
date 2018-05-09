@@ -201,7 +201,9 @@
     <Content Include="Assets\SplashScreen.scale-200.png" />
     <Content Include="Assets\Square150x150Logo.scale-200.png" />
     <Content Include="Assets\Square44x44Logo.scale-200.png" />
-    <Content Include="Services\Tiles.xml" />
+    <Content Include="Services\Tiles.xml">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -233,10 +235,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ArylicMaterial\ArylicMaterial.csproj">
-      <Project>{b68750d8-8876-40e9-a82f-dd376f79a5da}</Project>
-      <Name>ArylicMaterial</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CustomControl\CustomControl.csproj">
       <Project>{a4cc24d4-f383-4e1f-87c6-cd9794b719b3}</Project>
       <Name>CustomControl</Name>
@@ -245,13 +243,13 @@
       <Project>{abb6bc46-85f2-4287-b4ac-3db37a09eb31}</Project>
       <Name>DataBase</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TileUpdate\TileUpdate.csproj">
-      <Project>{672ad9eb-41bc-47dc-b600-6d2a66e3e981}</Project>
-      <Name>TileUpdate</Name>
+    <ProjectReference Include="..\UwpLibs\UwpLibs.csproj">
+      <Project>{57917382-9c60-4ec1-ab93-b7232d460cf3}</Project>
+      <Name>UwpLibs</Name>
     </ProjectReference>
-    <ProjectReference Include="..\UserActivities\UserActivities.csproj">
-      <Project>{b41fe2f5-2026-46d0-a0b0-c772312e17b8}</Project>
-      <Name>UserActivities</Name>
+    <ProjectReference Include="..\UwpUiLibs\UwpUiLibs.csproj">
+      <Project>{deae99d3-32a8-420e-8db9-1557bf9819ae}</Project>
+      <Name>UwpUiLibs</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

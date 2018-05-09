@@ -9,7 +9,7 @@ using Windows.UI.Composition;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Hosting;
 
-namespace ArylicMaterial
+namespace JskyUwpUiLibs
 {
     /// <summary>
     /// 页面特效静态类，用于实现亚克力材质

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.UserActivities;
 
-namespace UserActivities
+namespace JskyUwpLibs
 {
     public sealed class UserActivitiesHelper
     {
@@ -19,7 +19,7 @@ namespace UserActivities
 
             // Populate required properties
             userActivity.VisualElements.DisplayText = "Hello Activities";
-            userActivity.ActivationUri = new Uri("my-app://page2?action=edit");
+            userActivity.ActivationUri = new Uri("moepicture://page2?action=edit");
 
             //Save
             await userActivity.SaveAsync(); //save the new metadata

@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using JskyUwpUiLibs;
 
 // The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -27,7 +28,7 @@ namespace MoePicture.UC
         public PictureSingle()
         {
             this.InitializeComponent();
-            ArylicMaterial.Win2D.initialGlass(TagsGlass);
+            Win2D.initialGlass(TagsGlass);
         }
 
         private void TagsButton_Click(object sender, RoutedEventArgs e)

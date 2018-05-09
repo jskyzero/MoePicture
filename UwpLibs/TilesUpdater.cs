@@ -8,7 +8,7 @@ using Windows.Data.Xml.Dom;
 using Windows.Storage;
 using Windows.UI.Notifications;
 
-namespace TileUpdate
+namespace JskyUwpLibs
 {
     /// <summary>
     /// 用于管理磁贴，进行磁贴的更新
