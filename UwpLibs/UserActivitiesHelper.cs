@@ -14,7 +14,7 @@ namespace JskyUwpLibs
 {
     public sealed class UserActivitiesHelper
     {
-        UserActivitySession _currentActivity;
+        UserActivitySession currentActivity;
 
         public async void GenerateActivityAsync(string websitePage, string title, string content, string backgroundPath)
         {
@@ -34,15 +34,16 @@ namespace JskyUwpLibs
             card.backgroundImage = backgroundPath;
             card.body[0].items[0].text = title;
             card.body[0].items[1].text = content;
+            cardJsonText = JsonConvert.SerializeObject(card);
             // where jsonCardText is a JSON string that represents the card
-            userActivity.VisualElements.Content = AdaptiveCardBuilder.CreateAdaptiveCardFromJson(JsonConvert.SerializeObject(card));
+            userActivity.VisualElements.Content = AdaptiveCardBuilder.CreateAdaptiveCardFromJson(cardJsonText);
 
             //Save
             await userActivity.SaveAsync(); //save the new metadata
 
             // Dispose of any current UserActivitySession, and create a new one.
-            _currentActivity?.Dispose();
-            _currentActivity = userActivity.CreateSession();
+            currentActivity?.Dispose();
+            currentActivity = userActivity.CreateSession();
         }
     }
 }

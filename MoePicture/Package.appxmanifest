@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="3771jskyzero.MoePicture" Publisher="CN=3D7EFF45-ABDE-412B-AB72-90AF27AC9FFB" Version="1.0.6.0" />
+  <Identity Name="3771jskyzero.MoePicture" Publisher="CN=3D7EFF45-ABDE-412B-AB72-90AF27AC9FFB" Version="1.0.7.0" />
   <mp:PhoneIdentity PhoneProductId="8eb6bb2c-ca68-42a4-8eca-313129b66774" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>MoePicture</DisplayName>
