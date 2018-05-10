@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.ApplicationModel;
 using Windows.Data.Xml.Dom;
 using Windows.Storage;
 using Windows.UI.Notifications;
@@ -26,7 +27,8 @@ namespace JskyUwpLibs
         // 读取项目中Tiles.xml文件
         private async void ReadFile()
         {
-            var file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Services/Tiles.xml"));
+            var folder = Package.Current.InstalledLocation;
+            var file = await (await folder.GetFolderAsync("JskyUwpLibs")).GetFileAsync("Tiles.xml");
             XmlData = await FileIO.ReadTextAsync(file);
         }
 

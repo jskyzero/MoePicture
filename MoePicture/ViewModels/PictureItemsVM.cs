@@ -97,9 +97,9 @@ namespace MoePicture.ViewModels
         public async Task SelectItemClick(ItemClickEventArgs e)
         {
             UserActivitiesHelper helper = new UserActivitiesHelper();
-            helper.GenerateActivityAsync();
             SelectPictureItem = (PictureItem)e.ClickedItem;
             Tiles.UpdataOneItem(await SelectPictureItem.GetStorageFolder(UrlType.PreviewUrl), SelectPictureItem.FileName);
+            helper.GenerateActivityAsync(type.ToString(), type.ToString(), SelectPictureItem.Title, SelectPictureItem.SampleUrl);
             ServiceLocator.Current.GetInstance<ShellVM>().SwitchSigleCommand.Execute(null);
         }
         /// <summary> 点击标签 </summary>

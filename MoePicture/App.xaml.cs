@@ -113,24 +113,29 @@ namespace MoePicture
             {
                 // 创建要充当导航上下文的框架，并导航到第一页
                 rootFrame = new Frame();
-
-
-
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
                 // 将框架放在当前窗口中
                 Window.Current.Content = rootFrame;
             }
 
-                if (rootFrame.Content == null)
+            if (rootFrame.Content == null)
+            {
+                rootFrame.Navigate(typeof(Views.MainPage));
+            }
+
+            if (e.Kind == ActivationKind.Protocol)
+            {
+                var uriArgs = e as ProtocolActivatedEventArgs;
+                if (uriArgs != null && uriArgs.Uri.Host != null)
                 {
-                    // 当导航堆栈尚未还原时，导航到第一页，
-                    // 并通过将所需信息作为导航参数传入来配置
-                    // 参数
-                    rootFrame.Navigate(typeof(Views.MainPage));
+                    string websiteType = uriArgs.Uri.Host;
+                    websiteType = websiteType.Substring(0, 1).ToUpper() + websiteType.Substring(1);
+                    ServiceLocator.Current.GetInstance<ViewModels.PictureItemsVM>().ChangeWebsiteCommand.Execute(websiteType);
                 }
-                // 确保当前窗口处于活动状态
-                Window.Current.Activate();
+            }
+            // 确保当前窗口处于活动状态
+            Window.Current.Activate();
             DispatcherHelper.Initialize();
         }
     }
