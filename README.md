@@ -1,6 +1,8 @@
 # MoePicture
 `jskyzero` `UWP`
 
+帮助您更好的获取二次元图片。
+
 ## Overview
 
 ### 04/13版本更新细节
@@ -60,14 +62,19 @@ Download from [Microsoft Store](https://www.microsoft.com/zh-cn/store/p/moepictu
 ## Todo
 
 下个版本更新计划
-+ [x] 添加设置允许用户自定义行和列的显示数量
-+ [ ] 瀑布流加载（暂时不明白是指主界面的图片出现还是单张图片出现TAT）
-+ [x] 优化下返回逻辑
++ [ ] 单张图片界面的返回逻辑的修改。（使用新的返回按钮）
++ [ ] 修改本地数据库部分。（优化缓存逻辑）
++ [ ] 支持旧版系统和环境。（或单独打另一个包，要视个人精力来看）
++ [ ] 单独模块的文档和完善。
+
 
 长期更新计划
-+ [x] 添加其他图源
-+ [ ] 添加用户收藏
-+ [ ] 修改本地数据库储存
++ [x] 更多图源
++ [ ] 提供更多用户友好的系统，比如收藏等
++ [ ] 待定：瀑布流加载（暂时不明白是指主界面的图片出现还是单张图片出现TAT）
+
+
+
 
 ## [Privacy Policy](https://jskyzero.github.io/MoePicture/2018/03/28/privacy_policy.html)
 
