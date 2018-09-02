@@ -11,7 +11,7 @@ namespace MoePicture.Services
     /// <summary>
     /// 枚举网站种类
     /// </summary>
-    public enum WebsiteType { Yande, Konachan, Danbooru, Gelbooru, Safebooru};
+    public enum WebsiteType { Yande, Konachan, Danbooru, Gelbooru };
 
     public class WebsiteHelper
     {
@@ -20,12 +20,13 @@ namespace MoePicture.Services
         static Dictionary<WebsiteType, string> UrlDict = new Dictionary<WebsiteType, string>
         {
             {WebsiteType.Yande, "https://yande.re/post.xml?limit=100"} ,
-            {WebsiteType.Konachan, "http://konachan.com/post.xml?limit=100"},
+            {WebsiteType.Konachan, "http://konachan.net/post.xml?limit=100"},
             {WebsiteType.Danbooru, "https://danbooru.donmai.us/posts.xml?limit=100"},
             {WebsiteType.Gelbooru, "https://gelbooru.com/index.php?page=dapi&s=post&q=index&limit=100"},
-            {WebsiteType.Safebooru, "http://safebooru.org/index.php?page=dapi&s=post&q=index&limit=100"},
+            // {WebsiteType.Safebooru, "http://safebooru.org/index.php?page=dapi&s=post&q=index&limit=100"},
         };
 
+        // Safebooru can't find website now
         // https://chan.sankakucomplex.com/post/index.xml 403 Forbidden
         // https://idol.sankakucomplex.com/post/index.xml 403 Forbidden
         // Behoimi I don't like add cosplay site
@@ -74,7 +75,7 @@ namespace MoePicture.Services
                     url = UrlDict[Type] + "&page=" + pageNum.ToString() + searchTag;
                     break;
                 case WebsiteType.Gelbooru:
-                case WebsiteType.Safebooru:
+                // case WebsiteType.Safebooru:
                     url = UrlDict[Type] + "&pid=" + pageNum.ToString() + searchTag;
                     break;
 
@@ -105,9 +106,9 @@ namespace MoePicture.Services
                 case WebsiteType.Gelbooru:
                     Gelbooru(item, node);
                     break;
-                case WebsiteType.Safebooru:
-                    Safebooru(item, node);
-                    break;
+                // case WebsiteType.Safebooru:
+                //     Safebooru(item, node);
+                //     break;
                 default:
                     item.IsAllRight = false;
                     break;
