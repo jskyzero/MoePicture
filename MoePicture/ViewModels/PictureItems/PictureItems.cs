@@ -37,6 +37,7 @@ namespace MoePicture.ViewModels
             DB = new DataBase.DataBase(GlobalConfig.DataBaseName);
             website = new Services.WebsiteHelper(websiteType, tag);
             loadAll = ServiceLocator.Current.GetInstance<UserConfigVM>().Config.Rating == RatingType.All;
+            //LoadMoreItemsAsync(100);
         }
 
         #endregion Constructer

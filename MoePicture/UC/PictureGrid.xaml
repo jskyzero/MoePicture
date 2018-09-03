@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:CC="using:CustomControl"
     xmlns:Converters="using:MoePicture.Converters"
+    xmlns:Marduk="using:Marduk.Controls"
     xmlns:Models="using:MoePicture.Models"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -15,7 +16,7 @@
 
         <DataTemplate x:Key="PictureItem" x:DataType="Models:PictureItem">
             <Grid Loaded="RootGrid_Loaded" SizeChanged="RootGrid_SizeChanged">
-                <Image Source="{Binding ImageSource}" Stretch="UniformToFill" />
+                <Image Source="{Binding ImageSource}" />
                 <Border x:Name="MaskBorder" Background="#50000000">
                     <TextBlock
                         Foreground="White"
@@ -33,13 +34,23 @@
     </UserControl.Resources>
     <Grid DataContext="{Binding PicturesVM, Source={StaticResource Locator}}">
         <ProgressRing IsActive="{Binding PictureItems.Count, Converter={StaticResource IntBoolConverter}, Mode=OneWay}" Style="{StaticResource MyProgressRingStyle}" />
-        <CC:AdaptiveGridView
+        <!--  <CC:AdaptiveGridView  -->
+        <GridView
             IsItemClickEnabled="True"
             ItemClick="GridView_ItemClick"
             ItemContainerStyle="{StaticResource GridViewItemStyle}"
             ItemTemplate="{StaticResource PictureItem}"
-            ItemsSource="{Binding PictureItems}"
+            ItemsSource="{Binding PictureItems}">
+            <!--<GridView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <CC:PictureItemPane />
+                </ItemsPanelTemplate>
+            </GridView.ItemsPanel>-->
+        </GridView>
+        <!--
             MinItemHeight="{Binding ConfigVM.Config.PictureItemSize, Source={StaticResource Locator}, Mode=OneWay}"
-            MinItemWidth="{Binding ConfigVM.Config.PictureItemSize, Source={StaticResource Locator}, Mode=OneWay}" />
+            MinItemWidth="{Binding ConfigVM.Config.PictureItemSize, Source={StaticResource Locator}, Mode=OneWay}"/>
+        -->
+
     </Grid>
 </UserControl>
