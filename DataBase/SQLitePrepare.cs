@@ -2,7 +2,7 @@
 /// 用于创建“标准化”的数据库链接
 ///
 
-using SQLitePCL;
+using Microsoft.Data.Sqlite;
 
 namespace DataBase
 {
@@ -11,30 +11,19 @@ namespace DataBase
     /// </summary>
     internal class SQLitePrepare
     {
-        public static SQLiteConnection GetConnetion(string dataBaseName)
+        public static void InitialDataBase(string dataBaseName)
         {
-            SQLiteConnection conn = new SQLiteConnection(dataBaseName);
-
-            string sql = @"DROP TABLE IF EXISTS XmlCache";
-            using (var statement = conn.Prepare(sql))
+            using (SqliteConnection db = new SqliteConnection("Filename=" + dataBaseName))
             {
-                statement.Step();
-            }
+                db.Open();
+                string sql = @"DROP TABLE IF EXISTS XmlCache;" +
+                                @"CREATE TABLE XmlCache (Url VARCHAR( 100 ) PRIMARY KEY NOT NULL,
+                                                        Xml VARCHAR( 300000 ));" +
+                                @"PRAGMA foreign_keys = ON;";
 
-            sql = @"CREATE TABLE XmlCache (Url VARCHAR( 100 ) PRIMARY KEY NOT NULL,
-                                           Xml VARCHAR( 300000 ))";
-            using (var statement = conn.Prepare(sql))
-            {
-                statement.Step();
+                SqliteCommand createTable = new SqliteCommand(sql, db);
+                createTable.ExecuteReader();
             }
-
-            // Turn on Foreign Key constraints
-            sql = @"PRAGMA foreign_keys = ON";
-            using (var statement = conn.Prepare(sql))
-            {
-                statement.Step();
-            }
-            return conn;
         }
     }
 }

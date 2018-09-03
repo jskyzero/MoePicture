@@ -11,39 +11,40 @@ namespace DataBase
     /// </summary>
     public sealed class DataBase
     {
-        private SQLiteConnection conn;
+        //private SQLiteConnection conn;
 
         public DataBase(string dataBaseName)
         {
-            conn = SQLitePrepare.GetConnetion(dataBaseName);
+            SQLitePrepare.InitialDataBase(dataBaseName);
+            //conn = SQLitePrepare.GetConnetion(dataBaseName);
         }
 
         // 通过url查找对应的xml字符串
         public string select(string url)
         {
-            string sql = @"SELECT * FROM XmlCache WHERE Url = ?";
-            using (var statement = conn.Prepare(sql))
-            {
-                statement.Bind(1, url);
-                if (statement.Step() == SQLiteResult.ROW)
-                {
-                    return (string)statement[1];
-                }
-            }
+            //string sql = @"SELECT * FROM XmlCache WHERE Url = ?";
+            //using (var statement = conn.Prepare(sql))
+            //{
+            //    statement.Bind(1, url);
+            //    if (statement.Step() == SQLiteResult.ROW)
+            //    {
+            //        return (string)statement[1];
+            //    }
+            //}
             return string.Empty;
         }
 
         // 添加新项，url对应xml
         public void add(string url, string xml)
         {
-            string sql = @"INSERT INTO XmlCache (Url, Xml)
-                                       Values (?, ?)";
-            using (var statement = conn.Prepare(sql))
-            {
-                statement.Bind(1, url);
-                statement.Bind(2, xml);
-                statement.Step();
-            }
+            //string sql = @"INSERT INTO XmlCache (Url, Xml)
+            //                           Values (?, ?)";
+            //using (var statement = conn.Prepare(sql))
+            //{
+            //    statement.Bind(1, url);
+            //    statement.Bind(2, xml);
+            //    statement.Step();
+            //}
         }
     }
 }

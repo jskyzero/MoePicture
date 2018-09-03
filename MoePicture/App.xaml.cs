@@ -37,7 +37,8 @@ namespace MoePicture
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
-            AppCenter.Start("92198d92-999c-4dc1-a02e-d5c0bf73292f", typeof(Analytics));
+            // anyway, do not collect info from user
+            // AppCenter.Start("92198d92-999c-4dc1-a02e-d5c0bf73292f", typeof(Analytics));
         }
 
         /// <summary>
