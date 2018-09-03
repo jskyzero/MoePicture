@@ -37,7 +37,7 @@ namespace CustomControl
             double offsetY = 0;
             foreach (var item in Children)
             {
-                item.Arrange(new Rect(0, offsetY, item.DesiredSize.Width, 200));
+                item.Arrange(new Rect(0, offsetY, item.DesiredSize.Width, 100));
                 offsetY += item.DesiredSize.Height;
             }
             return finalSize;

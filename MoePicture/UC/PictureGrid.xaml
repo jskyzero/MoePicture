@@ -16,7 +16,7 @@
 
         <DataTemplate x:Key="PictureItem" x:DataType="Models:PictureItem">
             <Grid Loaded="RootGrid_Loaded" SizeChanged="RootGrid_SizeChanged">
-                <Image Source="{Binding ImageSource}" />
+                <Image Source="{Binding ImageSource}" Stretch="UniformToFill" />
                 <Border x:Name="MaskBorder" Background="#50000000">
                     <TextBlock
                         Foreground="White"
@@ -34,23 +34,13 @@
     </UserControl.Resources>
     <Grid DataContext="{Binding PicturesVM, Source={StaticResource Locator}}">
         <ProgressRing IsActive="{Binding PictureItems.Count, Converter={StaticResource IntBoolConverter}, Mode=OneWay}" Style="{StaticResource MyProgressRingStyle}" />
-        <!--  <CC:AdaptiveGridView  -->
-        <GridView
+        <CC:AdaptiveGridView
             IsItemClickEnabled="True"
             ItemClick="GridView_ItemClick"
             ItemContainerStyle="{StaticResource GridViewItemStyle}"
             ItemTemplate="{StaticResource PictureItem}"
-            ItemsSource="{Binding PictureItems}">
-            <!--<GridView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <CC:PictureItemPane />
-                </ItemsPanelTemplate>
-            </GridView.ItemsPanel>-->
-        </GridView>
-        <!--
+            ItemsSource="{Binding PictureItems}"
             MinItemHeight="{Binding ConfigVM.Config.PictureItemSize, Source={StaticResource Locator}, Mode=OneWay}"
-            MinItemWidth="{Binding ConfigVM.Config.PictureItemSize, Source={StaticResource Locator}, Mode=OneWay}"/>
-        -->
-
+            MinItemWidth="{Binding ConfigVM.Config.PictureItemSize, Source={StaticResource Locator}, Mode=OneWay}" />
     </Grid>
 </UserControl>

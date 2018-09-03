@@ -27,6 +27,7 @@ namespace MoePicture.UC
     public sealed partial class PictureGrid : UserControl
     {
         private Compositor compositor;
+        private int itemIndex;
 
         public PictureGrid()
         {
@@ -70,6 +71,11 @@ namespace MoePicture.UC
             var img = rootGrid.Children[0] as FrameworkElement;
 
             ToggleItemPointAnimation(maskBorder, img, true);
+        }
+
+        // TODO
+        private void CheckLoadMore(object sender, PointerRoutedEventArgs e)
+        {
         }
 
         private void ToggleItemPointAnimation(FrameworkElement mask, FrameworkElement img, bool show)
