@@ -1,17 +1,19 @@
-﻿using SQLitePCL;
+﻿///
+/// 用于创建“标准化”的数据库链接
+///
+
+using SQLitePCL;
 
 namespace DataBase
 {
     /// <summary>
     /// 数据库静态基类，用于创建数据库，进行链接
     /// </summary>
-    internal static class SQLitePrepare
+    internal class SQLitePrepare
     {
-        public static SQLiteConnection conn;
-
-        public static SQLiteConnection GetConnetion()
+        public static SQLiteConnection GetConnetion(string dataBaseName)
         {
-            conn = new SQLiteConnection("xml.db");
+            SQLiteConnection conn = new SQLiteConnection(dataBaseName);
 
             string sql = @"DROP TABLE IF EXISTS XmlCache";
             using (var statement = conn.Prepare(sql))

@@ -19,9 +19,9 @@ namespace MoePicture.Services
         {
             UserConfig Config;
             // 如果之前有json文件储存记录，读取json文件并反序列化，否则新建一个默认的实例
-            if (ApplicationData.Current.LocalSettings.Values.ContainsKey(MoePictureConfig.ConfigKey))
+            if (ApplicationData.Current.LocalSettings.Values.ContainsKey(GlobalConfig.ConfigKey))
             {
-                var jsonStr = ApplicationData.Current.RoamingSettings.Values[MoePictureConfig.ConfigKey].ToString();
+                var jsonStr = ApplicationData.Current.RoamingSettings.Values[GlobalConfig.ConfigKey].ToString();
                 try
                 {
                     Config = JsonConvert.DeserializeObject<UserConfig>(jsonStr);
@@ -75,7 +75,7 @@ namespace MoePicture.Services
         /// </summary>
         public void SaveConfig(UserConfig Config)
         {
-            ApplicationData.Current.RoamingSettings.Values[MoePictureConfig.ConfigKey] = JsonConvert.SerializeObject(Config);
+            ApplicationData.Current.RoamingSettings.Values[GlobalConfig.ConfigKey] = JsonConvert.SerializeObject(Config);
         }
 
         /// <summary>

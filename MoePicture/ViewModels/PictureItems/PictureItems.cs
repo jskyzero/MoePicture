@@ -34,7 +34,7 @@ namespace MoePicture.ViewModels
         public PictureItems(WebsiteType websiteType, string tag = "")
         {
             noMorePicture = false;
-            DB = new DataBase.DataBase();
+            DB = new DataBase.DataBase(GlobalConfig.DataBaseName);
             website = new Services.WebsiteHelper(websiteType, tag);
             loadAll = ServiceLocator.Current.GetInstance<UserConfigVM>().Config.Rating == RatingType.All;
         }

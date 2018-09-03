@@ -143,13 +143,13 @@ namespace MoePicture.Models
             {
                 folderToken = ServiceLocator.Current.GetInstance<ViewModels.UserConfigVM>().Config.CacheFolderToken;
                 folder = await StorageApplicationPermissions.FutureAccessList.GetFolderAsync(folderToken);
-                folder = await folder.CreateFolderAsync(MoePictureConfig.CacheFolderName, CreationCollisionOption.OpenIfExists);
+                folder = await folder.CreateFolderAsync(GlobalConfig.CacheFolderName, CreationCollisionOption.OpenIfExists);
             }
             else
             {
                 folderToken = ServiceLocator.Current.GetInstance<ViewModels.UserConfigVM>().Config.SaveFolderlToken;
                 folder = await StorageApplicationPermissions.FutureAccessList.GetFolderAsync(folderToken);
-                folder = await folder.CreateFolderAsync(MoePictureConfig.SampleFolderName, CreationCollisionOption.OpenIfExists);
+                folder = await folder.CreateFolderAsync(GlobalConfig.SampleFolderName, CreationCollisionOption.OpenIfExists);
             }
             // save to each sub folder
             folder = await folder.CreateFolderAsync(Type.ToString(), CreationCollisionOption.OpenIfExists);

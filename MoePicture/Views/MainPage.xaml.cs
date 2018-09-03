@@ -142,7 +142,7 @@ namespace MoePicture.Views
         private async void NavigationViewItem_Tapped(object sender, TappedRoutedEventArgs e)
         {
             // The URI to launch
-            var uriBing = new Uri(Services.MoePictureConfig.HelpWebSiteUrl);
+            var uriBing = new Uri(Services.GlobalConfig.HelpWebSiteUrl);
 
             // Set the option to show a warning
             var promptOptions = new Windows.System.LauncherOptions();

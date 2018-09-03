@@ -1,4 +1,8 @@
-﻿using SQLitePCL;
+﻿///
+/// 封装基本数据库操作，方便上层使用
+///
+
+using SQLitePCL;
 
 namespace DataBase
 {
@@ -9,9 +13,9 @@ namespace DataBase
     {
         private SQLiteConnection conn;
 
-        public DataBase()
+        public DataBase(string dataBaseName)
         {
-            conn = SQLitePrepare.GetConnetion();
+            conn = SQLitePrepare.GetConnetion(dataBaseName);
         }
 
         // 通过url查找对应的xml字符串
