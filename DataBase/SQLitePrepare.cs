@@ -16,10 +16,10 @@ namespace DataBase
             using (SqliteConnection db = new SqliteConnection("Filename=" + dataBaseName))
             {
                 db.Open();
-                string sql = @"DROP TABLE IF EXISTS XmlCache;" +
-                                @"CREATE TABLE XmlCache (Url VARCHAR( 100 ) PRIMARY KEY NOT NULL,
-                                                        Xml VARCHAR( 300000 ));" +
-                                @"PRAGMA foreign_keys = ON;";
+                string sql = @"DROP TABLE IF EXISTS XmlCache;
+                               CREATE TABLE XmlCache (Url VARCHAR( 100 ) PRIMARY KEY NOT NULL,
+                                                      Xml VARCHAR( 300000 ));
+                               PRAGMA foreign_keys = ON;";
 
                 SqliteCommand createTable = new SqliteCommand(sql, db);
                 createTable.ExecuteReader();
