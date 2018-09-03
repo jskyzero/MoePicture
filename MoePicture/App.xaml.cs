@@ -17,6 +17,10 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
 
 namespace MoePicture
 {
@@ -33,6 +37,7 @@ namespace MoePicture
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            AppCenter.Start("92198d92-999c-4dc1-a02e-d5c0bf73292f", typeof(Analytics));
         }
 
         /// <summary>
