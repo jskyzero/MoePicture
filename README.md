@@ -59,47 +59,15 @@
 
 Download from [Microsoft Store](https://www.microsoft.com/zh-cn/store/p/moepicture/9n7qlfkl7zrh?rtc=1)
 
-## Todo
 
-下个版本更新计划
-+ [ ] 单张图片界面的返回逻辑的修改。（使用新的返回按钮）
-+ [ ] 修改本地数据库部分。（优化缓存逻辑）
-+ [ ] 支持旧版系统和环境。（或单独打另一个包，要视个人精力来看）
-+ [ ] 单独模块的文档和完善。
+## About / 关于
 
-
-长期更新计划
-+ [x] 更多图源
-+ [ ] 提供更多用户友好的系统，比如收藏等
-+ [ ] 待定：瀑布流加载（暂时不明白是指主界面的图片出现还是单张图片出现TAT）
++ [Todo / 进度板](https://github.com/jskyzero/MoePicture/projects/1)
++ [Privacy Policy / 隐私政策](https://jskyzero.github.io/MoePicture/2018/03/28/privacy_policy.html)
++ [Thanks / 致谢](https://jskyzero.github.io/MoePicture/2017/06/18/thanks.html)
 
 
-
-
-## [Privacy Policy](https://jskyzero.github.io/MoePicture/2018/03/28/privacy_policy.html)
-
-> ENGLISH VERSION
-
-1. We do not collect any type of your information.
-2. Your information will only stored in your local storage.
-3. If you have any question, please send me a email (jskyzero@outlook.com).
-
-> 中文版本
-
-1. 我们不收集任何类型的信息。
-2. 您的信息只会存储在您的本地存储器中。
-3. 如果您有任何问题，可以给我发电子邮件询问 (jskyzero@outlook.com)。
-
-
-## Thanks
-
-> MoePicture-Yande 06/18日致谢
->
-> 感谢Mesekovic，M妹使得本项目有了完成的可能性。
->
-> 感谢Microsoft DOCS，感谢 StackOverFlow，感谢JuniperPhoton’s MyerSplashUWP
-
-## Reference
+## Reference / 参考
 
 + [MoePicture UWP Official](https://jskyzero.github.io/MoePicture/)
 + [yande.re API 介绍](https://jskyzero.github.io/MoePicture/2017/05/12/API.html)
