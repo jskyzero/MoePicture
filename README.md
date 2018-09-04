@@ -1,9 +1,9 @@
 # MoePicture
-`jskyzero` `UWP`
-
-帮助您更好的获取二次元图片。
+[![Build Status](https://jskyzero.visualstudio.com/MoePicture/_apis/build/status/MoePicture-UWP-CI)](https://jskyzero.visualstudio.com/MoePicture/_build/latest?definitionId=1) [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/Sushiscript/sushiscrip/issues) [![HitCount](http://hits.dwyl.io/jskyzero/MoePicture.svg)](http://hits.dwyl.io/jskyzero/MoePicture)
 
 ## Overview
+
+帮助您更好的获取二次元图片。
 
 ### 04/13版本更新细节
 1. 进一步增加新的图源：gelbooru.com 和 safebooru.org
