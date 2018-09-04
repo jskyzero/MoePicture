@@ -8,27 +8,11 @@
     mc:Ignorable="d">
     <NavigationView
         x:Name="NavView"
+        CompactModeThresholdWidth="720"
         ExpandedModeThresholdWidth="1480"
+        IsBackButtonVisible="Collapsed"
+        IsBackEnabled="False"
         SelectionChanged="NavViewSelectionChanged">
-
-        <!--<NavigationView.MenuItems>
-            <NavigationViewItem Content="Yande">
-                <NavigationViewItem.Icon>
-                    <FontIcon Glyph="&#xEB9F;" />
-                </NavigationViewItem.Icon>
-            </NavigationViewItem>
-            <NavigationViewItem Content="Konachan">
-                <NavigationViewItem.Icon>
-                    <FontIcon Glyph="&#xEB9F;" />
-                </NavigationViewItem.Icon>
-            </NavigationViewItem>
-            <NavigationViewItem Content="Danbooru">
-                <NavigationViewItem.Icon>
-                    <FontIcon Glyph="&#xEB9F;" />
-                </NavigationViewItem.Icon>
-            </NavigationViewItem>
-        </NavigationView.MenuItems>-->
-
         <NavigationView.AutoSuggestBox>
             <AutoSuggestBox
                 x:Name="ASB"
@@ -65,6 +49,7 @@
             </Frame.ContentTransitions>
         </Frame>
     </NavigationView>
+    <!--  自动打开侧边栏  -->
     <VisualStateManager.VisualStateGroups>
         <VisualStateGroup>
             <VisualState>

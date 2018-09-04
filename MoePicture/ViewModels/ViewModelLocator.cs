@@ -23,7 +23,7 @@ namespace MoePicture.ViewModels
         //public static string ShellKey => shellKey;
 
         public UserConfigVM ConfigVM => ServiceLocator.Current.GetInstance<UserConfigVM>();
-        public ShellVM MainVM => ServiceLocator.Current.GetInstance<ShellVM>();
+        public ShellVM ShellVM => ServiceLocator.Current.GetInstance<ShellVM>();
         public PictureItemsVM PicturesVM => ServiceLocator.Current.GetInstance<PictureItemsVM>();
 
         static ViewModelLocator()

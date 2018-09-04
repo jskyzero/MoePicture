@@ -29,23 +29,13 @@ namespace MoePicture.Views
         public MainPage()
         {
             this.InitializeComponent();
+            // 主界面导航到Views.Shell
             ContentFrame.Navigate(typeof(Shell));
+            // 初始化导航项
             InitialNaveMenuItems();
+            // 更新到当前选中的导航项
             ContentFrameBackToShell();
-            Windows.UI.Core.SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
-            ContentFrame.Navigated += (s, a) =>
-            {
-                if (ContentFrame.CanGoBack)
-                {
-                    // Setting this visible is ignored on Mobile and when in tablet mode!
-                    Windows.UI.Core.SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = Windows.UI.Core.AppViewBackButtonVisibility.Visible;
-                }
-                else
-                {
-                    Windows.UI.Core.SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = Windows.UI.Core.AppViewBackButtonVisibility.Collapsed;
-                }
-            };
-
+            UpdateNavViewSelect();
         }
 
         private void InitialNaveMenuItems()
@@ -63,26 +53,14 @@ namespace MoePicture.Views
             }
         }
 
-        private void OnBackRequested(object sender, Windows.UI.Core.BackRequestedEventArgs e)
-        {
-            // Navigate back if possible, and if the event has not already been handled.
-            if (ContentFrame.CanGoBack && e.Handled == false)
-            {
-                ContentFrame.GoBack();
-                e.Handled = true;
-            }
-
-            UpdateNavViewSelect();
-        }
 
         private void ContentFrameBackToShell()
         {
-            // Navigate back if possible, and if the event has not already been handled.
+            // 退到最上层
             while (ContentFrame.CanGoBack)
             {
                 ContentFrame.GoBack();
             }
-            UpdateNavViewSelect();
         }
 
         private void UpdateNavViewSelect()

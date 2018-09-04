@@ -130,6 +130,9 @@ namespace MoePicture
                 rootFrame.Navigate(typeof(Views.MainPage));
             }
 
+            // 时间线支持
+            // 从上次停止的地方继续
+
             if (e.Kind == ActivationKind.Protocol)
             {
                 var uriArgs = e as ProtocolActivatedEventArgs;

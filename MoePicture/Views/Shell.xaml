@@ -10,7 +10,7 @@
     xmlns:local="using:MoePicture.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:media="using:Windows.UI.Xaml.Media"
-    DataContext="{Binding MainVM, Source={StaticResource Locator}}"
+    DataContext="{Binding ShellVM, Source={StaticResource Locator}}"
     mc:Ignorable="d">
 
     <Page.Resources>
