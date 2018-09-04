@@ -1,0 +1,13 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MoePicture.Styles">
+
+    <SolidColorBrush x:Key="MyColor0" Color="#FFFFFFFF" />
+    <SolidColorBrush x:Key="MyColor1" Color="#FFF2F2F2" />
+    <SolidColorBrush x:Key="MyColor2" Color="#FFE6E6E6" />
+    <SolidColorBrush x:Key="MyColor3" Color="#FFCCCCCC" />
+    <SolidColorBrush x:Key="MyColor4" Color="#66000000" />
+    <SolidColorBrush x:Key="MyColor5" Color="#CC000000" />
+    <SolidColorBrush x:Key="MyColor6" Color="#FF000000" />
+</ResourceDictionary>

@@ -6,15 +6,15 @@
     xmlns:vm="using:MoePicture.ViewModels"
     RequestedTheme="Light">
 
-  <Application.Resources>
-    <ResourceDictionary>
-      <!--Global View Model Locator-->
-      <vm:ViewModelLocator x:Key="Locator" />
+    <Application.Resources>
+        <ResourceDictionary>
+            <!--  在全局作用域引入VM Locator  -->
+            <vm:ViewModelLocator x:Key="Locator" />
 
-      <ResourceDictionary.MergedDictionaries>
-        <!--Add My Own Styles-->
-        <ResourceDictionary Source="./Styles/Style.xaml" />
-      </ResourceDictionary.MergedDictionaries>
-    </ResourceDictionary>
-  </Application.Resources>
+            <ResourceDictionary.MergedDictionaries>
+                <!--  在全局作用域引入全部样式  -->
+                <ResourceDictionary Source="./Styles/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
 </Application>
