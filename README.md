@@ -22,8 +22,8 @@ Help you to get moe pictures more easily / 帮助您更好的获取二次元图�
 
 ## Install / 安装
 
-+ [(Recommend / 推荐): Microsoft Store / 微软商店](https://www.microsoft.com/store/apps/9N7QLFKL7ZRH)
-+ [(Optional / 可选): Release / 发布](https://github.com/jskyzero/MoePicture/releases)
++ [(Recommend): Microsoft Store / (推荐): 微软商店](https://www.microsoft.com/store/apps/9N7QLFKL7ZRH)
++ [(Optional): Release / (可选): 发布](https://github.com/jskyzero/MoePicture/releases)
 
 
 ## About / 关于
@@ -32,10 +32,9 @@ Help you to get moe pictures more easily / 帮助您更好的获取二次元图�
 + [Todo / 进度板](https://github.com/jskyzero/MoePicture/projects/1)
 + [Privacy Policy / 隐私政策](https://jskyzero.github.io/MoePicture/2018/03/28/privacy_policy.html)
 + [Thanks / 致谢](https://jskyzero.github.io/MoePicture/2017/06/18/thanks.html)
-
-Recommend read wiki / 推荐您阅读百科
++ Recommend read wiki / 推荐您阅读百科
 
 ## Reference / 参考
 
-+ [MoePicture网站](https://jskyzero.github.io/MoePicture/)
++ [MoePicture 网站](https://jskyzero.github.io/MoePicture/)
 + [yande.re API 介绍](https://jskyzero.github.io/MoePicture/2017/05/12/API.html)
