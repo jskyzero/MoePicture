@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="TestApp.MainPage"
+    x:Class="TestApp.LogPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:TestApp"
@@ -9,6 +9,11 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <Button Click="Button_Click"></Button>
+        <StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock>Memory Usage:</TextBlock>
+                <TextBlock x:Name="Text" Text="Value"></TextBlock>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Page>

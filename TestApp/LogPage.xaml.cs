@@ -12,41 +12,21 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using Windows.ApplicationModel.Core;
-using Windows.UI.Core;
-using Windows.UI.ViewManagement;
+using Windows.System;
 
-
-// https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x804 上介绍了“空白页”项模板
+// https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
 namespace TestApp
 {
     /// <summary>
     /// 可用于自身或导航至 Frame 内部的空白页。
     /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class LogPage : Page
     {
-        public MainPage()
+        public LogPage()
         {
             this.InitializeComponent();
             DispatcherTimerSetup();
-        }
-
-        private async void Button_Click(object sender, RoutedEventArgs e)
-        {
-            CoreApplicationView newView = CoreApplication.CreateNewView();
-            int newViewId = 0;
-            await newView.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-            {
-                Frame frame = new Frame();
-                frame.Navigate(typeof(LogPage), null);
-                Window.Current.Content = frame;
-                // You have to activate the window in order to show it later.
-                Window.Current.Activate();
-
-                newViewId = ApplicationView.GetForCurrentView().Id;
-            });
-            bool viewShown = await ApplicationViewSwitcher.TryShowAsStandaloneAsync(newViewId);
         }
 
         void DispatcherTimerSetup()
@@ -67,7 +47,14 @@ namespace TestApp
         void dispatcherTimer_Tick(object sender, object e)
         {
             DateTimeOffset time = DateTimeOffset.Now;
-            RandomMemoryUse();
+            //RandomMemoryUse();
+            UpdateValue();
+        }
+
+        void UpdateValue()
+        {
+            var value = MemoryManager.AppMemoryUsage / 1_000_000;
+            Text.Text = value.ToString();
         }
     }
 }
