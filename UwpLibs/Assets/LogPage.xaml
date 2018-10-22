@@ -1,8 +1,8 @@
 ﻿<Page
-    x:Class="JskyUwpLibs.LogPage"
+    x:Class="JskyUwpLibs.Assets.LogPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:JskyUwpLibs"
+    xmlns:local="using:JskyUwpLibs.Assets"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
@@ -11,8 +11,9 @@
     <Grid>
         <StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock>Memory Usage:</TextBlock>
+                <TextBlock Text="Memory Usage: "></TextBlock>
                 <TextBlock x:Name="Text" Text="Value"></TextBlock>
+                <TextBlock Text=" MB"></TextBlock>
             </StackPanel>
         </StackPanel>
     </Grid>

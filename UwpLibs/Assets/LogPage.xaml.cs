@@ -13,48 +13,74 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.System;
+using Windows.UI.ViewManagement;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
-namespace JskyUwpLibs
+namespace JskyUwpLibs.Assets
 {
     /// <summary>
     /// 可用于自身或导航至 Frame 内部的空白页。
     /// </summary>
     public sealed partial class LogPage : Page
     {
+
+        /// <summary>
+        /// 保存更新间隔
+        /// </summary>
+        private int? seconds = 1;
+
+
         public LogPage()
         {
             this.InitializeComponent();
-            DispatcherTimerSetup();
+            //this.Loaded += Page_Loaded;
+            UpdateValue();  // 先更新次数据
+
+            DispatcherTimerSetupAndStart();
+
+
         }
 
-        void DispatcherTimerSetup()
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            ApplicationView.GetForCurrentView().TryResizeView(new Size(900, 600));
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            seconds = e.Parameter as int?;
+        }
+
+        /// <summary>
+        /// 定时器初始化与开始
+        /// </summary>
+        void DispatcherTimerSetupAndStart()
         {
             DispatcherTimer dispatcherTimer;
             dispatcherTimer = new DispatcherTimer();
-            dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+            // 设置间隔
+            dispatcherTimer.Interval = new TimeSpan(0, 0, seconds ?? 1);
+            // 挂载更新函数
             dispatcherTimer.Tick += dispatcherTimer_Tick;
+            // 开始定时器
             dispatcherTimer.Start();
         }
 
-        void RandomMemoryUse()
-        {
-            var size = (new Random((int)DateTimeOffset.Now.ToUnixTimeSeconds())).Next(1_000_000, 10_000_000);
-            var array = new List<int>(size) { 0 };
-        }
 
         void dispatcherTimer_Tick(object sender, object e)
         {
-            DateTimeOffset time = DateTimeOffset.Now;
-            //RandomMemoryUse();
             UpdateValue();
         }
 
+        /// <summary>
+        /// 更新界面数据
+        /// </summary>
         void UpdateValue()
         {
             var value = MemoryManager.AppMemoryUsage / 1_000_000;
             Text.Text = value.ToString();
         }
     }
+
 }

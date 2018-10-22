@@ -35,7 +35,7 @@ namespace TestApp
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
             var logWindows = new JskyUwpLibs.LogWindows();
-            await logWindows.GetUriContentAsync("123");
+            await logWindows.CreateLogWindowsAsync(2);
         }
 
         void DispatcherTimerSetup()

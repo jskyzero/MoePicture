@@ -12,31 +12,36 @@ using Windows.UI.Xaml.Controls;
 
 namespace JskyUwpLibs
 {
-    public sealed class LogWindows 
+    public sealed class LogWindows
     {
 
-        public IAsyncOperation<string> GetUriContentAsync(string uri)
+        /// <summary>
+        /// 创建log窗口
+        /// </summary>
+        /// <param name="seconds">更新间隔（秒）</param>
+        /// <returns>是否创建成功</returns>
+        public IAsyncOperation<string> CreateLogWindowsAsync(int seconds)
         {
-            return this.GetUriContentAsynHelper(uri).AsAsyncOperation();
+            return CreateLogWindowsAsyncHelper(seconds).AsAsyncOperation();
         }
 
-        private async Task<string> GetUriContentAsynHelper(string uri)
+        private async Task<string> CreateLogWindowsAsyncHelper(int seconds)
         {
             CoreApplicationView newView = CoreApplication.CreateNewView();
             int newViewId = 0;
             await newView.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
                 Frame frame = new Frame();
-                frame.Navigate(typeof(LogPage), null);
+                frame.Navigate(typeof(Assets.LogPage), seconds);
                 Window.Current.Content = frame;
-                // You have to activate the window in order to show it later.
+                ApplicationView.GetForCurrentView().Title = "Log Windows";
+                // why this will change both two windows size ...
+                //ApplicationView.GetForCurrentView().TryResizeView(new Size { Width = 600, Height = 600 });
                 Window.Current.Activate();
-
                 newViewId = ApplicationView.GetForCurrentView().Id;
             });
-            await ApplicationViewSwitcher.TryShowAsStandaloneAsync(newViewId);
-            return "123";
-        }
 
+            return (await ApplicationViewSwitcher.TryShowAsStandaloneAsync(newViewId)).ToString();
+        }
     }
 }

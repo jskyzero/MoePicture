@@ -107,7 +107,7 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="LogPage.xaml.cs">
+    <Compile Include="Assets\LogPage.xaml.cs">
       <DependentUpon>LogPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="LogWindows.cs" />
@@ -130,9 +130,9 @@
     <Content Include="Tiles.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="LogPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Assets\LogPage.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
