@@ -76,30 +76,28 @@ namespace JskyUwpLibs.Assets
     {
         public LogLineList() : base()
         {
-            Add(new LogLineItem("Memory",
+            Add(new LogLineItem("Memory(MB)",
                 new Func<float>(() => { return MemoryManager.AppMemoryUsage / 1_000_000; })));
-            
-            Add(new LogLineItem("CPU",
-                new Func<float>(() => { return MemoryManager.AppMemoryUsage / 1_000_000; })));
-            //Add(new LogLineItem("Disk",
-            //    new Func<float>(() => { return ProcessDiagnosticInfo.CpuUsage.GetReport().UserTime.TotalSeconds; })));
-            Add(new LogLineItem("Other1",
-                new Func<float>(() => { return MemoryManager.AppMemoryUsage / 1_000_000; })));
-            Add(new LogLineItem("Other2",
-                new Func<float>(() => { return MemoryManager.AppMemoryUsage / 1_000_000; })));
+            Add(new LogLineItem("CPU User Time (Second)",
+                new Func<float>(() => { return (float)ProcessDiagnosticInfo.GetForCurrentProcess().CpuUsage.GetReport().UserTime.TotalSeconds; })));
+            Add(new LogLineItem("CPU Kernel Time (Second)",
+                new Func<float>(() => { return (float)ProcessDiagnosticInfo.GetForCurrentProcess().CpuUsage.GetReport().KernelTime.TotalSeconds; })));
+            Add(new LogLineItem("Disk Read", new Func<float>(() => { return ProcessDiagnosticInfo.GetForCurrentProcess().DiskUsage.GetReport().ReadOperationCount; })));
+            Add(new LogLineItem("Disk Write",
+                new Func<float>(() => { return ProcessDiagnosticInfo.GetForCurrentProcess().DiskUsage.GetReport().WriteOperationCount; })));
         }
     }
 
     internal class LogLineItem : INotifyPropertyChanged
     {
-        private string label;
+        private readonly string label;
         private float value;
         private float oldValue;
         private Func<float> caluateFucntion;
 
-        internal string Label { get => label; set { label = value; NotifyPropertyChanged(); } }
-        internal string CurrentValue { get => value.ToString(); }
-        internal string ChangeValue { get => (value - oldValue).ToString(); }
+        internal string Label { get => label; }
+        internal string CurrentValue { get => "Current = " + value.ToString(); }
+        internal string ChangeValue { get => "Change = " + (value - oldValue).ToString(); }
 
         internal LogLineItem(string label, Func<float> caluateFucntion)
         {
@@ -111,9 +109,8 @@ namespace JskyUwpLibs.Assets
         {
             oldValue = value;
             value = caluateFucntion();
-            label = value.ToString();
-            RaisePropertyChanged(CurrentValue);
-            RaisePropertyChanged(ChangeValue);
+            RaisePropertyChanged("CurrentValue");
+            RaisePropertyChanged("ChangeValue");
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
