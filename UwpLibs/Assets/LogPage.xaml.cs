@@ -14,6 +14,8 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.System;
 using Windows.UI.ViewManagement;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
@@ -29,22 +31,26 @@ namespace JskyUwpLibs.Assets
         /// 保存更新间隔
         /// </summary>
         private int? seconds = 1;
+        private const int LIST_SIZE = 5;
+        private List<LogLineItem> LogList;
+        private float[] ValueList;
+        private float[] OldValueList;
+        private string[] LableList;
 
 
         public LogPage()
         {
             this.InitializeComponent();
-            //this.Loaded += Page_Loaded;
+            LogList = new List<LogLineItem>();
+            ValueList = new float[LIST_SIZE];
+            OldValueList = new float[LIST_SIZE];
+            LableList = new string[LIST_SIZE] {
+                "Memory", "CPU", "Disk", "Other1", "Other2"
+            };
+
+            InitialValue();
             UpdateValue();  // 先更新次数据
-
             DispatcherTimerSetupAndStart();
-
-
-        }
-
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            ApplicationView.GetForCurrentView().TryResizeView(new Size(900, 600));
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -73,14 +79,62 @@ namespace JskyUwpLibs.Assets
             UpdateValue();
         }
 
-        /// <summary>
-        /// 更新界面数据
-        /// </summary>
+        void InitialValue()
+        {
+            for (int i = 0; i < LIST_SIZE; i++)
+            {
+                OldValueList[i] = 0.0f;
+                var log = new LogLineItem();
+                log.Label = LableList[i];
+                LogList.Add(log);
+            }
+        }
+
         void UpdateValue()
         {
-            var value = MemoryManager.AppMemoryUsage / 1_000_000;
-            Text.Text = value.ToString();
+            LogListView.ItemsSource = null;
+            ValueList[0] = MemoryManager.AppMemoryUsage / 1_000_000;
+            ValueList[1] = MemoryManager.AppMemoryUsage / 1_000_000;
+            ValueList[2] = MemoryManager.AppMemoryUsage / 1_000_000;
+            ValueList[3] = MemoryManager.AppMemoryUsage / 1_000_000;
+            ValueList[4] = MemoryManager.AppMemoryUsage / 1_000_000;
+
+            for (int i = 0; i < LIST_SIZE; i++)
+            {
+                var log = LogList[i];
+                log.Value = ValueList[i].ToString();
+                log.Change = (ValueList[i] - OldValueList[i]).ToString();
+                LogList[i] = log;
+            }
+            LogListView.ItemsSource = LogList;
         }
     }
 
+    //public struct LogLineItem
+    //{
+    //    public string Label;
+    //    public string Value;
+    //    public string Change;
+    //}
+}
+
+
+namespace JskyUwpLibs.Assets
+{
+
+    public sealed class LogLineItem : INotifyPropertyChanged
+    {
+        internal string Label;
+        internal string Value;
+        internal string Change;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void RaisePropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
+    }
 }

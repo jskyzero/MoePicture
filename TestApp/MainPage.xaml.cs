@@ -30,12 +30,9 @@ namespace TestApp
         {
             this.InitializeComponent();
             DispatcherTimerSetup();
-        }
 
-        private async void Button_Click(object sender, RoutedEventArgs e)
-        {
             var logWindows = new JskyUwpLibs.LogWindows();
-            await logWindows.CreateLogWindowsAsync(2);
+            logWindows.CreateLogWindowsAsync(2);
         }
 
         void DispatcherTimerSetup()

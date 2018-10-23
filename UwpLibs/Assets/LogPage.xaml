@@ -5,16 +5,30 @@
     xmlns:local="using:JskyUwpLibs.Assets"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    mc:Ignorable="d">
 
     <Grid>
-        <StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Memory Usage: "></TextBlock>
-                <TextBlock x:Name="Text" Text="Value"></TextBlock>
-                <TextBlock Text=" MB"></TextBlock>
-            </StackPanel>
-        </StackPanel>
+        <ListView  x:Name="LogListView" HorizontalAlignment="Stretch"
+                   Background="Black">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment"  Value="Stretch"></Setter>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemTemplate>
+                <DataTemplate x:Name="SingleLineDataTemplate" x:DataType="local:LogLineItem">
+                    <Grid HorizontalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="{x:Bind Label, Mode=OneWay}" Foreground="White"></TextBlock>
+                        <TextBlock Grid.Column="1" Text="{x:Bind Value, Mode=OneWay}" Foreground="White"></TextBlock>
+                        <TextBlock Grid.Column="2" Text="{x:Bind Change, Mode=OneWay}" Foreground="White"></TextBlock>
+                    </Grid>
+                </DataTemplate>
+                </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Page>
