@@ -8,8 +8,8 @@
     mc:Ignorable="d">
 
     <Grid>
-        <ListView  x:Name="LogListView" HorizontalAlignment="Stretch"
-                   Background="Black">
+        <ListView HorizontalAlignment="Stretch"
+                   Background="Black" ItemsSource="{x:Bind logLineList, Mode=OneWay}">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment"  Value="Stretch"></Setter>
@@ -24,11 +24,11 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" Text="{x:Bind Label, Mode=OneWay}" Foreground="White"></TextBlock>
-                        <TextBlock Grid.Column="1" Text="{x:Bind Value, Mode=OneWay}" Foreground="White"></TextBlock>
-                        <TextBlock Grid.Column="2" Text="{x:Bind Change, Mode=OneWay}" Foreground="White"></TextBlock>
+                        <TextBlock Grid.Column="1" Text="{x:Bind CurrentValue, Mode=OneWay}" Foreground="White"></TextBlock>
+                        <TextBlock Grid.Column="2" Text="{x:Bind ChangeValue, Mode=OneWay}" Foreground="White"></TextBlock>
                     </Grid>
                 </DataTemplate>
-                </ListView.ItemTemplate>
+            </ListView.ItemTemplate>
         </ListView>
     </Grid>
 </Page>

@@ -16,6 +16,8 @@ using Windows.System;
 using Windows.UI.ViewManagement;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Collections.ObjectModel;
+using Windows.System.Diagnostics;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
@@ -31,24 +33,11 @@ namespace JskyUwpLibs.Assets
         /// 保存更新间隔
         /// </summary>
         private int? seconds = 1;
-        private const int LIST_SIZE = 5;
-        private List<LogLineItem> LogList;
-        private float[] ValueList;
-        private float[] OldValueList;
-        private string[] LableList;
-
+        internal LogLineList logLineList = new LogLineList();
 
         public LogPage()
         {
             this.InitializeComponent();
-            LogList = new List<LogLineItem>();
-            ValueList = new float[LIST_SIZE];
-            OldValueList = new float[LIST_SIZE];
-            LableList = new string[LIST_SIZE] {
-                "Memory", "CPU", "Disk", "Other1", "Other2"
-            };
-
-            InitialValue();
             UpdateValue();  // 先更新次数据
             DispatcherTimerSetupAndStart();
         }
@@ -68,73 +57,76 @@ namespace JskyUwpLibs.Assets
             // 设置间隔
             dispatcherTimer.Interval = new TimeSpan(0, 0, seconds ?? 1);
             // 挂载更新函数
-            dispatcherTimer.Tick += dispatcherTimer_Tick;
+            dispatcherTimer.Tick += (s, e) => { UpdateValue(); };
             // 开始定时器
             dispatcherTimer.Start();
         }
 
-
-        void dispatcherTimer_Tick(object sender, object e)
-        {
-            UpdateValue();
-        }
-
-        void InitialValue()
-        {
-            for (int i = 0; i < LIST_SIZE; i++)
-            {
-                OldValueList[i] = 0.0f;
-                var log = new LogLineItem();
-                log.Label = LableList[i];
-                LogList.Add(log);
-            }
-        }
-
         void UpdateValue()
         {
-            LogListView.ItemsSource = null;
-            ValueList[0] = MemoryManager.AppMemoryUsage / 1_000_000;
-            ValueList[1] = MemoryManager.AppMemoryUsage / 1_000_000;
-            ValueList[2] = MemoryManager.AppMemoryUsage / 1_000_000;
-            ValueList[3] = MemoryManager.AppMemoryUsage / 1_000_000;
-            ValueList[4] = MemoryManager.AppMemoryUsage / 1_000_000;
-
-            for (int i = 0; i < LIST_SIZE; i++)
-            {
-                var log = LogList[i];
-                log.Value = ValueList[i].ToString();
-                log.Change = (ValueList[i] - OldValueList[i]).ToString();
-                LogList[i] = log;
-            }
-            LogListView.ItemsSource = LogList;
+            Enumerable.Range(0, logLineList.Count).ToList().ForEach(new Action<int>(i => logLineList[i].Update()));
         }
     }
-
-    //public struct LogLineItem
-    //{
-    //    public string Label;
-    //    public string Value;
-    //    public string Change;
-    //}
 }
 
 
 namespace JskyUwpLibs.Assets
 {
-
-    public sealed class LogLineItem : INotifyPropertyChanged
+    internal class LogLineList : ObservableCollection<LogLineItem>
     {
-        internal string Label;
-        internal string Value;
-        internal string Change;
+        public LogLineList() : base()
+        {
+            Add(new LogLineItem("Memory",
+                new Func<float>(() => { return MemoryManager.AppMemoryUsage / 1_000_000; })));
+            
+            Add(new LogLineItem("CPU",
+                new Func<float>(() => { return MemoryManager.AppMemoryUsage / 1_000_000; })));
+            //Add(new LogLineItem("Disk",
+            //    new Func<float>(() => { return ProcessDiagnosticInfo.CpuUsage.GetReport().UserTime.TotalSeconds; })));
+            Add(new LogLineItem("Other1",
+                new Func<float>(() => { return MemoryManager.AppMemoryUsage / 1_000_000; })));
+            Add(new LogLineItem("Other2",
+                new Func<float>(() => { return MemoryManager.AppMemoryUsage / 1_000_000; })));
+        }
+    }
+
+    internal class LogLineItem : INotifyPropertyChanged
+    {
+        private string label;
+        private float value;
+        private float oldValue;
+        private Func<float> caluateFucntion;
+
+        internal string Label { get => label; set { label = value; NotifyPropertyChanged(); } }
+        internal string CurrentValue { get => value.ToString(); }
+        internal string ChangeValue { get => (value - oldValue).ToString(); }
+
+        internal LogLineItem(string label, Func<float> caluateFucntion)
+        {
+            this.label = label;
+            this.caluateFucntion = caluateFucntion;
+        }
+
+        internal void Update()
+        {
+            oldValue = value;
+            value = caluateFucntion();
+            label = value.ToString();
+            RaisePropertyChanged(CurrentValue);
+            RaisePropertyChanged(ChangeValue);
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        protected void RaisePropertyChanged(string name)
+        // This method is called by the Set accessor of each property.  
+        // The CallerMemberName attribute that is applied to the optional propertyName  
+        // parameter causes the property name of the caller to be substituted as an argument.  
+        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        private void RaisePropertyChanged(string name)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
     }
 }
