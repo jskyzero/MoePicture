@@ -20,12 +20,12 @@ namespace JskyUwpLibs
         /// </summary>
         /// <param name="seconds">更新间隔（秒）</param>
         /// <returns>是否创建成功</returns>
-        public IAsyncOperation<string> CreateLogWindowsAsync(int seconds)
+        public static IAsyncOperation<string> CreateLogWindowsAsync(int seconds)
         {
             return CreateLogWindowsAsyncHelper(seconds).AsAsyncOperation();
         }
 
-        private async Task<string> CreateLogWindowsAsyncHelper(int seconds)
+        private static async Task<string> CreateLogWindowsAsyncHelper(int seconds)
         {
             CoreApplicationView newView = CoreApplication.CreateNewView();
             int newViewId = 0;
