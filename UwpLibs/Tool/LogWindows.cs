@@ -32,7 +32,7 @@ namespace JskyUwpLibs
             await newView.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
                 Frame frame = new Frame();
-                frame.Navigate(typeof(Assets.LogPage), seconds);
+                frame.Navigate(typeof(LogPage), seconds);
                 Window.Current.Content = frame;
                 ApplicationView.GetForCurrentView().Title = "Log Windows";
                 // why this will change both two windows size ...

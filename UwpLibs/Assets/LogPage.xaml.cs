@@ -21,7 +21,7 @@ using Windows.System.Diagnostics;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
-namespace JskyUwpLibs.Assets
+namespace JskyUwpLibs
 {
     /// <summary>
     /// 可用于自身或导航至 Frame 内部的空白页。
@@ -70,7 +70,7 @@ namespace JskyUwpLibs.Assets
 }
 
 
-namespace JskyUwpLibs.Assets
+namespace JskyUwpLibs
 {
     internal class LogLineList : ObservableCollection<LogLineItem>
     {

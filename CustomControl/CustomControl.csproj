@@ -107,9 +107,9 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="AdaptiveGridView.cs" />
+    <Compile Include="Reference\AdaptiveGridView.cs" />
     <Compile Include="PictureItemPane.cs" />
-    <Compile Include="StaggeredPanel.cs" />
+    <Compile Include="Reference\StaggeredPanel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

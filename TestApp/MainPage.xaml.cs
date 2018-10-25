@@ -31,8 +31,7 @@ namespace TestApp
             this.InitializeComponent();
             DispatcherTimerSetup();
 
-            var logWindows = new JskyUwpLibs.LogWindows();
-            logWindows.CreateLogWindowsAsync(2);
+            JskyUwpLibs.LogWindows.CreateLogWindowsAsync(2);
         }
 
         void DispatcherTimerSetup()
