@@ -4,6 +4,8 @@
 
 Help you to get moe pictures more easily / 帮助您更好的获取二次元图片
 
+![](./MoePicture/Assets/MoePicture2.png)
+
 ## Overview
 
 > Recently update / 最近更新
