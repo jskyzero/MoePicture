@@ -132,6 +132,10 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CustomControl\CustomControl.csproj">
+      <Project>{a4cc24d4-f383-4e1f-87c6-cd9794b719b3}</Project>
+      <Name>CustomControl</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UwpLibs\UwpLibs.csproj">
       <Project>{57917382-9c60-4ec1-ab93-b7232d460cf3}</Project>
       <Name>UwpLibs</Name>

@@ -3,11 +3,22 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:TestApp"
+    xmlns:cc="using:CustomControl"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+    mc:Ignorable="d">
     <Grid>
+        <ScrollViewer>
+        <cc:TestControlItem x:Name="TestControl" Background="SkyBlue">
+            <Rectangle Height="96" Width="96" Margin="1" Fill="BlueViolet"></Rectangle>
+        </cc:TestControlItem>
+        </ScrollViewer>
+        <StackPanel Background="Gray" Opacity="0.5" HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                    Orientation="Horizontal">
+            <Button Margin="4" x:Name="Add_Button" Click="Add_Button_Click">add</Button>
+            <Button Margin="4" x:Name="Insert_Button" Click="Insert_Button_Click">insert</Button>
+            <Button Margin="4" x:Name="Remove_Button" Click="Remove_Button_Click">remove</Button>
+            <Button Margin="4" x:Name="Reset_Button" Click="Reset_Button_Click">initial</Button>
+        </StackPanel>
     </Grid>
 </Page>
