@@ -30,11 +30,12 @@ Help you to get moe pictures more easily / 帮助您更好的获取二次元图�
 
 ## About / 关于
 
+Recommend read wiki / 推荐您阅读百科
+
 + [Wiki / 百科](https://github.com/jskyzero/MoePicture/wiki)
 + [Todo / 进度板](https://github.com/jskyzero/MoePicture/projects/1)
 + [Privacy Policy / 隐私政策](https://jskyzero.github.io/MoePicture/2018/03/28/privacy_policy.html)
 + [Thanks / 致谢](https://jskyzero.github.io/MoePicture/2017/06/18/thanks.html)
-+ Recommend read wiki / 推荐您阅读百科
 
 ## Reference / 参考
 

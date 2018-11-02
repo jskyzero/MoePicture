@@ -27,13 +27,13 @@ namespace TestApp
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        UIElementCollection Children = null;
+        ItemCollection Children = null;
 
         public MainPage()
         {
             this.InitializeComponent();
             JskyUwpLibs.LogWindows.CreateLogWindowsAsync(2);
-            Children = TestControl.Children;
+            Children = Holder.Items;
         }
 
         private Windows.UI.Color GetRandomColor()
@@ -48,11 +48,15 @@ namespace TestApp
         private UIElement CreateNewUIElement()
         {
             var rect = new Windows.UI.Xaml.Shapes.Rectangle();
-            rect.Width = 96;
-            rect.Height = 96;
+            Random rnd = new Random();
+            rect.Width = 50 + rnd.Next() % 100;
+            rect.Height = 50 + rnd.Next() % 100;
             rect.Margin = new Thickness(1);
-            rect.Fill = new SolidColorBrush(GetRandomColor());
-            return rect;
+            //rect.Fill = new SolidColorBrush(GetRandomColor());
+            var grid = new GridView();
+            grid.Items.Add(rect);
+            grid.Background = new SolidColorBrush(GetRandomColor());
+            return grid;
         }
 
         private void Add_Button_Click(object sender, RoutedEventArgs e)

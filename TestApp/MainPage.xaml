@@ -8,11 +8,26 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
     <Grid>
-        <ScrollViewer>
-        <cc:TestControlItem x:Name="TestControl" Background="SkyBlue">
-            <Rectangle Height="96" Width="96" Margin="1" Fill="BlueViolet"></Rectangle>
-        </cc:TestControlItem>
-        </ScrollViewer>
+        <ListView x:Name="Holder">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Padding" Value="0"/>
+                    <Setter Property="Margin" Value="0"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <cc:TestControlItem StatckCount="5" ItemsSpacing="0" StatckSpacing="0"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <Grid Background="BlueViolet">
+                <Rectangle Width="100" Height="100"></Rectangle>
+            </Grid>
+            <Grid Background="CadetBlue">
+                <Rectangle Width="90" Height="100"></Rectangle>
+            </Grid>
+        </ListView>
         <StackPanel Background="Gray" Opacity="0.5" HorizontalAlignment="Center" VerticalAlignment="Bottom"
                     Orientation="Horizontal">
             <Button Margin="4" x:Name="Add_Button" Click="Add_Button_Click">add</Button>
@@ -20,5 +35,6 @@
             <Button Margin="4" x:Name="Remove_Button" Click="Remove_Button_Click">remove</Button>
             <Button Margin="4" x:Name="Reset_Button" Click="Reset_Button_Click">initial</Button>
         </StackPanel>
+
     </Grid>
 </Page>
