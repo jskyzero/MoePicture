@@ -18,12 +18,10 @@ namespace CustomControl
         /// <returns>返回自己需要多少控件</returns>
         protected override Size MeasureOverride(Size availableSize)
         {
-            Size request = new Size(availableSize.Width, 10);
-            foreach (var item in Children)
-            {
-                item.Measure(availableSize);
-                request.Height += 100;
-            }
+            Size request = new Size(availableSize.Width, availableSize.Height);
+            var item = Children.First();
+            item.Measure(availableSize);
+            request.Height = item.DesiredSize.Height * availableSize.Width / item.DesiredSize.Width;
             return request;
         }
 
@@ -37,7 +35,7 @@ namespace CustomControl
             double offsetY = 0;
             foreach (var item in Children)
             {
-                item.Arrange(new Rect(0, offsetY, item.DesiredSize.Width, 100));
+                item.Arrange(new Rect(0, offsetY, item.DesiredSize.Width, item.DesiredSize.Height));
                 offsetY += item.DesiredSize.Height;
             }
             return finalSize;

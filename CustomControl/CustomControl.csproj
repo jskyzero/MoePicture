@@ -111,7 +111,7 @@
     <Compile Include="PictureItemPane.cs" />
     <Compile Include="Reference\StaggeredPanel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestControlItem.cs" />
+    <Compile Include="WaterFallView.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">

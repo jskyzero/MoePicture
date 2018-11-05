@@ -55,8 +55,10 @@ namespace TestApp
             //rect.Fill = new SolidColorBrush(GetRandomColor());
             var grid = new GridView();
             grid.Items.Add(rect);
-            grid.Background = new SolidColorBrush(GetRandomColor());
-            return grid;
+            var itemPanel = new CustomControl.PictureItemPane();
+            itemPanel.Children.Add(grid);
+            itemPanel.Background = new SolidColorBrush(GetRandomColor());
+            return itemPanel;
         }
 
         private void Add_Button_Click(object sender, RoutedEventArgs e)

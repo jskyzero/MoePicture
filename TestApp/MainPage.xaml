@@ -18,15 +18,19 @@
             </ListView.ItemContainerStyle>
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <cc:TestControlItem StatckCount="5" ItemsSpacing="0" StatckSpacing="0"/>
+                    <cc:WaterFallView StatckCount="5" ItemsSpacing="0" StatckSpacing="0"/>
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
-            <Grid Background="BlueViolet">
-                <Rectangle Width="100" Height="100"></Rectangle>
-            </Grid>
-            <Grid Background="CadetBlue">
-                <Rectangle Width="90" Height="100"></Rectangle>
-            </Grid>
+            <cc:PictureItemPane Background="BlueViolet">
+                <Grid>
+                    <Rectangle Width="100" Height="100" Fill="Red" Opacity="0"></Rectangle>
+                </Grid>
+            </cc:PictureItemPane>
+            <cc:PictureItemPane Background="CadetBlue">
+                <Grid>
+                    <Rectangle Width="50" Height="100" Fill="Red" Opacity="0"></Rectangle>
+                </Grid>
+            </cc:PictureItemPane>
         </ListView>
         <StackPanel Background="Gray" Opacity="0.5" HorizontalAlignment="Center" VerticalAlignment="Bottom"
                     Orientation="Horizontal">
