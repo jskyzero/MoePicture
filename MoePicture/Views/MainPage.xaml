@@ -13,6 +13,10 @@
         IsBackButtonVisible="Collapsed"
         IsBackEnabled="False"
         SelectionChanged="NavViewSelectionChanged">
+        <NavigationView.PaneTitle>
+            MoePicture
+        </NavigationView.PaneTitle>
+
         <NavigationView.AutoSuggestBox>
             <AutoSuggestBox
                 x:Name="ASB"
@@ -22,10 +26,7 @@
 
         <NavigationView.HeaderTemplate>
             <DataTemplate>
-                <!--  you never see it  -->
-                <Grid
-                    Height="48px"
-                    Background="White"
+                <Grid Height="48px"
                     Opacity="0" />
             </DataTemplate>
         </NavigationView.HeaderTemplate>
@@ -49,8 +50,8 @@
             </Frame.ContentTransitions>
         </Frame>
     </NavigationView>
-    <!--  自动打开侧边栏  -->
-    <VisualStateManager.VisualStateGroups>
+    <!--  已经废弃：使用屏幕断点自动打开侧边栏  -->
+    <!--<VisualStateManager.VisualStateGroups>
         <VisualStateGroup>
             <VisualState>
                 <VisualState.StateTriggers>
@@ -61,5 +62,5 @@
                 </VisualState.Setters>
             </VisualState>
         </VisualStateGroup>
-    </VisualStateManager.VisualStateGroups>
+    </VisualStateManager.VisualStateGroups>-->
 </Page>

@@ -19,24 +19,27 @@ namespace MoePicture.ViewModels
     /// </summary>
     public class ViewModelLocator
     {
-        //private const string shellKey = nameof(Views.Shell);
-        //public static string ShellKey => shellKey;
-
         public UserConfigVM ConfigVM => ServiceLocator.Current.GetInstance<UserConfigVM>();
         public ShellVM ShellVM => ServiceLocator.Current.GetInstance<ShellVM>();
         public PictureItemsVM PicturesVM => ServiceLocator.Current.GetInstance<PictureItemsVM>();
 
+        /// <summary>
+        /// 初始化ServiceLocator，注册ViewModels
+        /// </summary>
+        /// 为什么是 static
+        /// 静态构造函数用于初始化任何静态数据，或执行仅需要执行一次的特定操作。
         static ViewModelLocator()
         {
-            //SimpleIoc.Default.Register<INavigationService>(() => nav);
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
-
-            //var nav = new NavigationService();
-            //nav.Configure(ShellKey, typeof(Views.Shell));
             SimpleIoc.Default.Register<Services.ConfigService>();
             SimpleIoc.Default.Register<UserConfigVM>();
             SimpleIoc.Default.Register<PictureItemsVM>();
             SimpleIoc.Default.Register<ShellVM>();
+
+            // 旧时代导航相关服务
+            // SimpleIoc.Default.Register<INavigationService>(() => nav);
+            // var nav = new NavigationService();
+            // nav.Configure(ShellKey, typeof(Views.Shell));
         }
     }
 }
