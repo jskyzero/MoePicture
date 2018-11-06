@@ -10,8 +10,9 @@
         x:Name="NavView"
         CompactModeThresholdWidth="720"
         ExpandedModeThresholdWidth="1480"
-        IsBackButtonVisible="Collapsed"
-        IsBackEnabled="False"
+        IsBackButtonVisible="Visible"
+        IsBackEnabled="{Binding ShellVM.ShowSingle, Source={StaticResource Locator}, Mode=OneWay}"
+        BackRequested="NavView_BackRequested"
         SelectionChanged="NavViewSelectionChanged">
         <NavigationView.PaneTitle>
             MoePicture

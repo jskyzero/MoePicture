@@ -1,5 +1,6 @@
 ﻿using CommonServiceLocator;
 using GalaSoft.MvvmLight.Ioc;
+using MoePicture.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -128,6 +129,11 @@ namespace MoePicture.Views
 
             // Launch the URI
             await Windows.System.Launcher.LaunchUriAsync(uriBing, promptOptions);
+        }
+
+        private void NavView_BackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)
+        {
+            ServiceLocator.Current.GetInstance<ShellVM>().SwitchSigleCommand.Execute(null);
         }
     }
 }
