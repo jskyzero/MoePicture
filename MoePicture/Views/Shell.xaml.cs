@@ -26,19 +26,6 @@ namespace MoePicture.Views
         public Shell()
         {
             this.InitializeComponent();
-
-            var view = ApplicationView.GetForCurrentView();
-            // 将标题栏的三个键背景设为透明
-            view.TitleBar.ButtonBackgroundColor = Colors.Transparent;
-            // 失去焦点时，将三个键背景设为透明
-            view.TitleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
-            // 失去焦点时，将三个键前景色设为白色
-            view.TitleBar.ButtonInactiveForegroundColor = Colors.White;
-
-            var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
-            // 窗口内容扩展填充到标题栏
-            coreTitleBar.ExtendViewIntoTitleBar = !view.IsFullScreenMode;
-
             // 旧时代的自实现亚克力材质初始化
             // ArylicMaterial.Win2D.initialBackground(BackGround);
         }

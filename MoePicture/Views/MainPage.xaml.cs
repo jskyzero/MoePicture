@@ -6,8 +6,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -37,6 +40,23 @@ namespace MoePicture.Views
             // 更新到当前选中的导航项
             ContentFrameBackToShell();
             UpdateNavViewSelect();
+            InitialSelfDefinedTitleBar();
+        }
+
+        private void InitialSelfDefinedTitleBar()
+        {
+
+            var view = ApplicationView.GetForCurrentView();
+            // 将标题栏的三个键背景设为透明
+            view.TitleBar.ButtonBackgroundColor = Colors.Transparent;
+            // 失去焦点时，将三个键背景设为透明
+            view.TitleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
+            // 失去焦点时，将三个键前景色设为白色
+            view.TitleBar.ButtonInactiveForegroundColor = Colors.White;
+
+            var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
+            // 窗口内容扩展填充到标题栏
+            coreTitleBar.ExtendViewIntoTitleBar = !view.IsFullScreenMode;
         }
 
         private void InitialNaveMenuItems()
@@ -88,29 +108,6 @@ namespace MoePicture.Views
 
         }
 
-        private void NavViewSelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
-        {
-            if (args.IsSettingsSelected)
-            {
-                ContentFrame.Navigate(typeof(SettingsPage));
-            }
-            else
-            {
-                var pageTag = ((args.SelectedItem as NavigationViewItem).Content as string);
-
-                switch (pageTag)
-                {
-                    // now can't be help, but future may have other type.
-                    case "help":
-                        break;
-                    default:
-                        ContentFrameBackToShell();
-                        ServiceLocator.Current.GetInstance<ViewModels.PictureItemsVM>().ChangeWebsiteCommand.Execute(pageTag);
-                        break;
-                }
-            }
-        }
-
         private void QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
         {
             ContentFrameBackToShell();
@@ -134,6 +131,29 @@ namespace MoePicture.Views
         private void NavView_BackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)
         {
             ServiceLocator.Current.GetInstance<ShellVM>().SwitchSigleCommand.Execute(null);
+        }
+
+        private void NavView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
+        {
+            if (args.IsSettingsSelected)
+            {
+                ContentFrame.Navigate(typeof(SettingsPage));
+            }
+            else
+            {
+                var pageTag = ((args.SelectedItem as NavigationViewItem).Content as string);
+
+                switch (pageTag)
+                {
+                    // now can't be help, but future may have other type.
+                    case "help":
+                        break;
+                    default:
+                        ContentFrameBackToShell();
+                        ServiceLocator.Current.GetInstance<ViewModels.PictureItemsVM>().ChangeWebsiteCommand.Execute(pageTag);
+                        break;
+                }
+            }
         }
     }
 }

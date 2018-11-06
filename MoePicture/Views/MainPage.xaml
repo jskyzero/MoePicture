@@ -6,53 +6,54 @@
     xmlns:local="using:MoePicture.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    <NavigationView
-        x:Name="NavView"
-        CompactModeThresholdWidth="720"
-        ExpandedModeThresholdWidth="1480"
-        IsBackButtonVisible="Visible"
-        IsBackEnabled="{Binding ShellVM.ShowSingle, Source={StaticResource Locator}, Mode=OneWay}"
-        BackRequested="NavView_BackRequested"
-        SelectionChanged="NavViewSelectionChanged">
-        <NavigationView.PaneTitle>
-            MoePicture
-        </NavigationView.PaneTitle>
+    <Grid Background="{StaticResource TransparentAcrylicBrush}">
+        <NavigationView
+            x:Name="NavView"
+            Margin="0,32,0,32"
+            AlwaysShowHeader="False"
+            BackRequested="NavView_BackRequested"
+            CompactModeThresholdWidth="720"
+            ExpandedModeThresholdWidth="1480"
+            IsBackButtonVisible="Visible"
+            IsBackEnabled="{Binding ShellVM.ShowSingle, Source={StaticResource Locator}, Mode=OneWay}"
+            PaneTitle="MoePicture"
+            SelectionChanged="NavView_SelectionChanged">
+            <NavigationView.AutoSuggestBox>
+                <AutoSuggestBox
+                    x:Name="ASB"
+                    QueryIcon="Find"
+                    QuerySubmitted="QuerySubmitted" />
+            </NavigationView.AutoSuggestBox>
 
-        <NavigationView.AutoSuggestBox>
-            <AutoSuggestBox
-                x:Name="ASB"
-                QueryIcon="Find"
-                QuerySubmitted="QuerySubmitted" />
-        </NavigationView.AutoSuggestBox>
-
-        <NavigationView.HeaderTemplate>
+            <!--  已经隐藏  -->
+            <!--<NavigationView.HeaderTemplate>
             <DataTemplate>
                 <Grid Height="48px"
-                    Opacity="0" />
+                    Opacity="1" Background="BlueViolet"/>
             </DataTemplate>
-        </NavigationView.HeaderTemplate>
+        </NavigationView.HeaderTemplate>-->
 
-        <NavigationView.PaneFooter>
-            <NavigationViewItem
-                Content="Help"
-                Icon="Help"
-                Tapped="NavigationViewItem_Tapped" />
-        </NavigationView.PaneFooter>
+            <NavigationView.PaneFooter>
+                <NavigationViewItem
+                    Content="Help"
+                    Icon="Help"
+                    Tapped="NavigationViewItem_Tapped" />
+            </NavigationView.PaneFooter>
 
-        <Frame
-            x:Name="ContentFrame"
-            Margin="0,-64,0,0"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch">
-            <Frame.ContentTransitions>
-                <TransitionCollection>
-                    <NavigationThemeTransition />
-                </TransitionCollection>
-            </Frame.ContentTransitions>
-        </Frame>
-    </NavigationView>
-    <!--  已经废弃：使用屏幕断点自动打开侧边栏  -->
-    <!--<VisualStateManager.VisualStateGroups>
+            <Frame
+                x:Name="ContentFrame"
+                Margin="0,-32,0,-32"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch">
+                <Frame.ContentTransitions>
+                    <TransitionCollection>
+                        <NavigationThemeTransition />
+                    </TransitionCollection>
+                </Frame.ContentTransitions>
+            </Frame>
+        </NavigationView>
+        <!--  已经废弃：使用屏幕断点自动打开侧边栏  -->
+        <!--<VisualStateManager.VisualStateGroups>
         <VisualStateGroup>
             <VisualState>
                 <VisualState.StateTriggers>
@@ -64,4 +65,5 @@
             </VisualState>
         </VisualStateGroup>
     </VisualStateManager.VisualStateGroups>-->
+    </Grid>
 </Page>

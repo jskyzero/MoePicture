@@ -3,11 +3,17 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:MoePicture.Styles">
 
-    <SolidColorBrush x:Key="MyColor0" Color="#FFFFFFFF" />
-    <SolidColorBrush x:Key="MyColor1" Color="#FFF2F2F2" />
-    <SolidColorBrush x:Key="MyColor2" Color="#FFE6E6E6" />
-    <SolidColorBrush x:Key="MyColor3" Color="#FFCCCCCC" />
-    <SolidColorBrush x:Key="MyColor4" Color="#66000000" />
-    <SolidColorBrush x:Key="MyColor5" Color="#CC000000" />
-    <SolidColorBrush x:Key="MyColor6" Color="#FF000000" />
+    <!--
+        关于亚力克画笔
+        TintColor：颜色/色调覆盖层。 考虑指定 RGB 颜色值和 alpha 通道不透明度。
+        TintOpacity：色调层不透明度。 我们建议将 80%不透明度作为起点，尽管不同的颜色看起来可能在其他 translucencies 更具吸引力。
+        BackgroundSource：指定使用背景亚克力还是应用内亚克力的标记。
+        FallbackColor： 使用节电模式中替换亚克力的纯色。 对于背景亚克力，当应用并非位于活动状态桌面窗口中或者应用正在手机和 Xbox 上运行时，回退颜色也会替换亚克力。
+    -->
+    <AcrylicBrush
+        x:Key="TransparentAcrylicBrush"
+        BackgroundSource="HostBackdrop"
+        FallbackColor="Black"
+        TintColor="Black"
+        TintOpacity="0" />
 </ResourceDictionary>
