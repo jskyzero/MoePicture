@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using Windows.Foundation;
 
 namespace MoePicture.Services
 {
@@ -126,7 +127,8 @@ namespace MoePicture.Services
                 item.SampleUrl = node.Attributes["sample_url"].Value;
                 item.SourceUrl = node.Attributes["jpeg_url"].Value;
                 item.IsSafe = node.Attributes["rating"].Value == "s";
-
+                item.PreviewSize = new Size(int.Parse(node.Attributes["preview_width"].Value), 
+                                            int.Parse(node.Attributes["preview_height"].Value));
                 // 通过url处理得到两种name
                 item.Title = Spider.GetFileNameFromUrl(item.SourceUrl);
                 item.FileName = Spider.GetFileNameFromUrl(item.PreviewUrl);
@@ -149,7 +151,8 @@ namespace MoePicture.Services
                 item.SampleUrl = node.Attributes["sample_url"].Value;
                 item.SourceUrl = node.Attributes["file_url"].Value;
                 item.IsSafe = node.Attributes["rating"].Value == "s";
-
+                item.PreviewSize = new Size(int.Parse(node.Attributes["preview_width"].Value),
+                                            int.Parse(node.Attributes["preview_height"].Value));
                 // 通过url处理得到两种name
                 item.Title = Spider.GetFileNameFromUrl(item.SourceUrl);
                 item.FileName = Spider.GetFileNameFromUrl(item.PreviewUrl);
@@ -171,7 +174,8 @@ namespace MoePicture.Services
                 item.SampleUrl = "http:" + node.Attributes["sample_url"].Value;
                 item.SourceUrl = "http:" + node.Attributes["file_url"].Value;
                 item.IsSafe = node.Attributes["rating"].Value == "s";
-
+                item.PreviewSize = new Size(int.Parse(node.Attributes["preview_width"].Value),
+                                            int.Parse(node.Attributes["preview_height"].Value));
                 // 通过url处理得到两种name
                 item.Title = Spider.GetFileNameFromUrl(item.SourceUrl);
                 item.FileName = Spider.GetFileNameFromUrl(item.PreviewUrl);
@@ -193,7 +197,8 @@ namespace MoePicture.Services
                 item.SampleUrl = node["file-url"].InnerText;
                 item.SourceUrl = node["large-file-url"].InnerText;
                 item.IsSafe = node["rating"].InnerText == "s";
-
+                item.PreviewSize = new Size(int.Parse(node["image-width"].InnerText),
+                                            int.Parse(node["image-height"].InnerText));
                 // 通过url处理得到两种name
                 item.Title = Spider.GetFileNameFromUrl(item.SourceUrl);
                 item.FileName = Spider.GetFileNameFromUrl(item.PreviewUrl);

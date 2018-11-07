@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using System.Xml;
+using Windows.Foundation;
 using Windows.Storage;
 using Windows.Storage.AccessCache;
 using Windows.UI.Xaml.Media;
@@ -15,11 +16,9 @@ using Windows.UI.Xaml.Media.Imaging;
 
 namespace MoePicture.Models
 {
-
-    
-
     /// <summary>
     /// 枚举Uri种类
+    /// 预览链接、示例图链接，原图链接。
     /// </summary>
     public enum UrlType { PreviewUrl, SampleUrl, SourceUrl };
 
@@ -37,9 +36,9 @@ namespace MoePicture.Models
         private UrlType urlType;
         /// <summary> 网站类型 </summary>
         private WebsiteType websiteType;
-        /// <summary> 图片是否安全 </summary>
+        /// <summary> 图片是否合规 </summary>
         private bool isSafe = false;
-        /// <summary> 处理图片过程种是否顺利 </summary>
+        /// <summary> 处理图片过程中是否无错误发生 </summary>
         private bool isAllRight = true;
 
         /// <summary> 标识id </summary>
@@ -64,7 +63,8 @@ namespace MoePicture.Models
         public WebsiteType Type { get => websiteType; set => websiteType = value; }
         /// <summary> 链接种类 </summary>
         public UrlType UrlType { get { return urlType; } set { urlType = value; bitmapImage = null; } }
-
+        /// <summary> 预览大小 </summary>
+        public Size PreviewSize { get; set; }
 
         #endregion Properties
 
@@ -80,7 +80,7 @@ namespace MoePicture.Models
             Type = type;
             // 初始化为预览链接
             UrlType = ServiceLocator.Current.GetInstance<UserConfigVM>().Config.PictureItemSize > 400 ?
-                       UrlType.SampleUrl:
+                       UrlType.SampleUrl :
                        UrlType.PreviewUrl;
             // 用网站特异性的方法来设置具体信息
             WebsiteHelper.SetInfoFromNode(this, node, Type);
@@ -123,7 +123,7 @@ namespace MoePicture.Models
                 ServiceLocator.Current.GetInstance<ViewModels.ShellVM>().ShowError = true;
                 return Items;
             }
-            
+
         }
 
         #endregion Constructer

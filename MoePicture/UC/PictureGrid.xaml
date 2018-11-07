@@ -20,11 +20,23 @@
                 SizeChanged="RootGrid_SizeChanged">
                 <Image Source="{Binding ImageSource}" Stretch="UniformToFill" />
                 <Border x:Name="MaskBorder" Background="#50000000">
-                    <TextBlock
-                        Margin="12"
-                        Foreground="White"
-                        Text="{Binding Title}"
-                        TextWrapping="Wrap" />
+                    <StackPanel>
+                        <TextBlock
+                            Margin="12"
+                            Foreground="White"
+                            Text="{Binding Title}"
+                            TextWrapping="Wrap" />
+                        <TextBlock
+                            Margin="12"
+                            Foreground="White"
+                            Text="{Binding PreviewSize.Width}"
+                            TextWrapping="Wrap" />
+                        <TextBlock
+                            Margin="12"
+                            Foreground="White"
+                            Text="{Binding PreviewSize.Height}"
+                            TextWrapping="Wrap" />
+                    </StackPanel>
                 </Border>
             </Grid>
         </DataTemplate>
