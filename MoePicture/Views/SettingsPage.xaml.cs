@@ -59,5 +59,10 @@ namespace MoePicture.Views
             ServiceLocator.Current.GetInstance<UserConfigVM>().Config.SaveFolderlToken = StorageApplicationPermissions.FutureAccessList.Add(KnownFolders.PicturesLibrary);
             ServiceLocator.Current.GetInstance<UserConfigVM>().Config.SaveFolderlToken = StorageApplicationPermissions.FutureAccessList.Add(ApplicationData.Current.LocalCacheFolder);
         }
+
+        private async void openLogWindow(object sender, RoutedEventArgs e)
+        {
+            await JskyUwpLibs.LogWindows.CreateLogWindowsAsync(1);
+        }
     }
 }
