@@ -12,12 +12,10 @@
     </UserControl.Resources>
     <Grid>
         <Grid
-            x:Name="Title"
-            Margin="12,12,0,0"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Top"
-            Background="Transparent">
-            <Canvas Background="Black" Opacity="0.5" />
+            Margin="0,36,20,0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top">
+            <Canvas Background="{StaticResource Black100AcrylicBrush}" Opacity="0.5" />
             <TextBlock
                 Margin="8,0,8,0"
                 VerticalAlignment="Center"
@@ -26,12 +24,10 @@
                 Foreground="White"
                 Text="{Binding Tag, Converter={StaticResource TagStringConverter}}" />
         </Grid>
-
         <Grid
             Margin="0,0,48,48"
             HorizontalAlignment="Right"
-            VerticalAlignment="Bottom"
-            Background="Transparent">
+            VerticalAlignment="Bottom">
             <StackPanel>
                 <Button
                     Background="Transparent"
@@ -50,7 +46,7 @@
         </Grid>
 
         <!--  设置Title居中/靠右  -->
-        <VisualStateManager.VisualStateGroups>
+        <!--<VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
                 <VisualState>
                     <VisualState.StateTriggers>
@@ -61,6 +57,6 @@
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
+        </VisualStateManager.VisualStateGroups>-->
     </Grid>
 </UserControl>

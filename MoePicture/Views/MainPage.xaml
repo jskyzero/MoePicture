@@ -27,11 +27,13 @@
 
             <!--  已经隐藏  -->
             <!--<NavigationView.HeaderTemplate>
-            <DataTemplate>
-                <Grid Height="48px"
-                    Opacity="1" Background="BlueViolet"/>
-            </DataTemplate>
-        </NavigationView.HeaderTemplate>-->
+                <DataTemplate>
+                    <Grid
+                        Height="48px"
+                        Background="BlueViolet"
+                        Opacity="1" />
+                </DataTemplate>
+            </NavigationView.HeaderTemplate>-->
 
             <NavigationView.PaneFooter>
                 <NavigationViewItem
@@ -52,8 +54,36 @@
                 </Frame.ContentTransitions>
             </Frame>
         </NavigationView>
-        <!--  已经废弃：使用屏幕断点自动打开侧边栏  -->
-        <!--<VisualStateManager.VisualStateGroups>
+        <Grid
+            x:Name="AppTitleBar"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition x:Name="RightPaddingColumn" Width="0" />
+            </Grid.ColumnDefinitions>
+            <Canvas
+                Grid.ColumnSpan="2"
+                Background="{StaticResource Black100AcrylicBrush}"
+                Opacity="0.5" />
+            <Image
+                Width="20"
+                Height="20"
+                Margin="4,0,0,0"
+                HorizontalAlignment="Left"
+                Source="/Assets/source/MoePicture.png"
+                Stretch="Fill" />
+            <TextBlock
+                Margin="28,0,0,0"
+                VerticalAlignment="Center"
+                Foreground="White"
+                Style="{StaticResource CaptionTextBlockStyle}"
+                Text="MoePicture" />
+        </Grid>
+
+    </Grid>
+    <!--  已经废弃：使用屏幕断点自动打开侧边栏  -->
+    <!--<VisualStateManager.VisualStateGroups>
         <VisualStateGroup>
             <VisualState>
                 <VisualState.StateTriggers>
@@ -65,5 +95,4 @@
             </VisualState>
         </VisualStateGroup>
     </VisualStateManager.VisualStateGroups>-->
-    </Grid>
 </Page>

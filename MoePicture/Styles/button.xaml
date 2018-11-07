@@ -83,7 +83,7 @@
                 x:Name="CircleButtonHover"
                 Width="60"
                 Height="60"
-                Fill="Black"
+                Fill="{StaticResource Black100AcrylicBrush}"
                 Opacity="0.5"
                 RadiusX="30"
                 RadiusY="30" />

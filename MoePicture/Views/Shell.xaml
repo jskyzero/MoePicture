@@ -26,11 +26,11 @@
     <Grid Background="{StaticResource TransparentAcrylicBrush}">
         <!--  旧时代的亚克力材质背景  -->
         <!--<Grid x:Name="BackGround" />-->
-        <!--<Grid>
+        <Grid>
             <UC:PictureGrid />
             <UC:ErrorPrompt d:IsHidden="True" Visibility="{Binding ShowError, Mode=OneWay, Converter={StaticResource BoolVisibilityConverter}}" />
             <UC:ButtonBar />
             <UC:PictureSingle d:IsHidden="True" Visibility="{Binding ShowSingle, Mode=OneWay, Converter={StaticResource BoolVisibilityConverter}}" />
-        </Grid>-->
+        </Grid>
     </Grid>
 </Page>

@@ -33,6 +33,9 @@ namespace MoePicture.Views
         public MainPage()
         {
             this.InitializeComponent();
+            InitialSelfDefinedTitleBar();
+
+
             // 主界面导航到Views.Shell
             ContentFrame.Navigate(typeof(Shell));
             // 初始化导航项
@@ -40,7 +43,6 @@ namespace MoePicture.Views
             // 更新到当前选中的导航项
             ContentFrameBackToShell();
             UpdateNavViewSelect();
-            InitialSelfDefinedTitleBar();
         }
 
         private void InitialSelfDefinedTitleBar()
@@ -51,12 +53,58 @@ namespace MoePicture.Views
             view.TitleBar.ButtonBackgroundColor = Colors.Transparent;
             // 失去焦点时，将三个键背景设为透明
             view.TitleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
+            // 将三个键前景色设为白色
+            view.TitleBar.ButtonForegroundColor = Colors.White;
             // 失去焦点时，将三个键前景色设为白色
             view.TitleBar.ButtonInactiveForegroundColor = Colors.White;
+            
+
 
             var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
             // 窗口内容扩展填充到标题栏
             coreTitleBar.ExtendViewIntoTitleBar = !view.IsFullScreenMode;
+
+            UpdateTitleBarLayout(coreTitleBar);
+
+            // Set XAML element as a draggable region.
+            Window.Current.SetTitleBar(AppTitleBar);
+
+            // Register a handler for when the size of the overlaid caption control changes.
+            // For example, when the app moves to a screen with a different DPI.
+            coreTitleBar.LayoutMetricsChanged += CoreTitleBar_LayoutMetricsChanged;
+
+            // Register a handler for when the title bar visibility changes.
+            // For example, when the title bar is invoked in full screen mode.
+            coreTitleBar.IsVisibleChanged += CoreTitleBar_IsVisibleChanged;
+        }
+
+        private void CoreTitleBar_LayoutMetricsChanged(CoreApplicationViewTitleBar sender, object args)
+        {
+            UpdateTitleBarLayout(sender);
+        }
+
+        private void UpdateTitleBarLayout(CoreApplicationViewTitleBar coreTitleBar)
+        {
+            // Get the size of the caption controls area and back button 
+            // (returned in logical pixels), and move your content around as necessary.
+            // LeftPaddingColumn.Width = new GridLength(coreTitleBar.SystemOverlayLeftInset);
+            RightPaddingColumn.Width = new GridLength(coreTitleBar.SystemOverlayRightInset);
+            //TitleBarButton.Margin = new Thickness(0, 0, coreTitleBar.SystemOverlayRightInset, 0);
+
+            // Update title bar control size as needed to account for system size changes.
+            AppTitleBar.Height = coreTitleBar.Height;
+        }
+
+        private void CoreTitleBar_IsVisibleChanged(CoreApplicationViewTitleBar sender, object args)
+        {
+            if (sender.IsVisible)
+            {
+                AppTitleBar.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                AppTitleBar.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void InitialNaveMenuItems()
