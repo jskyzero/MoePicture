@@ -49,6 +49,7 @@ namespace MoePicture.Views
         {
 
             var view = ApplicationView.GetForCurrentView();
+
             // 将标题栏的三个键背景设为透明
             view.TitleBar.ButtonBackgroundColor = Colors.Transparent;
             // 失去焦点时，将三个键背景设为透明
@@ -57,7 +58,6 @@ namespace MoePicture.Views
             view.TitleBar.ButtonForegroundColor = Colors.White;
             // 失去焦点时，将三个键前景色设为白色
             view.TitleBar.ButtonInactiveForegroundColor = Colors.White;
-            
 
 
             var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;

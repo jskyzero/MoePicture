@@ -14,10 +14,14 @@
         <Converters:IntBoolConverter x:Key="IntBoolConverter" />
 
         <DataTemplate x:Key="PictureItem" x:DataType="Models:PictureItem">
-            <Grid Loaded="RootGrid_Loaded" SizeChanged="RootGrid_SizeChanged">
+            <Grid
+                Margin="8"
+                Loaded="RootGrid_Loaded"
+                SizeChanged="RootGrid_SizeChanged">
                 <Image Source="{Binding ImageSource}" Stretch="UniformToFill" />
                 <Border x:Name="MaskBorder" Background="#50000000">
                     <TextBlock
+                        Margin="12"
                         Foreground="White"
                         Text="{Binding Title}"
                         TextWrapping="Wrap" />

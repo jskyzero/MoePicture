@@ -14,7 +14,7 @@
         <Converters:StringListConverter x:Key="StringListConverter" />
     </UserControl.Resources>
     <Grid DataContext="{Binding PicturesVM.SelectPictureItem, Source={StaticResource Locator}}">
-        <Grid Background="Black" Opacity="0.8" />
+        <Grid Background="{StaticResource Black60AcrylicBrush}" Opacity="0.9" />
         <Border Tapped="Border_Tapped">
             <Grid Background="Transparent">
                 <ProgressRing IsActive="True" Style="{StaticResource MyProgressRingStyle}" />
@@ -28,10 +28,10 @@
             x:Name="TagsGrid"
             VerticalAlignment="Bottom"
             Visibility="Collapsed">
-            <Grid x:Name="TagsGlass" />
             <Grid
                 Padding="20"
                 VerticalAlignment="Bottom"
+                Background="{StaticResource NavigationViewDefaultPaneBackground}"
                 DataContext="{Binding PicturesVM, Source={StaticResource Locator}}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto" />
@@ -58,7 +58,7 @@
             HorizontalAlignment="Right"
             VerticalAlignment="Center"
             Background="Transparent">
-            <Canvas Background="Black" Opacity="0.5" />
+            <Canvas Background="{StaticResource Black50AcrylicBrush}" Opacity="0.9" />
             <StackPanel>
                 <Button
                     x:Name="TagsButton"

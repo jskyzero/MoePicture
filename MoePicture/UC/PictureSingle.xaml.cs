@@ -28,7 +28,7 @@ namespace MoePicture.UC
         public PictureSingle()
         {
             this.InitializeComponent();
-            Win2D.initialGlass(TagsGlass);
+            // Win2D.initialGlass(TagsGlass);
         }
 
         private void TagsButton_Click(object sender, RoutedEventArgs e)
@@ -72,7 +72,7 @@ namespace MoePicture.UC
         private async void OnShareDataRequested(DataTransferManager sender, DataRequestedEventArgs args)
         {
             var request = args.Request;
-            var SelectItem = (Models.PictureItem)TagsGlass.DataContext;
+            var SelectItem = (Models.PictureItem)TagsGrid.DataContext;
             // 添加文字描述
             request.Data.Properties.Title = SelectItem.Title;
             request.Data.Properties.Description = "Moe picture share";

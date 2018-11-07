@@ -18,9 +18,29 @@
         TintOpacity="0" />
 
     <AcrylicBrush
+        x:Key="Black50_30AcrylicBrush"
+        BackgroundSource="Backdrop"
+        TintColor="#AF000000"
+        TintOpacity="0.3" />
+
+    <AcrylicBrush
         x:Key="Black50AcrylicBrush"
         BackgroundSource="Backdrop"
         FallbackColor="#FF000000"
         TintColor="#FF000000"
+        TintOpacity="0.5" />
+
+    <AcrylicBrush
+        x:Key="Black60AcrylicBrush"
+        BackgroundSource="Backdrop"
+        FallbackColor="#FF000000"
+        TintColor="#FF000000"
+        TintOpacity="0.6" />
+
+    <!--  重写一些系统资源  -->
+    <AcrylicBrush
+        x:Key="NavigationViewDefaultPaneBackground"
+        BackgroundSource="Backdrop"
+        TintColor="#F9F9F9"
         TintOpacity="0.5" />
 </ResourceDictionary>

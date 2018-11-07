@@ -9,7 +9,6 @@
     <Grid Background="{StaticResource TransparentAcrylicBrush}">
         <NavigationView
             x:Name="NavView"
-            Margin="0,32,0,32"
             AlwaysShowHeader="False"
             BackRequested="NavView_BackRequested"
             CompactModeThresholdWidth="720"
@@ -44,7 +43,7 @@
 
             <Frame
                 x:Name="ContentFrame"
-                Margin="0,-32,0,-32"
+                Margin="0,0,0,0"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch">
                 <Frame.ContentTransitions>
