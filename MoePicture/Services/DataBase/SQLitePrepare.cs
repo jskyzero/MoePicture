@@ -4,7 +4,7 @@
 
 using Microsoft.Data.Sqlite;
 
-namespace DataBase
+namespace MoePicture.Services.DataBase
 {
     /// <summary>
     /// 数据库静态基类，用于创建数据库，进行链接

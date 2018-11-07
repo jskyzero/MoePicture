@@ -8,7 +8,7 @@ using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace CustomControl
+namespace MoePicture.CC
 {
     /// <summary>
     /// Arranges child elements into a staggered grid pattern where items are added to the column that has used least amount of space.

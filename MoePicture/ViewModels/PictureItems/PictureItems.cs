@@ -1,6 +1,7 @@
 ﻿using CommonServiceLocator;
 using MoePicture.Models;
 using MoePicture.Services;
+using MoePicture.Services.DataBase;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -18,9 +19,9 @@ namespace MoePicture.ViewModels
         /// <summary> 判断是否还有图片 </summary>
         private bool noMorePicture;
         /// <summary> 网页类型 </summary>
-        private Services.WebsiteHelper website;
+        private WebsiteHelper website;
         /// <summary> 数据库实例 </summary>
-        public DataBase.DataBase DB;
+        public DataBase DB;
 
         #endregion Propeities
 
@@ -34,7 +35,7 @@ namespace MoePicture.ViewModels
         public PictureItems(WebsiteType websiteType, string tag = "")
         {
             noMorePicture = false;
-            DB = new DataBase.DataBase(GlobalConfig.DataBaseName);
+            DB = new DataBase(GlobalConfig.DataBaseName);
             website = new Services.WebsiteHelper(websiteType, tag);
             loadAll = ServiceLocator.Current.GetInstance<UserConfigVM>().Config.Rating == RatingType.All;
             //LoadMoreItemsAsync(100);

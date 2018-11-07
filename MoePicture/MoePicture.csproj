@@ -102,6 +102,10 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CC\AdaptiveGridView.cs" />
+    <Compile Include="CC\PictureItem.cs" />
+    <Compile Include="CC\PictureWall.cs" />
+    <Compile Include="CC\StaggeredPanel.cs" />
     <Compile Include="Converters\BoolVisibilityConverter.cs" />
     <Compile Include="Converters\IntBoolConverter.cs" />
     <Compile Include="Converters\IntVisibilityConverter.cs" />
@@ -112,6 +116,8 @@
     <Compile Include="Models\UserConfig.cs" />
     <Compile Include="Services\ConfigService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\DataBase\DateBase.cs" />
+    <Compile Include="Services\DataBase\SQLitePrepare.cs" />
     <Compile Include="Services\MoePictureConfig.cs" />
     <Compile Include="Services\Spider.cs" />
     <Compile Include="Services\WebsiteHelper.cs" />
@@ -221,6 +227,9 @@
     <PackageReference Include="Microsoft.AppCenter.Analytics">
       <Version>1.9.0</Version>
     </PackageReference>
+    <PackageReference Include="Microsoft.Data.Sqlite">
+      <Version>2.1.0</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.1.7</Version>
     </PackageReference>
@@ -238,21 +247,9 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CustomControl\CustomControl.csproj">
-      <Project>{a4cc24d4-f383-4e1f-87c6-cd9794b719b3}</Project>
-      <Name>CustomControl</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DataBase\DataBase.csproj">
-      <Project>{abb6bc46-85f2-4287-b4ac-3db37a09eb31}</Project>
-      <Name>DataBase</Name>
-    </ProjectReference>
     <ProjectReference Include="..\UwpLibs\UwpLibs.csproj">
       <Project>{57917382-9c60-4ec1-ab93-b7232d460cf3}</Project>
       <Name>UwpLibs</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\UwpUiLibs\UwpUiLibs.csproj">
-      <Project>{deae99d3-32a8-420e-8db9-1557bf9819ae}</Project>
-      <Name>UwpUiLibs</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

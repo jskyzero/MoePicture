@@ -7,9 +7,9 @@ using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace CustomControl
+namespace MoePicture.CC
 {
-    public class PictureItemPane : Panel
+    public class PictureItem : Panel
     {
         /// <summary>
         /// Measure 测量过程
@@ -19,9 +19,9 @@ namespace CustomControl
         protected override Size MeasureOverride(Size availableSize)
         {
             Size request = new Size(availableSize.Width, availableSize.Height);
-            var item = Children.First();
-            item.Measure(availableSize);
-            request.Height = item.DesiredSize.Height * availableSize.Width / item.DesiredSize.Width;
+            //DataContext as 
+            //return new Size((this.).Post.PreviewImageWidth, (this.DataContext as PostViewModel).Post.PreviewImageHeight);
+            //request.Height = item.DesiredSize.Height * availableSize.Width / item.DesiredSize.Width;
             return request;
         }
 

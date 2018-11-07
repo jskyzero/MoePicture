@@ -7,12 +7,13 @@ using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace CustomControl
+namespace MoePicture.CC
 {
-    public class WaterFallView : Panel
-    {/// <summary>
-     /// 设定栈布局个数,最小值为1.
-     /// </summary>
+    public class PictureWall : Panel
+    {
+        /// <summary>
+        /// 设定栈布局个数,最小值为1.
+        /// </summary>
         public int StatckCount
         {
             get { return (int)GetValue(StatckCountProperty); }
@@ -20,7 +21,7 @@ namespace CustomControl
         }
 
         public static readonly DependencyProperty StatckCountProperty =
-                DependencyProperty.Register("StatckCount", typeof(int), typeof(VirtualizingPanel), new PropertyMetadata(1, RequestArrange));
+                DependencyProperty.Register("StatckCount", typeof(int), typeof(VirtualizingPanel), new PropertyMetadata(5, RequestArrange));
 
         /// <summary>
         /// 设定栈布局的间距.
@@ -32,7 +33,7 @@ namespace CustomControl
         }
 
         public static readonly DependencyProperty StatckSpacingProperty =
-                DependencyProperty.Register("StatckSpacing", typeof(Double), typeof(VirtualizingPanel), new PropertyMetadata(10, RequestArrange));
+                DependencyProperty.Register("StatckSpacing", typeof(Double), typeof(VirtualizingPanel), new PropertyMetadata(10.0, RequestArrange));
         /// <summary>
         /// 设定子元素的间距.
         /// </summary>
@@ -43,7 +44,7 @@ namespace CustomControl
         }
 
         public static readonly DependencyProperty ItemsSpacingProperty =
-                DependencyProperty.Register("ItemsSpacing", typeof(Double), typeof(VirtualizingPanel), new PropertyMetadata(10, RequestArrange));
+                DependencyProperty.Register("ItemsSpacing", typeof(Double), typeof(VirtualizingPanel), new PropertyMetadata(10.0, RequestArrange));
 
         /// <summary>
         /// 请求重新测量与布局面板
@@ -144,7 +145,6 @@ namespace CustomControl
                 //递增纵坐标
                 offsetY[minIndex] += (item.DesiredSize.Height * itemFixed / item.DesiredSize.Width + ItemsSpacing);
             }
-
             //直接返回参数
             return finalSize;
         }

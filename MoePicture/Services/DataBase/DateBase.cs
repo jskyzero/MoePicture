@@ -4,7 +4,7 @@
 
 using SQLitePCL;
 
-namespace DataBase
+namespace MoePicture.Services.DataBase
 {
     /// <summary>
     /// 数据库类，可进行数据库的链接，数据项查询，数据项增加
