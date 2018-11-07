@@ -64,8 +64,8 @@
             </Grid.ColumnDefinitions>
             <Canvas
                 Grid.ColumnSpan="2"
-                Background="{StaticResource Black100AcrylicBrush}"
-                Opacity="0.5" />
+                Background="{StaticResource Black50AcrylicBrush}"
+                Opacity="0.9" />
             <Image
                 Width="20"
                 Height="20"

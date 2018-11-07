@@ -83,8 +83,8 @@
                 x:Name="CircleButtonHover"
                 Width="60"
                 Height="60"
-                Fill="{StaticResource Black100AcrylicBrush}"
-                Opacity="0.5"
+                Fill="{StaticResource Black50AcrylicBrush}"
+                Opacity="0.9"
                 RadiusX="30"
                 RadiusY="30" />
             <ContentPresenter
@@ -94,13 +94,15 @@
                 ContentTemplate="{TemplateBinding ContentTemplate}"
                 ContentTransitions="{TemplateBinding ContentTransitions}" />
             <VisualStateManager.VisualStateGroups>
-
                 <VisualStateGroup x:Name="CommonStates">
                     <VisualState x:Name="Normal" />
                     <VisualState x:Name="PointerOver">
                         <Storyboard>
                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CircleButtonHover" Storyboard.TargetProperty="Opacity">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="0.7" />
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CircleButtonHover" Storyboard.TargetProperty="Fill">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="black" />
                             </ObjectAnimationUsingKeyFrames>
                         </Storyboard>
                     </VisualState>

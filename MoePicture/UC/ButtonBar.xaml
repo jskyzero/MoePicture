@@ -12,10 +12,10 @@
     </UserControl.Resources>
     <Grid>
         <Grid
-            Margin="0,36,20,0"
+            Margin="0,36,0,0"
             HorizontalAlignment="Right"
             VerticalAlignment="Top">
-            <Canvas Background="{StaticResource Black100AcrylicBrush}" Opacity="0.5" />
+            <Canvas Background="{StaticResource Black50AcrylicBrush}" Opacity="0.9" />
             <TextBlock
                 Margin="8,0,8,0"
                 VerticalAlignment="Center"
@@ -25,7 +25,7 @@
                 Text="{Binding Tag, Converter={StaticResource TagStringConverter}}" />
         </Grid>
         <Grid
-            Margin="0,0,48,48"
+            Margin="0,0,20,48"
             HorizontalAlignment="Right"
             VerticalAlignment="Bottom">
             <StackPanel>

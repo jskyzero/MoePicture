@@ -54,7 +54,7 @@
         </Grid>
 
         <Grid
-            Margin="0,0,12,0"
+            Margin="0,0,20,0"
             HorizontalAlignment="Right"
             VerticalAlignment="Center"
             Background="Transparent">
