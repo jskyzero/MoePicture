@@ -128,5 +128,16 @@ namespace MoePicture.UC
         {
             ServiceLocator.Current.GetInstance<PictureItemsVM>().SelectItemClick(e);
         }
+
+        private void ListView_Loaded(object sender, RoutedEventArgs e)
+        {
+            var scrollViewer = gridView.ChildrenBreadthFirst().OfType<ScrollViewer>().First();
+            scrollViewer.ViewChanged += onViewChanged;
+        }
+
+        private void onViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("Scrolled");
+        }
     }
 }

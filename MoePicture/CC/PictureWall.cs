@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
 
 namespace MoePicture.CC
 {
-    public class PictureWall : Panel
+    public class PictureWall :  Panel
     {
         /// <summary>
         /// 设定栈布局个数,最小值为1.
@@ -148,5 +149,6 @@ namespace MoePicture.CC
             //直接返回参数
             return finalSize;
         }
+
     }
 }

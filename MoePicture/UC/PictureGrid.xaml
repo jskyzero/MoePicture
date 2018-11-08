@@ -16,9 +16,11 @@
     <Grid DataContext="{Binding PicturesVM, Source={StaticResource Locator}}">
         <ProgressRing IsActive="{Binding PictureItems.Count, Converter={StaticResource IntBoolConverter}, Mode=OneWay}" Style="{StaticResource MyProgressRingStyle}" />
         <ListView
+            x:Name="gridView"
             IsItemClickEnabled="True"
             ItemClick="GridView_ItemClick"
-            ItemsSource="{Binding PictureItems}">
+            ItemsSource="{Binding PictureItems}"
+            Loaded="ListView_Loaded">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="Padding" Value="0" />
@@ -33,20 +35,18 @@
             </ListView.ItemsPanel>
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="Models:PictureItem">
-                    <CC:PictureItem>
-                        <Grid Loaded="RootGrid_Loaded" SizeChanged="RootGrid_SizeChanged">
-                            <Image Source="{Binding ImageSource}" Stretch="UniformToFill" />
-                            <Border x:Name="MaskBorder" Background="#50000000">
-                                <StackPanel>
-                                    <TextBlock
-                                        Margin="12"
-                                        Foreground="White"
-                                        Text="{Binding Title}"
-                                        TextWrapping="Wrap" />
-                                </StackPanel>
-                            </Border>
-                        </Grid>
-                    </CC:PictureItem>
+                    <Grid Loaded="RootGrid_Loaded" SizeChanged="RootGrid_SizeChanged">
+                        <Image Source="{Binding ImageSource}" Stretch="UniformToFill" />
+                        <Border x:Name="MaskBorder" Background="#50000000">
+                            <StackPanel>
+                                <TextBlock
+                                    Margin="12"
+                                    Foreground="White"
+                                    Text="{Binding Title}"
+                                    TextWrapping="Wrap" />
+                            </StackPanel>
+                        </Border>
+                    </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
