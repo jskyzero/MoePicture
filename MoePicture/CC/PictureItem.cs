@@ -29,7 +29,6 @@ namespace MoePicture.CC
         }
 
 
-
         /// <summary>
         /// Measure 测量过程
         /// </summary>

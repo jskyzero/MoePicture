@@ -16,11 +16,10 @@
     <Grid DataContext="{Binding PicturesVM, Source={StaticResource Locator}}">
         <ProgressRing IsActive="{Binding PictureItems.Count, Converter={StaticResource IntBoolConverter}, Mode=OneWay}" Style="{StaticResource MyProgressRingStyle}" />
         <ListView
-            x:Name="gridView"
+            x:Name="listView"
             IsItemClickEnabled="True"
             ItemClick="GridView_ItemClick"
-            ItemsSource="{Binding PictureItems}"
-            Loaded="ListView_Loaded">
+            ItemsSource="{Binding PictureItems}">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="Padding" Value="0" />

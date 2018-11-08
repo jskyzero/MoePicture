@@ -23,6 +23,8 @@ namespace MoePicture.ViewModels
         /// <summary> 数据库实例 </summary>
         public DataBase DB;
 
+        public bool Busy { get { return _busy; } }
+
         #endregion Propeities
 
         #region Constructer

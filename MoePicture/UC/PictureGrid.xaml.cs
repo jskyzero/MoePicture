@@ -1,4 +1,5 @@
 ﻿using CommonServiceLocator;
+using MoePicture.CC;
 using MoePicture.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -71,11 +72,12 @@ namespace MoePicture.UC
             var img = rootGrid.Children[0] as FrameworkElement;
 
             ToggleItemPointAnimation(maskBorder, img, true);
-        }
 
-        // TODO
-        private void CheckLoadMore(object sender, PointerRoutedEventArgs e)
-        {
+
+
+            var context = ((sender as Grid).DataContext as Models.PictureItem);
+            itemIndex = ServiceLocator.Current.GetInstance<PictureItemsVM>().PictureItems.IndexOf(context);
+            if (ServiceLocator.Current.GetInstance<PictureItemsVM>().PictureItems.Count - itemIndex < 20) LoadMore();
         }
 
         private void ToggleItemPointAnimation(FrameworkElement mask, FrameworkElement img, bool show)
@@ -129,15 +131,14 @@ namespace MoePicture.UC
             ServiceLocator.Current.GetInstance<PictureItemsVM>().SelectItemClick(e);
         }
 
-        private void ListView_Loaded(object sender, RoutedEventArgs e)
-        {
-            var scrollViewer = gridView.ChildrenBreadthFirst().OfType<ScrollViewer>().First();
-            scrollViewer.ViewChanged += onViewChanged;
-        }
+        private double pointerPosition = 0;
 
-        private void onViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
+        private void LoadMore()
         {
-            System.Diagnostics.Debug.WriteLine("Scrolled");
+            if (!ServiceLocator.Current.GetInstance<PictureItemsVM>().PictureItems.Busy)
+            {
+                ServiceLocator.Current.GetInstance<PictureItemsVM>().PictureItems.LoadMoreItemsAsync(100);
+            }
         }
     }
 }

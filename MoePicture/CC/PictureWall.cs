@@ -34,7 +34,7 @@ namespace MoePicture.CC
         }
 
         public static readonly DependencyProperty StatckSpacingProperty =
-                DependencyProperty.Register("StatckSpacing", typeof(Double), typeof(VirtualizingPanel), new PropertyMetadata(10.0, RequestArrange));
+                DependencyProperty.Register("StatckSpacing", typeof(Double), typeof(VirtualizingPanel), new PropertyMetadata(0.0, RequestArrange));
         /// <summary>
         /// 设定子元素的间距.
         /// </summary>
@@ -45,7 +45,7 @@ namespace MoePicture.CC
         }
 
         public static readonly DependencyProperty ItemsSpacingProperty =
-                DependencyProperty.Register("ItemsSpacing", typeof(Double), typeof(VirtualizingPanel), new PropertyMetadata(10.0, RequestArrange));
+                DependencyProperty.Register("ItemsSpacing", typeof(Double), typeof(VirtualizingPanel), new PropertyMetadata(0.0, RequestArrange));
 
         /// <summary>
         /// 请求重新测量与布局面板
@@ -146,6 +146,7 @@ namespace MoePicture.CC
                 //递增纵坐标
                 offsetY[minIndex] += (item.DesiredSize.Height * itemFixed / item.DesiredSize.Width + ItemsSpacing);
             }
+            Height = finalSize.Height;
             //直接返回参数
             return finalSize;
         }
