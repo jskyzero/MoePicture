@@ -57,14 +57,16 @@ namespace MoePicture.UC
             FileSavePicker savePicker = new FileSavePicker();
 
             savePicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
-            savePicker.SuggestedFileName = SelectItem.Title;
+            var titleStrs = SelectItem.Title.Split('.').ToList();
+            if (titleStrs.Count > 1) titleStrs.RemoveAt(titleStrs.Count - 1);
+            savePicker.SuggestedFileName = String.Join('.', titleStrs.ToArray());
             savePicker.FileTypeChoices.Add(".png", new List<string>() { ".png" });
             savePicker.FileTypeChoices.Add(".jpg", new List<string>() { ".jpg", ".jpeg" });
 
             StorageFile file = await savePicker.PickSaveFileAsync();
             if (file != null)
             {
-                await Services.Spider.DownloadPictureFromUriToFile(new Uri(SelectItem.SourceUrl), file);
+                await Services.Spider.DownloadPictureFromUriToFolder(new Uri(SelectItem.SourceUrl), (await file.GetParentAsync()).Path, file.Name);
             }
         }
 

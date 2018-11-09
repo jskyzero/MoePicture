@@ -140,8 +140,8 @@ namespace MoePicture.CC
                 minIndex = offsetY.IndexOf(min);
 
                 //对 item 进行布局
-                var newHeight = item.DesiredSize.Height * itemFixed / item.DesiredSize.Width;
-                var rect = new Rect(offsetX[minIndex], offsetY[minIndex], itemFixed, newHeight);
+                //var newHeight = item.DesiredSize.Height * itemFixed / item.DesiredSize.Width;
+                var rect = new Rect(offsetX[minIndex], offsetY[minIndex], itemFixed, item.DesiredSize.Height);
                 item.Arrange(rect);
                 //递增纵坐标
                 offsetY[minIndex] += (item.DesiredSize.Height * itemFixed / item.DesiredSize.Width + ItemsSpacing);

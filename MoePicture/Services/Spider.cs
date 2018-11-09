@@ -41,19 +41,6 @@ namespace MoePicture.Services
         }
 
         /// <summary>
-        /// 通过Uri下载图片到本地文件
-        /// </summary>
-        /// <param name="uri">链接</param>
-        /// <param name="file">保存文件</param>
-        /// <returns></returns>
-        public async static Task DownloadPictureFromUriToFile(Uri uri, StorageFile file)
-        {
-            // 获取图片流下载到文件中
-            IBuffer buffer = await Client.GetBufferAsync(uri);
-            await FileIO.WriteBufferAsync(file, buffer);
-        }
-
-        /// <summary>
         /// 通过Uri下载图片到本地文件(通过path和fileName路径得到本地文件)
         /// </summary>
         /// <param name="uri">链接</param>
@@ -62,9 +49,10 @@ namespace MoePicture.Services
         /// <returns></returns>
         public async static Task DownloadPictureFromUriToFolder(Uri uri, string path, string fileName)
         {
+            IBuffer buffer = await Client.GetBufferAsync(uri);
             StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(path);
             StorageFile file = await folder.CreateFileAsync(fileName, CreationCollisionOption.OpenIfExists);
-            await DownloadPictureFromUriToFile(uri, file);
+            await FileIO.WriteBufferAsync(file, buffer);
         }
 
         private static SemaphoreSlim DownloadPictureLock = new SemaphoreSlim(5);
@@ -80,9 +68,10 @@ namespace MoePicture.Services
         {
             await DownloadPictureLock.WaitAsync();
 
+            IBuffer buffer = await Client.GetBufferAsync(uri);
             StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(path);
             StorageFile file = await folder.CreateFileAsync(fileName, CreationCollisionOption.OpenIfExists);
-            await DownloadPictureFromUriToFile(uri, file);
+            await FileIO.WriteBufferAsync(file, buffer);
 
             DownloadPictureLock.Release();
         }

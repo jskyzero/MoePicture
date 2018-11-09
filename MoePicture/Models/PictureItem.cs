@@ -117,7 +117,7 @@ namespace MoePicture.Models
                 }
                 return Items;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 // show error page
                 ServiceLocator.Current.GetInstance<ShellVM>().ErrorMessage = e.ToString();
@@ -188,6 +188,7 @@ namespace MoePicture.Models
             var path = Path.Combine(folder.Path, FileName);
 
             if (!File.Exists(path) || ((new FileInfo(path).Length) == 0))
+            //if (!File.Exists(path))
             {
                 if (UrlType == UrlType.PreviewUrl)
                 {
@@ -217,7 +218,7 @@ namespace MoePicture.Models
                     //触发UI绑定属性的改变
                     RaisePropertyChanged(() => ImageSource);
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     // show error page
                     ServiceLocator.Current.GetInstance<ShellVM>().ErrorMessage = e.ToString();

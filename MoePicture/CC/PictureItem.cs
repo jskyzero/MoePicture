@@ -13,20 +13,20 @@ namespace MoePicture.CC
     {
 
 
-        public PictureItem()
-        {
-            DataContextChanged += PictureItem_DataContextChanged;
-        }
+        //public PictureItem()
+        //{
+        //    DataContextChanged += PictureItem_DataContextChanged;
+        //}
 
-        private void PictureItem_DataContextChanged(FrameworkElement sender, DataContextChangedEventArgs args)
-        {
-            var context = DataContext as Models.PictureItem;
-            if (DataContext != null)
-            {
-                InvalidateMeasure();
-                InvalidateArrange();
-            }
-        }
+        //private void PictureItem_DataContextChanged(FrameworkElement sender, DataContextChangedEventArgs args)
+        //{
+        //    var context = DataContext as Models.PictureItem;
+        //    if (DataContext != null)
+        //    {
+        //        InvalidateMeasure();
+        //        InvalidateArrange();
+        //    }
+        //}
 
 
         /// <summary>
@@ -36,22 +36,12 @@ namespace MoePicture.CC
         /// <returns>返回自己需要多少控件</returns>
         protected override Size MeasureOverride(Size availableSize)
         {
-            //Size request = new Size(availableSize.Width, availableSize.Height);
-            //request.Height = Height * availableSize.Width / Width;
-            //return request;
+            //Children[0].Measure(availableSize);
             Size request = new Size(availableSize.Width, availableSize.Height);
-            var context = DataContext as Models.PictureItem;
-            if (context != null)
-            {
-                var size = context.PreviewSize;
-                request.Height = size.Height * availableSize.Width / size.Width;
-            }
-            else
-            {
-                request.Height = 0;
-            }
-
+            var size = (DataContext as Models.PictureItem).PreviewSize;
+            request.Height = size.Height * availableSize.Width / size.Width;
             return request;
+            //return Children[0].DesiredSize;
         }
 
         /// <summary>
@@ -61,12 +51,16 @@ namespace MoePicture.CC
         /// <returns>并没有什么特殊含义,一半是原封不动直接返回参数</returns>
         protected override Size ArrangeOverride(Size finalSize)
         {
-            double offsetY = 0;
-            foreach (var item in Children)
-            {
-                item.Arrange(new Rect(0, offsetY, item.DesiredSize.Width, item.DesiredSize.Height));
-                offsetY += item.DesiredSize.Height;
-            }
+            //var size = Children[0].DesiredSize;
+            Children[0].Arrange(new Rect(0, 0, finalSize.Width, finalSize.Height));
+
+            //Children[0].Arrange(new Rect(0, 0, size.Width, size.Height));
+            //double offsetY = 0;
+            //foreach (var item in Children)
+            //{
+            //    item.Arrange(new Rect(0, offsetY, item.DesiredSize.Width, item.DesiredSize.Height));
+            //    offsetY += item.DesiredSize.Height;
+            //}
             return finalSize;
         }
     }
