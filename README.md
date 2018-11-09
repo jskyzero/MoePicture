@@ -4,23 +4,13 @@
 
 Help you to get moe pictures more easily / 帮助您更好的获取二次元图片
 
-![](./MoePicture/Assets/MoePicture2.png)
+![](./MoePicture/Assets/source/MoePicture2.png)
 
 ## Overview
 
 > Recently update / 最近更新
 
-1. 进一步增加新的图源：gelbooru.com 和 safebooru.org
-
-![](https://jskyzero.github.io/MoePicture/assets/images/18.spring/1.gif)
-
-2. 允许自定义主界面图片大小，同时在大小大于400px时候将会加载大图。
-
-![](https://jskyzero.github.io/MoePicture/assets/images/18.spring/2.gif)
-
-3. 加入了异常处理界面，避免体验极差的闪退。
-
-![](https://jskyzero.github.io/MoePicture/assets/images/18.spring/3.gif)
+![Recently update / 最近更新](https://user-images.githubusercontent.com/20439262/48274490-679aa380-e47e-11e8-8b70-5053864aa281.gif)
 
 ## Install / 安装
 
