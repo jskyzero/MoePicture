@@ -58,7 +58,8 @@ namespace MoePicture.UC
 
             savePicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
             savePicker.SuggestedFileName = SelectItem.Title;
-            savePicker.FileTypeChoices.Add("Picture", new List<string>() { ".jpg", ".png" });
+            savePicker.FileTypeChoices.Add(".png", new List<string>() { ".png" });
+            savePicker.FileTypeChoices.Add(".jpg", new List<string>() { ".jpg", ".jpeg" });
 
             StorageFile file = await savePicker.PickSaveFileAsync();
             if (file != null)

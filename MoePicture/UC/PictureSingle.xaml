@@ -17,7 +17,11 @@
         <Grid Background="{StaticResource Black60AcrylicBrush}" Opacity="0.9" />
         <Border Tapped="Border_Tapped">
             <Grid Background="Transparent">
-                <ProgressRing IsActive="True" Style="{StaticResource MyProgressRingStyle}" />
+                <ProgressRing
+                    Width="100"
+                    Height="100"
+                    IsActive="True"
+                    Style="{StaticResource MyProgressRingStyle}" />
             </Grid>
         </Border>
         <Grid Padding="20">

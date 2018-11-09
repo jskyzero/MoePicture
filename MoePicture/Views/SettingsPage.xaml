@@ -32,6 +32,7 @@
                     HorizontalAlignment="Left"
                     IsOn="{Binding Config.Rating, Converter={StaticResource RatingNullableBooleanConverter}, Mode=TwoWay}" />
                 <TextBlock Style="{StaticResource BodyTextBlockStyle}" Text="图片墙界面单张图片大小" />
+                <TextBlock Style="{StaticResource BodyTextBlockStyle}" Text="（未实现，无效果）" />
                 <Slider
                     Width="200"
                     Margin="0,0,0,20"
