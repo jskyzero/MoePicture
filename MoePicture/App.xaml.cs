@@ -138,6 +138,11 @@ namespace MoePicture
                 rootFrame.Navigate(initialPageType);
             }
 
+            // 确保当前窗口处于活动状态
+            Window.Current.Activate();
+            // 在UI线程初始化调度管理帮助类
+            DispatcherHelper.Initialize();
+
             // 时间线支持，从上次停止的地方继续
             if (e.Kind == ActivationKind.Protocol) // 从url协议启动
             {
@@ -151,11 +156,6 @@ namespace MoePicture
                     ServiceLocator.Current.GetInstance<PictureItemsVM>().ChangeWebsiteCommand.Execute(websiteType);
                 }
             }
-
-            // 确保当前窗口处于活动状态
-            Window.Current.Activate();
-            // 在UI线程初始化调度管理帮助类
-            DispatcherHelper.Initialize();
         }
     }
 }

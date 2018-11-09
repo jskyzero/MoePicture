@@ -11,8 +11,8 @@ namespace MoePicture.Services
 {
     static class Spider
     {
-        /// <summary> client </summary>
-        private static HttpClient client = null;
+        ///// <summary> client </summary>
+        //private static HttpClient client = null;
         /// <summary> 伪装头 </summary>
         private const string User_Agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit / 537.36(KHTML, like Gecko) Chrome  47.0.2526.106 Safari / 537.36";
 
@@ -20,13 +20,19 @@ namespace MoePicture.Services
         {
             get
             {
-                if (client == null)
-                {
-                    client = new HttpClient();
-                    // 对爬虫进行伪装，防止网站发现爬虫然后无法访问
-                    client.DefaultRequestHeaders.Add("User-Agent", User_Agent);
-                    JskyUwpLibs.Tool.LogFile.WriteLog("Create Client");
-                }
+                //if (client == null)
+                //{
+                //    client = new HttpClient();
+                //    // 对爬虫进行伪装，防止网站发现爬虫然后无法访问
+                //    client.DefaultRequestHeaders.Add("User-Agent", User_Agent);
+                //    JskyUwpLibs.Tool.LogFile.WriteLog("Create Client");
+                //}
+                //return client;
+
+                var client = new HttpClient();
+                // 对爬虫进行伪装，防止网站发现爬虫然后无法访问
+                client.DefaultRequestHeaders.Add("User-Agent", User_Agent);
+                JskyUwpLibs.Tool.LogFile.WriteLog("Create Client");
                 return client;
             }
         }
@@ -60,7 +66,7 @@ namespace MoePicture.Services
             JskyUwpLibs.Tool.LogFile.WriteLog("Finish " + path + fileName);
         }
 
-        private static SemaphoreSlim DownloadPictureLock = new SemaphoreSlim(5);
+        //private static SemaphoreSlim DownloadPictureLock = new SemaphoreSlim(5);
 
         /// <summary>
         /// 限制最大同时下载次数的通过Uri下载图片到本地文件(通过path和fileName路径得到本地文件)
@@ -71,7 +77,7 @@ namespace MoePicture.Services
         /// <returns></returns>
         public async static Task DownloadPictureFromUriToFolderLock(Uri uri, string path, string fileName)
         {
-            await DownloadPictureLock.WaitAsync();
+            //await DownloadPictureLock.WaitAsync();
 
             JskyUwpLibs.Tool.LogFile.WriteLog("Lock Begin " + path + fileName);
 
@@ -82,7 +88,7 @@ namespace MoePicture.Services
 
             JskyUwpLibs.Tool.LogFile.WriteLog("Lock Finish " + path + fileName);
 
-            DownloadPictureLock.Release();
+            //DownloadPictureLock.Release();
         }
 
         /// <summary>

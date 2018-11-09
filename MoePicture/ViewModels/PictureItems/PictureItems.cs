@@ -85,6 +85,8 @@ namespace MoePicture.ViewModels
                     DB.add(url, str);
                 }
 
+                JskyUwpLibs.Tool.LogFile.WriteLog("Begin Load Items " + url);
+
                 var Items = PictureItem.GetPictureItems(website.Type, str, loadAll);
 
                 if (Items.Count > 0)
