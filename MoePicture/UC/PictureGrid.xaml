@@ -14,40 +14,56 @@
         <Converters:IntBoolConverter x:Key="IntBoolConverter" />
     </UserControl.Resources>
     <Grid DataContext="{Binding PicturesVM, Source={StaticResource Locator}}">
-        <ProgressRing IsActive="{Binding PictureItems.Count, Converter={StaticResource IntBoolConverter}, Mode=OneWay}" Style="{StaticResource MyProgressRingStyle}" />
-        <ListView
-            x:Name="listView"
-            IsItemClickEnabled="True"
-            ItemClick="GridView_ItemClick"
-            ItemsSource="{Binding PictureItems}">
-            <ListView.ItemContainerStyle>
-                <Style TargetType="ListViewItem">
-                    <Setter Property="Padding" Value="0" />
-                    <Setter Property="Margin" Value="0" />
-                    <Setter Property="BorderThickness" Value="0" />
-                </Style>
-            </ListView.ItemContainerStyle>
-            <ListView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <CC:PictureWall />
-                </ItemsPanelTemplate>
-            </ListView.ItemsPanel>
-            <ListView.ItemTemplate>
-                <DataTemplate x:DataType="Models:PictureItem">
-                    <Grid Loaded="RootGrid_Loaded" SizeChanged="RootGrid_SizeChanged">
-                        <Image Source="{Binding ImageSource}" Stretch="UniformToFill" />
-                        <Border x:Name="MaskBorder" Background="#50000000">
-                            <StackPanel>
-                                <TextBlock
-                                    Margin="12"
-                                    Foreground="White"
-                                    Text="{Binding Title}"
-                                    TextWrapping="Wrap" />
-                            </StackPanel>
-                        </Border>
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+        
+        <ScrollViewer x:Name="scrollView" ViewChanged="scrollView_ViewChanged">
+            <ListView
+                x:Name="listView"
+                IsItemClickEnabled="True"
+                ItemClick="GridView_ItemClick"
+                ItemsSource="{Binding PictureItems}">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="Padding" Value="0" />
+                        <Setter Property="Margin" Value="0" />
+                        <Setter Property="BorderThickness" Value="0" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <CC:PictureWall />
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="Models:PictureItem">
+                        <Grid Loaded="RootGrid_Loaded" SizeChanged="RootGrid_SizeChanged">
+                            <Image Source="{Binding ImageSource}" Stretch="UniformToFill" />
+                            <Border x:Name="MaskBorder" Background="#50000000">
+                                <StackPanel>
+                                    <TextBlock
+                                        Margin="12"
+                                        Foreground="White"
+                                        Text="{Binding Title}"
+                                        TextWrapping="Wrap" />
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </ScrollViewer>
+        <!--<StackPanel
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            Background="Gray"
+            Orientation="Horizontal">
+            <Button x:Name="Add_Button" Margin="4">
+                add
+            </Button>
+            <Button x:Name="Insert_Button" Margin="4">insert</Button>
+            <Button x:Name="Remove_Button" Margin="4">remove</Button>
+            <Button x:Name="Reset_Button" Margin="4">
+                initial
+            </Button>
+        </StackPanel>-->
     </Grid>
 </UserControl>

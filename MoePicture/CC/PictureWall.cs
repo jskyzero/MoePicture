@@ -69,7 +69,7 @@ namespace MoePicture.CC
         /// </summary>
         protected override Size MeasureOverride(Size availableSize)
         {
-            var measure = base.MeasureOverride(availableSize);
+            //var measure = base.MeasureOverride(availableSize);
 
             double itemFixed = 0;
             Size requestSize = Size.Empty;

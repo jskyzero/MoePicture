@@ -9,6 +9,7 @@
     mc:Ignorable="d">
     <UserControl.Resources>
         <Converters:TagStringConverter x:Key="TagStringConverter" />
+        <Converters:BoolVisibilityConverter x:Key="BoolVisibilityConverter" />
     </UserControl.Resources>
     <Grid>
         <Grid
@@ -23,6 +24,36 @@
                 FontSize="36"
                 Foreground="White"
                 Text="{Binding Tag, Converter={StaticResource TagStringConverter}}" />
+        </Grid>
+        <Grid
+            Height="44"
+            Margin="0,88,0,0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            DataContext="{Binding PicturesVM, Source={StaticResource Locator}}"
+            Visibility="{Binding PictureItems.Busy, Mode=OneWay, Converter={StaticResource BoolVisibilityConverter}}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+            <Canvas
+                Grid.ColumnSpan="2"
+                Background="{StaticResource Black50AcrylicBrush}"
+                Opacity="0.9" />
+            <ProgressRing
+                Width="40"
+                Height="40"
+                Padding="8"
+                HorizontalAlignment="Left"
+                IsActive="{Binding PictureItems.Busy, Mode=OneWay}"
+                Style="{StaticResource MyProgressRingStyle}" />
+            <TextBlock
+                Grid.Column="2"
+                Margin="8,0,8,0"
+                VerticalAlignment="Center"
+                FontSize="32"
+                Foreground="White"
+                Text="加载中..." />
         </Grid>
         <Grid
             Margin="0,0,20,48"

@@ -112,14 +112,15 @@ namespace MoePicture.ViewModels
             get { return HasMoreItemsOverride(); }
         }
 
+
         public Windows.Foundation.IAsyncOperation<LoadMoreItemsResult> LoadMoreItemsAsync(uint count)
         {
-            if (_busy)
+            if (Busy)
             {
                 throw new InvalidOperationException("Only one operation in flight at a time");
             }
 
-            _busy = true;
+            Busy = true;
 
             return AsyncInfo.Run((c) => LoadMoreItemsAsync(c, count));
         }
@@ -168,7 +169,7 @@ namespace MoePicture.ViewModels
             //}
             finally
             {
-                _busy = false;
+                Busy = false;
             }
         }
 
@@ -206,7 +207,9 @@ namespace MoePicture.ViewModels
         protected List<T> _storage = new List<T>();
 
         // 表示后台线程是否正在进行，一次只能进行一个线程
-        protected bool _busy = false;
+        private bool busy = false;
+        protected bool Busy { get => busy; set { busy = value; OnPropertyChanged("Busy"); } }
+
 
         #endregion State
     }

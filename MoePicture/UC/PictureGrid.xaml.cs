@@ -1,4 +1,5 @@
 ﻿using CommonServiceLocator;
+using GalaSoft.MvvmLight.Threading;
 using MoePicture.CC;
 using MoePicture.ViewModels;
 using System;
@@ -33,7 +34,16 @@ namespace MoePicture.UC
         public PictureGrid()
         {
             this.InitializeComponent();
+            ServiceLocator.Current.GetInstance<PictureItemsVM>().ScrollRefreshEvent += Refresh;
             this.compositor = ElementCompositionPreview.GetElementVisual(this).Compositor;
+        }
+
+        private void Refresh()
+        {
+            DispatcherHelper.CheckBeginInvokeOnUI(() =>
+            {
+                scrollView.ChangeView(null, 0, null, true);
+            });
         }
 
         private void RootGrid_Loaded(object sender, RoutedEventArgs e)
@@ -139,6 +149,24 @@ namespace MoePicture.UC
             {
                 ServiceLocator.Current.GetInstance<PictureItemsVM>().PictureItems.LoadMoreItemsAsync(100);
             }
+        }
+
+        private void scrollView_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
+        {
+            var verticalOffset = scrollView.VerticalOffset;
+            var maxVerticalOffset = scrollView.ScrollableHeight; //sv.ExtentHeight - sv.ViewportHeight;
+
+            if (maxVerticalOffset < 0 ||
+                verticalOffset == maxVerticalOffset)
+            {
+                // Scrolled to bottom
+                LoadMore();
+            }
+            //else
+            //{
+            //    // Not scrolled to bottom
+            //    rect.Fill = new SolidColorBrush(Colors.Yellow);
+            //}
         }
     }
 }
