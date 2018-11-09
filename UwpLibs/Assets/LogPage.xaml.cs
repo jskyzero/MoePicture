@@ -67,11 +67,7 @@ namespace JskyUwpLibs
             Enumerable.Range(0, logLineList.Count).ToList().ForEach(new Action<int>(i => logLineList[i].Update()));
         }
     }
-}
 
-
-namespace JskyUwpLibs
-{
     internal class LogLineList : ObservableCollection<LogLineItem>
     {
         public LogLineList() : base()
@@ -127,3 +123,4 @@ namespace JskyUwpLibs
         }
     }
 }
+

@@ -36,6 +36,9 @@ namespace MoePicture.ViewModels
             SimpleIoc.Default.Register<PictureItemsVM>();
             SimpleIoc.Default.Register<ShellVM>();
 
+            JskyUwpLibs.Tool.LogFile.InitialFilePath("LOG.TXT");
+            JskyUwpLibs.Tool.LogFile.WriteLog("ViewModelLocator Initial");
+
             // 旧时代导航相关服务
             // SimpleIoc.Default.Register<INavigationService>(() => nav);
             // var nav = new NavigationService();

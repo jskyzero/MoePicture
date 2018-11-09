@@ -25,6 +25,7 @@ namespace MoePicture.Services
                     client = new HttpClient();
                     // 对爬虫进行伪装，防止网站发现爬虫然后无法访问
                     client.DefaultRequestHeaders.Add("User-Agent", User_Agent);
+                    JskyUwpLibs.Tool.LogFile.WriteLog("Create Client");
                 }
                 return client;
             }
@@ -49,10 +50,14 @@ namespace MoePicture.Services
         /// <returns></returns>
         public async static Task DownloadPictureFromUriToFolder(Uri uri, string path, string fileName)
         {
+            JskyUwpLibs.Tool.LogFile.WriteLog("Begin " + path + fileName);
+
             IBuffer buffer = await Client.GetBufferAsync(uri);
             StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(path);
             StorageFile file = await folder.CreateFileAsync(fileName, CreationCollisionOption.OpenIfExists);
             await FileIO.WriteBufferAsync(file, buffer);
+
+            JskyUwpLibs.Tool.LogFile.WriteLog("Finish " + path + fileName);
         }
 
         private static SemaphoreSlim DownloadPictureLock = new SemaphoreSlim(5);
@@ -68,10 +73,14 @@ namespace MoePicture.Services
         {
             await DownloadPictureLock.WaitAsync();
 
+            JskyUwpLibs.Tool.LogFile.WriteLog("Lock Begin " + path + fileName);
+
             IBuffer buffer = await Client.GetBufferAsync(uri);
             StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(path);
             StorageFile file = await folder.CreateFileAsync(fileName, CreationCollisionOption.OpenIfExists);
             await FileIO.WriteBufferAsync(file, buffer);
+
+            JskyUwpLibs.Tool.LogFile.WriteLog("Lock Finish " + path + fileName);
 
             DownloadPictureLock.Release();
         }

@@ -102,6 +102,8 @@ namespace MoePicture.CC
             //寻找最长的 Stack,这个 Stack 就是面板需要的高度
             requestSize.Height = offsetY.Max();
 
+            JskyUwpLibs.Tool.LogFile.WriteLog("PictureWall Measure " + requestSize.ToString());
+
             //返回我们面板需要的大小
             return requestSize;
         }
@@ -147,6 +149,9 @@ namespace MoePicture.CC
                 offsetY[minIndex] += (item.DesiredSize.Height * itemFixed / item.DesiredSize.Width + ItemsSpacing);
             }
             Height = finalSize.Height;
+
+            JskyUwpLibs.Tool.LogFile.WriteLog("PictureWall Arrange " + finalSize.ToString());
+
             //直接返回参数
             return finalSize;
         }

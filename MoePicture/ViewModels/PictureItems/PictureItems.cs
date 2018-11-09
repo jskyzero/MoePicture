@@ -98,6 +98,8 @@ namespace MoePicture.ViewModels
                     noMorePicture = true;
                 }
 
+                JskyUwpLibs.Tool.LogFile.WriteLog("Finish Load Items " + url);
+
                 return Items;
             }
             catch(Exception e)
@@ -105,6 +107,7 @@ namespace MoePicture.ViewModels
                 ServiceLocator.Current.GetInstance<ShellVM>().ErrorMessage = e.ToString();
                 return PictureItem.GetPictureItems(website.Type, "", loadAll);
             }
+
         }
 
         #endregion Methods

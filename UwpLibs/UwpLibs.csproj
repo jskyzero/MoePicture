@@ -110,6 +110,7 @@
     <Compile Include="Assets\LogPage.xaml.cs">
       <DependentUpon>LogPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Tool\LogFile.cs" />
     <Compile Include="Tool\LogWindows.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TilesUpdater.cs" />

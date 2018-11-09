@@ -1,10 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
 using Windows.Foundation;
+using Windows.System;
+using Windows.System.Diagnostics;
 using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
@@ -14,6 +16,8 @@ namespace JskyUwpLibs
 {
     public sealed class LogWindows
     {
+
+        private static bool hasWindows = false;
 
         /// <summary>
         /// 创建log窗口
@@ -40,6 +44,8 @@ namespace JskyUwpLibs
                 Window.Current.Activate();
                 newViewId = ApplicationView.GetForCurrentView().Id;
             });
+
+            hasWindows = true;
 
             return (await ApplicationViewSwitcher.TryShowAsStandaloneAsync(newViewId)).ToString();
         }
