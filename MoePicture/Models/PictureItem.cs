@@ -117,10 +117,10 @@ namespace MoePicture.Models
                 }
                 return Items;
             }
-            catch
+            catch(Exception e)
             {
                 // show error page
-                ServiceLocator.Current.GetInstance<ViewModels.ShellVM>().ShowError = true;
+                ServiceLocator.Current.GetInstance<ShellVM>().ErrorMessage = e.ToString();
                 return Items;
             }
 
@@ -217,10 +217,10 @@ namespace MoePicture.Models
                     //触发UI绑定属性的改变
                     RaisePropertyChanged(() => ImageSource);
                 }
-                catch
+                catch(Exception e)
                 {
                     // show error page
-                    ServiceLocator.Current.GetInstance<ViewModels.ShellVM>().ShowError = true;
+                    ServiceLocator.Current.GetInstance<ShellVM>().ErrorMessage = e.ToString();
                 }
             });
         }

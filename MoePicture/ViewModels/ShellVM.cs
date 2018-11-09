@@ -14,11 +14,29 @@ namespace MoePicture.ViewModels
         private bool showSingle = false;
         /// <summary> 显示错误页面 </summary>
         private bool showError = false;
+        /// <summary> 错误信息 </summary>
+        private string errorMessage;
 
         /// <summary> 显示单个页面 </summary>
         public bool ShowSingle { get => showSingle; set { Set(ref showSingle, value); } }
+        /// <summary> 错误信息 </summary>
+        public string ErrorMessage { get => errorMessage; set
+            {
+                Set(ref errorMessage, value);
+                if (ErrorMessage.Length == 0)
+                {
+                    ShowError = false;
+                }
+                else
+                {
+                    ShowError = true;
+                }
+            }
+        }
         /// <summary> 显示错误页面 </summary>
-        public bool ShowError { get => showError; set { Set(ref showError, value); } }
+        public bool ShowError { get => showError; private set { Set(ref showError, value); } }
+
+
 
         public ShellVM()
         {
@@ -68,5 +86,6 @@ namespace MoePicture.ViewModels
                    }));
             }
         }
+
     }
 }

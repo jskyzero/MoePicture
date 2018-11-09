@@ -100,9 +100,9 @@ namespace MoePicture.ViewModels
 
                 return Items;
             }
-            catch
+            catch(Exception e)
             {
-                ServiceLocator.Current.GetInstance<ShellVM>().ShowError = true;
+                ServiceLocator.Current.GetInstance<ShellVM>().ErrorMessage = e.ToString();
                 return PictureItem.GetPictureItems(website.Type, "", loadAll);
             }
         }

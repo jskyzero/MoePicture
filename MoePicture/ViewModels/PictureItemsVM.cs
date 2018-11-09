@@ -95,7 +95,7 @@ namespace MoePicture.ViewModels
         {
             PictureItems = new PictureItems(Type, Tag);
             ScrollRefreshEvent?.Invoke();
-            ServiceLocator.Current.GetInstance<ShellVM>().ShowError = false;
+            ServiceLocator.Current.GetInstance<ShellVM>().ErrorMessage = "";
         }
         /// <summary> 点击单个对象 </summary>
         public async Task SelectItemClick(ItemClickEventArgs e)

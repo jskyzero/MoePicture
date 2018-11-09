@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="300"
     d:DesignWidth="400"
+    DataContext="{Binding ShellVM, Source={StaticResource Locator}}"
     mc:Ignorable="d">
 
     <Grid>
@@ -17,14 +18,23 @@
                 Foreground="White"
                 Style="{StaticResource HeaderTextBlockStyle}"
                 TextWrapping="Wrap">
-                <Run Text=" An error occurred" />
+                <Run Text="出现了个错误" />
             </TextBlock>
             <TextBlock
                 Padding="10"
                 Foreground="White"
                 TextWrapping="Wrap">
-                <Run Text="Please click the refresh button, If it can't help, please check your internet connection and restart MoePicture application." />
+                <Run Text="请单击刷新按钮，如果它无法帮助，请检查您的Internet连接并重新启动MoePicture应用程序。" />
             </TextBlock>
+            <TextBlock
+                Padding="10,10,10,0"
+                Foreground="White"
+                Text="错误信息如下" />
+            <TextBox
+                Margin="10,0,10,0"
+                Foreground="White"
+                Text="{Binding ErrorMessage, Mode=OneWay}" />
+
         </StackPanel>
     </Grid>
 </UserControl>

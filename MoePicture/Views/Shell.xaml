@@ -28,9 +28,9 @@
         <!--<Grid x:Name="BackGround" />-->
         <Grid>
             <UC:PictureGrid />
+            <UC:PictureSingle d:IsHidden="True" Visibility="{Binding ShowSingle, Mode=OneWay, Converter={StaticResource BoolVisibilityConverter}}" />
             <UC:ErrorPrompt d:IsHidden="True" Visibility="{Binding ShowError, Mode=OneWay, Converter={StaticResource BoolVisibilityConverter}}" />
             <UC:ButtonBar />
-            <UC:PictureSingle d:IsHidden="True" Visibility="{Binding ShowSingle, Mode=OneWay, Converter={StaticResource BoolVisibilityConverter}}" />
         </Grid>
     </Grid>
 </Page>
