@@ -30,7 +30,7 @@ namespace JskyUwpLibs.Tool
                 string result = time + str + Environment.NewLine;
                 File.AppendAllText(filePath, result);
             }
-            catch
+            catch(Exception e)
             {
                 return false;
             }

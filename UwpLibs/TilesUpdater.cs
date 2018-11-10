@@ -58,7 +58,7 @@ namespace JskyUwpLibs
                 // 磁贴添加新图片
                 update.Update(new TileNotification(doc));
             }
-            catch
+            catch(Exception e)
             {
                 // file not download then do not update
             }

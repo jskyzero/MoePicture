@@ -29,15 +29,18 @@ namespace MoePicture.ViewModels
         public UserConfigVM(Services.ConfigService configHelper)
         {
             this.configHelper = configHelper;
-            InitialConfigAsync();
+            Task.Run(async () =>
+            {
+                await InitialConfigAsync();
+            }).Wait();
         }
 
         /// <summary>
         /// 异步初始化用户设置
         /// </summary>
-        public void InitialConfigAsync()
+        public async Task InitialConfigAsync()
         {
-            Config = configHelper.GetConfig();
+            Config = await configHelper.GetConfig();
         }
 
         /// <summary>

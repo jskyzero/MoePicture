@@ -15,22 +15,22 @@ namespace MoePicture.Services
         /// <summary>
         /// 获取之前的设置
         /// </summary>
-        public UserConfig GetConfig()
+        public async Task<UserConfig> GetConfig()
         {
             UserConfig Config;
             // 如果之前有json文件储存记录，读取json文件并反序列化，否则新建一个默认的实例
-            if (ApplicationData.Current.LocalSettings.Values.ContainsKey(GlobalConfig.ConfigKey))
+            if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(GlobalConfig.ConfigKey))
             {
                 var jsonStr = ApplicationData.Current.RoamingSettings.Values[GlobalConfig.ConfigKey].ToString();
                 try
                 {
                     Config = JsonConvert.DeserializeObject<UserConfig>(jsonStr);
-                    if (!TestConfigWorksWell(Config).Result)
+                    if (!await TestConfigWorksWell(Config))
                     {
                         Config = GetDefaultConfig();
                     }
                 }
-                catch
+                catch(Exception e)
                 {
                     Config = GetDefaultConfig();
                 }
@@ -55,14 +55,14 @@ namespace MoePicture.Services
                 StorageFolder folder;
                 folderToken = config.CacheFolderToken;
                 folder = await StorageApplicationPermissions.FutureAccessList.GetFolderAsync(folderToken);
-                folder = await folder.CreateFolderAsync("cache", CreationCollisionOption.OpenIfExists);
+                folder = await folder.CreateFolderAsync(GlobalConfig.CacheFolderName, CreationCollisionOption.OpenIfExists);
                 if (folder == null) return false;
                 folderToken = config.SaveFolderlToken;
                 folder = await StorageApplicationPermissions.FutureAccessList.GetFolderAsync(folderToken);
-                folder = await folder.CreateFolderAsync("MoePicture", CreationCollisionOption.OpenIfExists);
+                folder = await folder.CreateFolderAsync(GlobalConfig.SampleFolderName, CreationCollisionOption.OpenIfExists);
                 if (folder == null) return false;
             }
-            catch
+            catch(Exception e)
             {
                 return false;
             }

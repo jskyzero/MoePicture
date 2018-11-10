@@ -163,10 +163,10 @@ namespace MoePicture.ViewModels
 
                 return new LoadMoreItemsResult { Count = (uint)items.Count };
             }
-            //catch
-            //{
-            //    return new LoadMoreItemsResult { Count = 0 };
-            //}
+            catch(Exception e)
+            {
+               return new LoadMoreItemsResult { Count = 0 };
+            }
             finally
             {
                 Busy = false;
