@@ -66,7 +66,7 @@ namespace MoePicture.Services
             JskyUwpLibs.Tool.LogFile.WriteLog("Finish " + path + fileName);
         }
 
-        //private static SemaphoreSlim DownloadPictureLock = new SemaphoreSlim(5);
+        private static SemaphoreSlim DownloadPictureLock = new SemaphoreSlim(5);
 
         /// <summary>
         /// 限制最大同时下载次数的通过Uri下载图片到本地文件(通过path和fileName路径得到本地文件)
@@ -77,7 +77,7 @@ namespace MoePicture.Services
         /// <returns></returns>
         public async static Task DownloadPictureFromUriToFolderLock(Uri uri, string path, string fileName)
         {
-            //await DownloadPictureLock.WaitAsync();
+            await DownloadPictureLock.WaitAsync();
 
             JskyUwpLibs.Tool.LogFile.WriteLog("Lock Begin " + path + fileName);
 
@@ -88,7 +88,7 @@ namespace MoePicture.Services
 
             JskyUwpLibs.Tool.LogFile.WriteLog("Lock Finish " + path + fileName);
 
-            //DownloadPictureLock.Release();
+            DownloadPictureLock.Release();
         }
 
         /// <summary>
