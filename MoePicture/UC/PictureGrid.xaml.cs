@@ -40,10 +40,20 @@ namespace MoePicture.UC
 
         private void Refresh()
         {
-            DispatcherHelper.CheckBeginInvokeOnUI(() =>
+            if (DispatcherHelper.UIDispatcher != null)
+            {
+                DispatcherHelper.CheckBeginInvokeOnUI(() =>
+                {
+                    scrollView.ChangeView(null, 0, null, true);
+                });
+
+            }
+            else
             {
                 scrollView.ChangeView(null, 0, null, true);
-            });
+            }
+
+
         }
 
         private void RootGrid_Loaded(object sender, RoutedEventArgs e)
