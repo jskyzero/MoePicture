@@ -48,6 +48,7 @@ namespace MoePicture.ViewModels
             website = new Services.WebsiteHelper(websiteType, tag);
             loadAll = ServiceLocator.Current.GetInstance<UserConfigVM>().Config.Rating == RatingType.All;
 
+            // initial load some
             LoadMoreItemsAsync(100);
         }
 

@@ -11,24 +11,6 @@ namespace MoePicture.CC
 {
     public class PictureItem : Panel
     {
-
-
-        //public PictureItem()
-        //{
-        //    DataContextChanged += PictureItem_DataContextChanged;
-        //}
-
-        //private void PictureItem_DataContextChanged(FrameworkElement sender, DataContextChangedEventArgs args)
-        //{
-        //    var context = DataContext as Models.PictureItem;
-        //    if (DataContext != null)
-        //    {
-        //        InvalidateMeasure();
-        //        InvalidateArrange();
-        //    }
-        //}
-
-
         /// <summary>
         /// Measure 测量过程
         /// </summary>

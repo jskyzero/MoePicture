@@ -15,12 +15,13 @@
     </UserControl.Resources>
     <Grid DataContext="{Binding PicturesVM, Source={StaticResource Locator}}">
 
-        <ScrollViewer x:Name="scrollView" ViewChanged="scrollView_ViewChanged">
+        <ScrollViewer x:Name="scrollView" 
+                      ViewChanged="scrollView_ViewChanged">
             <ListView
                 x:Name="listView"
                 IsItemClickEnabled="True"
-                ItemClick="GridView_ItemClick"
-                ItemsSource="{Binding PictureItems}">
+                ItemClick="GridView_ItemClick">
+                <!--ItemsSource="{Binding PictureItems}">-->
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="Padding" Value="0" />
@@ -36,7 +37,7 @@
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="Models:PictureItem">
                         <CC:PictureItem>
-                            <Grid Loaded="RootGrid_Loaded" SizeChanged="RootGrid_SizeChanged">
+                                <Grid Loaded="RootGrid_Loaded" SizeChanged="RootGrid_SizeChanged">
                                 <Image Source="{Binding ImageSource}" Stretch="UniformToFill" />
                                 <Border x:Name="MaskBorder" Background="#50000000">
                                     <StackPanel>
@@ -53,19 +54,19 @@
                 </ListView.ItemTemplate>
             </ListView>
         </ScrollViewer>
-        <!--<StackPanel
+        <StackPanel
             HorizontalAlignment="Center"
             VerticalAlignment="Bottom"
             Background="Gray"
             Orientation="Horizontal">
-            <Button x:Name="Add_Button" Margin="4">
+            <Button x:Name="Add_Button" Margin="4" Click="Add_Button_Click">
                 add
             </Button>
-            <Button x:Name="Insert_Button" Margin="4">insert</Button>
-            <Button x:Name="Remove_Button" Margin="4">remove</Button>
+            <Button x:Name="Insert_Button" Margin="4" Click="Insert_Button_Click">insert</Button>
+            <Button x:Name="Remove_Button" Margin="4" Click="Remove_Button_Click">remove</Button>
             <Button x:Name="Reset_Button" Margin="4">
                 initial
             </Button>
-        </StackPanel>-->
+        </StackPanel>
     </Grid>
 </UserControl>

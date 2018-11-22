@@ -146,8 +146,10 @@ namespace MoePicture.CC
                 var rect = new Rect(offsetX[minIndex], offsetY[minIndex], itemFixed, item.DesiredSize.Height);
                 item.Arrange(rect);
                 //递增纵坐标
-                offsetY[minIndex] += (item.DesiredSize.Height * itemFixed / item.DesiredSize.Width + ItemsSpacing);
+                var newHeight = item.DesiredSize.Height * itemFixed / item.DesiredSize.Width + ItemsSpacing;
+                offsetY[minIndex] += newHeight;
             }
+            finalSize.Height = offsetY.Max();
             Height = finalSize.Height;
 
             JskyUwpLibs.Tool.LogFile.WriteLog("PictureWall Arrange " + finalSize.ToString());

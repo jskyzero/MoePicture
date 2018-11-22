@@ -46,14 +46,11 @@ namespace MoePicture.UC
                 {
                     scrollView.ChangeView(null, 0, null, true);
                 });
-
             }
             else
             {
                 scrollView.ChangeView(null, 0, null, true);
             }
-
-
         }
 
         private void RootGrid_Loaded(object sender, RoutedEventArgs e)
@@ -169,14 +166,25 @@ namespace MoePicture.UC
             if (maxVerticalOffset < 0 ||
                 verticalOffset == maxVerticalOffset)
             {
-                // Scrolled to bottom
                 LoadMore();
             }
-            //else
-            //{
-            //    // Not scrolled to bottom
-            //    rect.Fill = new SolidColorBrush(Colors.Yellow);
-            //}
+        }
+
+        private void Add_Button_Click(object sender, RoutedEventArgs e)
+        {
+            ServiceLocator.Current.GetInstance<ViewModels.PictureItemsVM>().ChangeWebsiteCommand.Execute("Yande");
+            listView.ItemsSource = ServiceLocator.Current.GetInstance<PictureItemsVM>().PictureItems;
+        }
+
+        private void Insert_Button_Click(object sender, RoutedEventArgs e)
+        {
+            ServiceLocator.Current.GetInstance<ViewModels.PictureItemsVM>().ChangeWebsiteCommand.Execute("Konachan");
+            listView.ItemsSource = ServiceLocator.Current.GetInstance<PictureItemsVM>().PictureItems;
+        }
+
+        private void Remove_Button_Click(object sender, RoutedEventArgs e)
+        {
+            listView.ItemsSource = null;
         }
     }
 }
