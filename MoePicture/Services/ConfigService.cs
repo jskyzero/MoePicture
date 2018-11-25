@@ -55,6 +55,7 @@ namespace MoePicture.Services
                 StorageFolder folder;
                 folderToken = config.CacheFolderToken;
                 folder = await StorageApplicationPermissions.FutureAccessList.GetFolderAsync(folderToken);
+                folder = await folder.CreateFolderAsync(GlobalConfig.SampleFolderName, CreationCollisionOption.OpenIfExists);
                 folder = await folder.CreateFolderAsync(GlobalConfig.CacheFolderName, CreationCollisionOption.OpenIfExists);
                 if (folder == null) return false;
                 folderToken = config.SaveFolderlToken;

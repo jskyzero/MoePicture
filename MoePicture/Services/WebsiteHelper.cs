@@ -147,10 +147,10 @@ namespace MoePicture.Services
                 // 从节点得到图片信息
                 item.Id = node.Attributes["id"].Value;
                 item.Tags = node.Attributes["tags"].Value;
-                //item.PreviewUrl = node.Attributes["preview_url"].Value;
+                item.PreviewUrl = node.Attributes["preview_url"].Value;
                 item.SampleUrl = node.Attributes["sample_url"].Value;
                 item.SourceUrl = node.Attributes["file_url"].Value;
-                item.PreviewUrl = item.SampleUrl;
+                //item.PreviewUrl = item.SampleUrl;
                 item.IsSafe = node.Attributes["rating"].Value == "s";
                 item.PreviewSize = new Size(int.Parse(node.Attributes["preview_width"].Value),
                                             int.Parse(node.Attributes["preview_height"].Value));
@@ -171,10 +171,10 @@ namespace MoePicture.Services
                 // 从节点得到图片信息
                 item.Id = node.Attributes["tags"].Value;
                 item.Tags = node.Attributes["tags"].Value;
-                //item.PreviewUrl = "http:" + node.Attributes["preview_url"].Value;
+                item.PreviewUrl = "http:" + node.Attributes["preview_url"].Value;
                 item.SampleUrl = "http:" + node.Attributes["sample_url"].Value;
                 item.SourceUrl = "http:" + node.Attributes["file_url"].Value;
-                item.PreviewUrl = item.SampleUrl;
+                //item.PreviewUrl = item.SampleUrl;
                 item.IsSafe = node.Attributes["rating"].Value == "s";
                 item.PreviewSize = new Size(int.Parse(node.Attributes["preview_width"].Value),
                                             int.Parse(node.Attributes["preview_height"].Value));
@@ -195,10 +195,10 @@ namespace MoePicture.Services
                 // 从节点得到图片信息
                 item.Id = node["id"].InnerText;
                 item.Tags = node["tag-string-general"].InnerText;
-                //item.PreviewUrl = node["preview-file-url"].InnerText;
+                item.PreviewUrl = node["preview-file-url"].InnerText;
                 item.SampleUrl = node["file-url"].InnerText;
                 item.SourceUrl = node["large-file-url"].InnerText;
-                item.PreviewUrl = item.SampleUrl;
+                //item.PreviewUrl = item.SampleUrl;
                 item.IsSafe = node["rating"].InnerText == "s";
                 item.PreviewSize = new Size(int.Parse(node["image-width"].InnerText),
                                             int.Parse(node["image-height"].InnerText));
