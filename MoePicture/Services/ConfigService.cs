@@ -85,7 +85,9 @@ namespace MoePicture.Services
         {
 
             var saveFolderlToken = StorageApplicationPermissions.FutureAccessList.Add(KnownFolders.PicturesLibrary);
-            var cacheFolderToken = StorageApplicationPermissions.FutureAccessList.Add(ApplicationData.Current.LocalCacheFolder);
+            var cacheFolderToken = StorageApplicationPermissions.FutureAccessList.Add(KnownFolders.PicturesLibrary);
+
+            //var cacheFolderToken = StorageApplicationPermissions.FutureAccessList.Add(ApplicationData.Current.LocalCacheFolder);
 
             return new UserConfig()
             {

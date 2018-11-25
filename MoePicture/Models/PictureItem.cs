@@ -141,13 +141,14 @@ namespace MoePicture.Models
             // 根据图片Uri类型，打开到不同文件夹里
             if (urlType == UrlType.PreviewUrl)
             {
-                folderToken = ServiceLocator.Current.GetInstance<ViewModels.UserConfigVM>().Config.CacheFolderToken;
+                folderToken = ServiceLocator.Current.GetInstance<UserConfigVM>().Config.CacheFolderToken;
                 folder = await StorageApplicationPermissions.FutureAccessList.GetFolderAsync(folderToken);
+                folder = await folder.CreateFolderAsync(GlobalConfig.SampleFolderName, CreationCollisionOption.OpenIfExists);
                 folder = await folder.CreateFolderAsync(GlobalConfig.CacheFolderName, CreationCollisionOption.OpenIfExists);
             }
             else
             {
-                folderToken = ServiceLocator.Current.GetInstance<ViewModels.UserConfigVM>().Config.SaveFolderlToken;
+                folderToken = ServiceLocator.Current.GetInstance<UserConfigVM>().Config.SaveFolderlToken;
                 folder = await StorageApplicationPermissions.FutureAccessList.GetFolderAsync(folderToken);
                 folder = await folder.CreateFolderAsync(GlobalConfig.SampleFolderName, CreationCollisionOption.OpenIfExists);
             }

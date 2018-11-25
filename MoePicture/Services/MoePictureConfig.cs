@@ -14,7 +14,7 @@ namespace MoePicture.Services
         #region Properties
 
         /// <summary> 缓存文件夹 </summary>
-        public const string CacheFolderName = "Cache";
+        public const string CacheFolderName = ".Cache";
         /// <summary> 样例文件夹 </summary>
         public const string SampleFolderName = "MoePicture";
         /// <summary> 配置文件KEY </summary>
