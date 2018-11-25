@@ -49,7 +49,7 @@ namespace MoePicture.ViewModels
             loadAll = ServiceLocator.Current.GetInstance<UserConfigVM>().Config.Rating == RatingType.All;
 
             // initial load some
-            LoadMoreItemsAsync(100);
+            if (!Busy) LoadMoreItemsAsync(100);
         }
 
         #endregion Constructer

@@ -31,8 +31,8 @@ namespace MoePicture.ViewModels
         /// <summary> 切换网站 </summary>
         private RelayCommand<string> changeWebsiteCommand;
 
-        public delegate void ScrollRefresh();
-        public ScrollRefresh ScrollRefreshEvent;
+        //public delegate void ScrollRefresh();
+        //public ScrollRefresh ScrollRefreshEvent;
 
         /// <summary> TilesUpdater实例 </summary>
         private static TilesUpdater Tiles = new TilesUpdater();
@@ -94,7 +94,7 @@ namespace MoePicture.ViewModels
         private void RefreshPictures()
         {
             PictureItems = new PictureItems(Type, Tag);
-            ScrollRefreshEvent?.Invoke();
+            // ScrollRefreshEvent?.Invoke();
             ServiceLocator.Current.GetInstance<ShellVM>().ErrorMessage = "";
         }
         /// <summary> 点击单个对象 </summary>

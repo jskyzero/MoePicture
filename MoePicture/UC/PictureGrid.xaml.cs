@@ -29,12 +29,11 @@ namespace MoePicture.UC
     public sealed partial class PictureGrid : UserControl
     {
         private Compositor compositor;
-        private int itemIndex;
 
         public PictureGrid()
         {
             this.InitializeComponent();
-            ServiceLocator.Current.GetInstance<PictureItemsVM>().ScrollRefreshEvent += Refresh;
+            //ServiceLocator.Current.GetInstance<PictureItemsVM>().ScrollRefreshEvent += Refresh;
             this.compositor = ElementCompositionPreview.GetElementVisual(this).Compositor;
         }
 
@@ -90,11 +89,10 @@ namespace MoePicture.UC
 
             ToggleItemPointAnimation(maskBorder, img, true);
 
-
-
-            var context = ((sender as Grid).DataContext as Models.PictureItem);
-            itemIndex = ServiceLocator.Current.GetInstance<PictureItemsVM>().PictureItems.IndexOf(context);
-            if (ServiceLocator.Current.GetInstance<PictureItemsVM>().PictureItems.Count - itemIndex < 20) LoadMore();
+            // use index to load more picture
+            //var context = ((sender as Grid).DataContext as Models.PictureItem);
+            //itemIndex = ServiceLocator.Current.GetInstance<PictureItemsVM>().PictureItems.IndexOf(context);
+            //if (ServiceLocator.Current.GetInstance<PictureItemsVM>().PictureItems.Count - itemIndex < 20) LoadMore();
         }
 
         private void ToggleItemPointAnimation(FrameworkElement mask, FrameworkElement img, bool show)
@@ -168,23 +166,6 @@ namespace MoePicture.UC
             {
                 LoadMore();
             }
-        }
-
-        private void Add_Button_Click(object sender, RoutedEventArgs e)
-        {
-            ServiceLocator.Current.GetInstance<ViewModels.PictureItemsVM>().ChangeWebsiteCommand.Execute("Yande");
-            listView.ItemsSource = ServiceLocator.Current.GetInstance<PictureItemsVM>().PictureItems;
-        }
-
-        private void Insert_Button_Click(object sender, RoutedEventArgs e)
-        {
-            ServiceLocator.Current.GetInstance<ViewModels.PictureItemsVM>().ChangeWebsiteCommand.Execute("Konachan");
-            listView.ItemsSource = ServiceLocator.Current.GetInstance<PictureItemsVM>().PictureItems;
-        }
-
-        private void Remove_Button_Click(object sender, RoutedEventArgs e)
-        {
-            listView.ItemsSource = null;
         }
     }
 }
