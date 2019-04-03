@@ -134,7 +134,7 @@ namespace MoePicture.Services
                 item.FileName = Spider.GetFileNameFromUrl(item.PreviewUrl);
 
             }
-            catch(Exception e)
+            catch(Exception)
             {
                 item.IsAllRight = false;
             }
@@ -158,7 +158,7 @@ namespace MoePicture.Services
                 item.Title = Spider.GetFileNameFromUrl(item.SourceUrl);
                 item.FileName = Spider.GetFileNameFromUrl(item.PreviewUrl);
             }
-            catch(Exception e)
+            catch(Exception)
             {
                 item.IsAllRight = false;
             }
@@ -182,7 +182,7 @@ namespace MoePicture.Services
                 item.Title = Spider.GetFileNameFromUrl(item.SourceUrl);
                 item.FileName = Spider.GetFileNameFromUrl(item.PreviewUrl);
             }
-            catch(Exception e)
+            catch(Exception)
             {
                 item.IsAllRight = false;
             }
@@ -207,7 +207,7 @@ namespace MoePicture.Services
                 item.FileName = Spider.GetFileNameFromUrl(item.PreviewUrl);
 
             }
-            catch(Exception e)
+            catch(Exception)
             {
                 item.IsAllRight = false;
             }

@@ -30,7 +30,7 @@ namespace MoePicture.Services
                         Config = GetDefaultConfig();
                     }
                 }
-                catch(Exception e)
+                catch(Exception)
                 {
                     Config = GetDefaultConfig();
                 }
@@ -63,7 +63,7 @@ namespace MoePicture.Services
                 folder = await folder.CreateFolderAsync(GlobalConfig.SampleFolderName, CreationCollisionOption.OpenIfExists);
                 if (folder == null) return false;
             }
-            catch(Exception e)
+            catch(Exception)
             {
                 return false;
             }

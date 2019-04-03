@@ -23,7 +23,7 @@ namespace MoePicture.ViewModels
         /// <summary> 数据库实例 </summary>
         public DataBase DB;
 
-        public bool Busy
+        public new bool Busy
         {
             get { return base.Busy; }
             set
