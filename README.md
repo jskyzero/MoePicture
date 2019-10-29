@@ -1,8 +1,8 @@
 # MoePicture
 [![Build Status](https://jskyzero.visualstudio.com/MoePicture/_apis/build/status/MoePicture-UWP-CI)](https://jskyzero.visualstudio.com/MoePicture/_build/latest?definitionId=1)
-[![CodeFactor](https://www.codefactor.io/repository/github/oyovoyo/moepicture/badge)](https://www.codefactor.io/repository/github/oyovoyo/moepicture)
+[![CodeFactor](https://www.codefactor.io/repository/github/jskyzero/moepicture/badge)](https://www.codefactor.io/repository/github/jskyzero/moepicture)
 [![HitCount](http://hits.dwyl.io/jskyzero/MoePicture.svg)](http://hits.dwyl.io/jskyzero/MoePicture)
-[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/Sushiscript/sushiscrip/issues)
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/jskyzero/MoePicture/issues)
 
 Help you to get moe pictures more easily / 帮助您更好的获取二次元图片
 
